@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var shifts: [Shift] = Shift.shifts
-
+    let shifts: [Shift] = Shift.shifts
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -25,6 +25,7 @@ struct ContentView: View {
                 .padding(.horizontal)
                 .navigationTitle("Turnos L9")
             }
+            .contentMargins([.top, .bottom], 40)
         }
     }
 }

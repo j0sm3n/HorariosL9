@@ -24,9 +24,7 @@ struct Shift: Identifiable {
     }
     
     var imageName: String {
-        let imageName = location.rawValue + "-" + name
-        print("Image name: \(imageName)")
-        return imageName
+        location.rawValue + "-" + name
     }
 }
 

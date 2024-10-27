@@ -41,8 +41,8 @@ struct ShiftRowView: View {
         }
         .foregroundStyle(.primary)
         .frame(maxWidth: .infinity)
-        .padding()
-        .background(Color.row.opacity(0.4).shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 8))
+        .padding(10)
+        .background(Color.row.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
     }
 }
 
