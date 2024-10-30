@@ -12,6 +12,14 @@ extension TimeInterval {
         self = TimeInterval((hour * 3600) + (minute * 60))
     }
     
+    init(minute: Int) {
+        self = TimeInterval(minute * 60)
+    }
+    
+    init(duration: Duration) {
+        self = TimeInterval(hour: duration.hour, minute: duration.minute)
+    }
+    
     var abbreviatedTimeString: String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day, .hour, .minute]

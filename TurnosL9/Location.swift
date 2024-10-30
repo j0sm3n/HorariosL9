@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Location: String {
+enum Location: String, Decodable {
     case benidorm = "Benidorm"
     case intermodal = "Benidorm Intermodal"
     case camiCoves = "Cami Coves"

@@ -8,10 +8,24 @@
 import SwiftUI
 
 struct ShiftView: View {
-    let shift: Shift = .shifts.randomElement()!
+    let shift: Shift
 
     var body: some View {
         VStack {
+            Header(shift: shift)
+        }
+    }
+}
+
+#Preview {
+    ShiftView(shift: .preview)
+}
+
+extension ShiftView {
+    struct Header: View {
+        let shift: Shift
+
+        var body: some View {
             HStack {
                 Text(shift.name)
                     .font(.largeTitle)
@@ -24,8 +38,8 @@ struct ShiftView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Inicio: \(shift.startTime.positionalTimeString)")
-                    Text("Fin: \(shift.endTime.positionalTimeString)")
+                    Text("Inicio: \(shift.shiftStart.positionalTimeString)")
+                    Text("Fin: \(shift.shiftEnd.positionalTimeString)")
                 }
                 .font(.callout)
                 .frame(width: 90, alignment: .leading)
@@ -33,7 +47,7 @@ struct ShiftView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Jornada: \(shift.duration.abbreviatedTimeString)")
+                    Text("Jornada: \(shift.shiftDuration.abbreviatedTimeString)")
                     if let saturation = shift.saturation {
                         Text("Saturación: \(saturation.formatted()) %")
                     } else {
@@ -49,8 +63,4 @@ struct ShiftView: View {
             .background(Color.row.opacity(0.5).shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
         }
     }
-}
-
-#Preview {
-    ShiftView()
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let shifts: [Shift] = Shift.shifts
+    let shifts: [Shift]
     
     var body: some View {
         NavigationStack {
@@ -31,5 +31,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(shifts: .preview)
 }

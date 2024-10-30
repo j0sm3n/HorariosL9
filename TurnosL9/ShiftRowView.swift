@@ -20,8 +20,8 @@ struct ShiftRowView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Inicio: \(shift.startTime.positionalTimeString)")
-                Text("Fin: \(shift.endTime.positionalTimeString)")
+                Text("Inicio: \(shift.shiftStart.positionalTimeString)")
+                Text("Fin: \(shift.shiftEnd.positionalTimeString)")
             }
             .font(.callout)
             .frame(width: 90, alignment: .leading)
@@ -29,7 +29,7 @@ struct ShiftRowView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Jornada: \(shift.duration.abbreviatedTimeString)")
+                Text("Jornada: \(shift.shiftDuration.abbreviatedTimeString)")
                 if let saturation = shift.saturation {
                     Text("Saturación: \(saturation.formatted()) %")
                 } else {
@@ -47,5 +47,5 @@ struct ShiftRowView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(shifts: .preview)
 }
