@@ -12,61 +12,61 @@
                 "minute": 34
             },
             "saturation": 41.87,
-            "location": "benidorm",
+            "location": "Benidorm",
             "trips": [
                 {
                     "train": "9003",
-                    "origin": "benidorm",
-                    "destination": "garganes",
+                    "origin": "Benidorm",
+                    "destination": "Garganes",
                     "departure": {
                         "hour": 6,
                         "minute": 0
                     },
                     "stops": [
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 10
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 15
                             }
                         },
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
@@ -76,57 +76,57 @@
                 },
                 {
                     "train": "9002",
-                    "origin": "garganes",
-                    "destination": "benidorm",
+                    "origin": "Garganes",
+                    "destination": "Benidorm",
                     "departure": {
                         "hour": 7,
                         "minute": 12
                     },
                     "stops": [
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 3
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 8
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
@@ -136,57 +136,57 @@
                 },
                 {
                     "train": "9007",
-                    "origin": "benidorm",
-                    "destination": "garganes",
+                    "origin": "Benidorm",
+                    "destination": "Garganes",
                     "departure": {
                         "hour": 8,
                         "minute": 0
                     },
                     "stops": [
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 10
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 15
                             }
                         },
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
@@ -196,57 +196,57 @@
                 },
                 {
                     "train": "9006",
-                    "origin": "garganes",
-                    "destination": "benidorm",
+                    "origin": "Garganes",
+                    "destination": "Benidorm",
                     "departure": {
                         "hour": 9,
                         "minute": 12
                     },
                     "stops": [
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 3
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 8
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
@@ -256,57 +256,57 @@
                 },
                 {
                     "train": "9011",
-                    "origin": "benidorm",
-                    "destination": "garganes",
+                    "origin": "Benidorm",
+                    "destination": "Garganes",
                     "departure": {
                         "hour": 10,
                         "minute": 0
                     },
                     "stops": [
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 10
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 15
                             }
                         },
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
@@ -316,57 +316,57 @@
                 },
                 {
                     "train": "9010",
-                    "origin": "garganes",
-                    "destination": "benidorm",
+                    "origin": "Garganes",
+                    "destination": "Benidorm",
                     "departure": {
                         "hour": 11,
                         "minute": 12
                     },
                     "stops": [
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 3
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 8
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
@@ -376,57 +376,57 @@
                 },
                 {
                     "train": "9015",
-                    "origin": "benidorm",
-                    "destination": "garganes",
+                    "origin": "Benidorm",
+                    "destination": "Garganes",
                     "departure": {
                         "hour": 12,
                         "minute": 0
                     },
                     "stops": [
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 10
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 15
                             }
                         },
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
@@ -436,57 +436,57 @@
                 },
                 {
                     "train": "9014",
-                    "origin": "garganes",
-                    "destination": "benidorm",
+                    "origin": "Garganes",
+                    "destination": "Benidorm",
                     "departure": {
                         "hour": 13,
                         "minute": 12
                     },
                     "stops": [
                         {
-                            "location": "garganes",
+                            "location": "Garganes",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0
                             }
                         },
                         {
-                            "location": "altea",
+                            "location": "Altea",
                             "duration": {
                                 "hour": 0,
                                 "minute": 3
                             }
                         },
                         {
-                            "location": "el_albir",
+                            "location": "El Albir",
                             "duration": {
                                 "hour": 0,
                                 "minute": 8
                             }
                         },
                         {
-                            "location": "alfaz",
+                            "location": "L'Alfàs del Pi",
                             "duration": {
                                 "hour": 0,
                                 "minute": 7
                             }
                         },
                         {
-                            "location": "cami_coves",
+                            "location": "Cami Coves",
                             "duration": {
                                 "hour": 0,
                                 "minute": 4
                             }
                         },
                         {
-                            "location": "intermodal",
+                            "location": "Benidorm Intermodal",
                             "duration": {
                                 "hour": 0,
                                 "minute": 2
                             }
                         },
                         {
-                            "location": "benidorm",
+                            "location": "Benidorm",
                             "duration": {
                                 "hour": 0,
                                 "minute": 0

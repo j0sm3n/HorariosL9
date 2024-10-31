@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Location: String, Decodable {
+enum Location: String {
     case benidorm = "Benidorm"
     case intermodal = "Benidorm Intermodal"
     case camiCoves = "Cami Coves"
@@ -25,4 +25,13 @@ enum Location: String, Decodable {
     case pedreraVessanes = "Pedrera-Vessanes"
     case boscDeDiana = "Bosc de Diana"
     case denia = "Denia"
+    case unknown
+}
+
+extension Location: Decodable {
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        self = .init(rawValue: rawValue) ?? .unknown
+    }
 }

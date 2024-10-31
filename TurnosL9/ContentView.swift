@@ -15,9 +15,7 @@ struct ContentView: View {
             ScrollView {
                 ForEach(shifts) { shift in
                     NavigationLink {
-                        Image(shift.imageName)
-                            .resizable()
-                            .scaledToFit()
+                        ShiftDetailView(shift: shift)
                     } label: {
                         ShiftRowView(shift: shift)
                     }

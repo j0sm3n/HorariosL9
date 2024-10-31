@@ -7,12 +7,19 @@
 
 import Foundation
 
-struct Trip: Decodable {
+struct Trip: Identifiable {
+    let id: UUID = .init()
     let train: String
     let origin: String
     let destination: String
     let departure: Duration
     let stops: [Stop]
+}
+
+extension Trip: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case train, origin, destination, departure, stops
+    }
 }
 
 extension Trip {

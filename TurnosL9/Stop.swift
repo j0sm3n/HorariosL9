@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct Stop: Decodable {
-    let location: String
+struct Stop: Identifiable {
+    let id: UUID = .init()
+    let location: Location
     let duration: Duration
+}
+
+extension Stop: Decodable {
+    enum CodingKeys: CodingKey {
+        case location, duration
+    }
 }
 
 extension Stop {

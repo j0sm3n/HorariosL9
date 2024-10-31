@@ -21,3 +21,9 @@ extension [Shift] {
         return wrapper.shifts
     }
 }
+
+extension Trip {
+    static var preview: Trip {
+        Shift.preview.trips[0]
+    }
+}
