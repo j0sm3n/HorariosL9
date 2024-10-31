@@ -9,16 +9,24 @@ import SwiftUI
 
 struct TripDetailView: View {
     let trip: Trip
-
+    
     var body: some View {
-        List {
+        ScrollView {
             ForEach(trip.stops) { stop in
-                Text(stop.location.rawValue)
+                let arrival: TimeInterval = TimeInterval(duration: trip.departure) + TimeInterval(duration: stop.duration)
+                LabeledContent(stop.location.rawValue, value: arrival.positionalTimeString)
+                    .listRowSeparator(.hidden)
+                    .rowStyle()
             }
+            .padding(.horizontal)
+            .navigationTitle(trip.train)
         }
+        .contentMargins([.top, .bottom], 40)
     }
 }
 
 #Preview {
-    TripDetailView(trip: .preview)
+    NavigationStack {
+        TripDetailView(trip: .preview)
+    }
 }

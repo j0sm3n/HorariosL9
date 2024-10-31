@@ -39,10 +39,7 @@ struct ShiftRowView: View {
             .font(.callout)
             .frame(width: 150, alignment: .leading)
         }
-        .foregroundStyle(.primary)
-        .frame(maxWidth: .infinity)
-        .padding(10)
-        .background(Color.row.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
+        .rowStyle()
     }
 }
 

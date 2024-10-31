@@ -11,17 +11,24 @@ struct ShiftDetailView: View {
     let shift: Shift
 
     var body: some View {
-        List(shift.trips) { trip in
-            NavigationLink {
-                TripDetailView(trip: trip)
-            } label: {
-                Text(trip.train)
+        ScrollView {
+            ForEach(shift.trips) { trip in
+                NavigationLink {
+                    TripDetailView(trip: trip)
+                } label: {
+                    Text(trip.train)
+                        .rowStyle()
+                }
             }
-
+            .padding(.horizontal)
+            .navigationTitle("Turno \(shift.name)")
         }
+        .contentMargins([.top, .bottom], 40)
     }
 }
 
 #Preview {
-    ShiftDetailView(shift: .preview)
+    NavigationStack {
+        ShiftDetailView(shift: .preview)
+    }
 }
