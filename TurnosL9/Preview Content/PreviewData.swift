@@ -9,7 +9,7 @@ import Foundation
 
 extension Shift {
     static var preview: Shift {
-        [Shift].preview[0]
+        [Shift].preview[4]
     }
 }
 

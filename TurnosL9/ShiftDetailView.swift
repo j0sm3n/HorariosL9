@@ -26,6 +26,11 @@ struct ShiftDetailView: View {
             .padding(.horizontal)
         }
         .contentMargins([.top, .bottom], 40)
+        .overlay {
+            if shift.trips.isEmpty {
+                    ContentUnavailableView("Reserva y Maniobras", systemImage: "exclamationmark.triangle.fill")
+            }
+        }
     }
 }
 
