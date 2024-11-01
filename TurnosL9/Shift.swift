@@ -12,6 +12,16 @@ struct Duration: Decodable {
     let minute: Int
 }
 
+extension Duration {
+    var timeString: String {
+        TimeInterval(duration: self).positionalTimeString
+    }
+    
+    static func + (lhs: Duration, rhs: Duration) -> Duration {
+        Duration(hour: lhs.hour + rhs.hour, minute: lhs.minute + rhs.minute)
+    }
+}
+
 struct Shift: Identifiable {
     let id: UUID = .init()
     let name: String

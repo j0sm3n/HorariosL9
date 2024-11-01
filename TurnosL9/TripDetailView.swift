@@ -12,16 +12,23 @@ struct TripDetailView: View {
     
     var body: some View {
         ScrollView {
-            ForEach(trip.stops) { stop in
-                let arrival: TimeInterval = TimeInterval(duration: trip.departure) + TimeInterval(duration: stop.duration)
-                LabeledContent(stop.location.rawValue, value: arrival.positionalTimeString)
-                    .listRowSeparator(.hidden)
-                    .rowStyle()
+            Section {
+                ForEach(trip.stops) { stop in
+                    LabeledContent(stop.location.rawValue, value: arrival(for: stop))
+                        .listRowSeparator(.hidden)
+                        .rowStyle()
+                }
+            } header: {
+                TripRowView(trip: trip)
             }
             .padding(.horizontal)
-            .navigationTitle(trip.train)
         }
         .contentMargins([.top, .bottom], 40)
+    }
+    
+    private func arrival(for stop: Stop) -> String {
+        let arrival = TimeInterval(duration: trip.departure) + TimeInterval(duration: stop.duration)
+        return arrival.positionalTimeString
     }
 }
 

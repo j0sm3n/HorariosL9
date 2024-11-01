@@ -13,9 +13,7 @@ struct ShiftRowView: View {
     var body: some View {
         HStack {
             Text(shift.name)
-                .font(.title2)
-                .fontDesign(.monospaced)
-                .padding(.leading)
+                .rowTitleStyle()
             
             Spacer()
             

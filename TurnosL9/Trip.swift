@@ -16,6 +16,17 @@ struct Trip: Identifiable {
     let stops: [Stop]
 }
 
+extension Trip {
+    var arrival: Duration {
+        departure + stops.last!.duration
+    }
+    
+    var isEven: Bool {
+        guard train.isNumeric else { return false }
+        return Int(train)!.isMultiple(of: 2)
+    }
+}
+
 extension Trip: Decodable {
     enum CodingKeys: String, CodingKey {
         case train, origin, destination, departure, stops

@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct RowStyle: ViewModifier {
+    var color: Color = .row
+
     func body(content: Content) -> some View {
         content
             .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
             .padding(10)
-            .background(Color.row.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
+            .background(color.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
     }
 }
 
 extension View {
-    func rowStyle() -> some View {
-        modifier(RowStyle())
+    func rowStyle(in color: Color = .row) -> some View {
+        modifier(RowStyle(color: color))
     }
 }
 

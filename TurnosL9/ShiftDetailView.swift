@@ -12,16 +12,18 @@ struct ShiftDetailView: View {
 
     var body: some View {
         ScrollView {
-            ForEach(shift.trips) { trip in
-                NavigationLink {
-                    TripDetailView(trip: trip)
-                } label: {
-                    Text(trip.train)
-                        .rowStyle()
+            Section {
+                ForEach(shift.trips) { trip in
+                    NavigationLink {
+                        TripDetailView(trip: trip)
+                    } label: {
+                        TripRowView(trip: trip)
+                    }
                 }
+            } header: {
+                ShiftRowView(shift: shift)
             }
             .padding(.horizontal)
-            .navigationTitle("Turno \(shift.name)")
         }
         .contentMargins([.top, .bottom], 40)
     }
