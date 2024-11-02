@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct TurnosL9App: App {
+    @State private var viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(shifts: .preview)
+            ContentView(shifts: viewModel.shifts)
+                .task {
+                    viewModel.fetchShifts()
+                }
         }
     }
 }

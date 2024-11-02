@@ -47,7 +47,9 @@ struct ShiftRowView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ShiftRowView(shift: .preview)
         .padding(.horizontal)
 }
+#endif

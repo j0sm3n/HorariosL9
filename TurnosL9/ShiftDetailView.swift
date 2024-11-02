@@ -34,8 +34,10 @@ struct ShiftDetailView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
         ShiftDetailView(shift: .preview)
     }
 }
+#endif

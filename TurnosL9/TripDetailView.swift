@@ -32,8 +32,10 @@ struct TripDetailView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
         TripDetailView(trip: .preview)
     }
 }
+#endif

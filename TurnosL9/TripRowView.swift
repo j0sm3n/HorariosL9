@@ -35,7 +35,9 @@ struct TripRowView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     TripRowView(trip: .preview)
         .padding(.horizontal)
 }
+#endif
