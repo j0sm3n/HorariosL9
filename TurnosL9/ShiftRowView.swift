@@ -13,15 +13,16 @@ struct ShiftRowView: View {
     var body: some View {
         HStack {
             Text(shift.name)
-                .font(.title2)
-                .fontDesign(.monospaced)
-                .padding(.leading)
+                .frame(height: 48)
+                .font(.largeTitle)
+                .bold()
+                .rowTitleStyle()
             
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Inicio: \(shift.startTime.positionalTimeString)")
-                Text("Fin: \(shift.endTime.positionalTimeString)")
+                LabeledContent("Inicio", value: shift.shiftStart.positionalTimeString)
+                LabeledContent("Fin", value: shift.shiftEnd.positionalTimeString)
             }
             .font(.callout)
             .frame(width: 90, alignment: .leading)
@@ -29,23 +30,24 @@ struct ShiftRowView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Jornada: \(shift.duration.abbreviatedTimeString)")
+                LabeledContent("Jornada", value: shift.shiftDuration.positionalTimeString)
                 if let saturation = shift.saturation {
-                    Text("Saturación: \(saturation.formatted()) %")
+                    LabeledContent("Saturación") {
+                        Text("\(saturation.formatted()) %")
+                    }
                 } else {
                     Text("")
                 }
             }
             .font(.callout)
-            .frame(width: 150, alignment: .leading)
+            .frame(width: 160, alignment: .leading)
         }
-        .foregroundStyle(.primary)
-        .frame(maxWidth: .infinity)
-        .padding(10)
-        .background(Color.row.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
+        .rowStyle()
+        .lineLimit(1)
     }
 }
 
 #Preview {
-    ContentView()
+    ShiftRowView(shift: .preview)
+        .padding(.horizontal)
 }

@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    let shifts: [Shift] = Shift.shifts
+    let shifts: [Shift]
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 ForEach(shifts) { shift in
                     NavigationLink {
-                        Image(shift.imageName)
-                            .resizable()
-                            .scaledToFit()
+                        ShiftDetailView(shift: shift)
                     } label: {
                         ShiftRowView(shift: shift)
                     }
@@ -31,5 +29,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(shifts: .preview)
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct TurnosL9App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(shifts: .preview)
         }
     }
 }
