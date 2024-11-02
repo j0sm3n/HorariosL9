@@ -15,7 +15,7 @@ struct RowStyle: ViewModifier {
             .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
             .padding(10)
-            .background(color.shadow(.inner(color: .white, radius: 5)), in: .rect(cornerRadius: 16))
+            .background(color, in: .rect(cornerRadius: 12))
     }
 }
 

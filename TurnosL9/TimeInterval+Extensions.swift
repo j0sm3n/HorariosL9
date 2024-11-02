@@ -20,13 +20,6 @@ extension TimeInterval {
         self = TimeInterval(hour: duration.hour, minute: duration.minute)
     }
     
-    var abbreviatedTimeString: String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day, .hour, .minute]
-        formatter.unitsStyle = .abbreviated
-        return formatter.string(from: self) ?? ""
-    }
-    
     var positionalTimeString: String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day, .hour, .minute]

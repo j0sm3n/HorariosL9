@@ -13,13 +13,16 @@ struct ShiftRowView: View {
     var body: some View {
         HStack {
             Text(shift.name)
+                .frame(height: 48)
+                .font(.largeTitle)
+                .bold()
                 .rowTitleStyle()
             
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Inicio: \(shift.shiftStart.positionalTimeString)")
-                Text("Fin: \(shift.shiftEnd.positionalTimeString)")
+                LabeledContent("Inicio", value: shift.shiftStart.positionalTimeString)
+                LabeledContent("Fin", value: shift.shiftEnd.positionalTimeString)
             }
             .font(.callout)
             .frame(width: 90, alignment: .leading)
@@ -27,20 +30,24 @@ struct ShiftRowView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Jornada: \(shift.shiftDuration.abbreviatedTimeString)")
+                LabeledContent("Jornada", value: shift.shiftDuration.positionalTimeString)
                 if let saturation = shift.saturation {
-                    Text("Saturación: \(saturation.formatted()) %")
+                    LabeledContent("Saturación") {
+                        Text("\(saturation.formatted()) %")
+                    }
                 } else {
                     Text("")
                 }
             }
             .font(.callout)
-            .frame(width: 150, alignment: .leading)
+            .frame(width: 160, alignment: .leading)
         }
         .rowStyle()
+        .lineLimit(1)
     }
 }
 
 #Preview {
-    ContentView(shifts: .preview)
+    ShiftRowView(shift: .preview)
+        .padding(.horizontal)
 }

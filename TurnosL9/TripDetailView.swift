@@ -13,10 +13,10 @@ struct TripDetailView: View {
     var body: some View {
         ScrollView {
             Section {
-                ForEach(trip.stops) { stop in
+                ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, stop in
                     LabeledContent(stop.location.rawValue, value: arrival(for: stop))
-                        .listRowSeparator(.hidden)
-                        .rowStyle()
+                        .padding(.horizontal)
+                        .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))
                 }
             } header: {
                 TripRowView(trip: trip)
