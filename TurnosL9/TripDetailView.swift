@@ -14,9 +14,12 @@ struct TripDetailView: View {
         ScrollView {
             Section {
                 ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, stop in
-                    LabeledContent(stop.location.rawValue, value: arrival(for: stop))
-                        .padding(.horizontal)
-                        .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))
+                    LabeledContent(stop.location.rawValue) {
+                        Text(arrival(for: stop))
+                            .timeStyle(with: .callout)
+                    }
+                    .padding(.horizontal)
+                    .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))
                 }
             } header: {
                 TripRowView(trip: trip)

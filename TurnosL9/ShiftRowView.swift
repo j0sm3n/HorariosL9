@@ -21,26 +21,37 @@ struct ShiftRowView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                LabeledContent("Inicio", value: shift.shiftStart.positionalTimeString)
-                LabeledContent("Fin", value: shift.shiftEnd.positionalTimeString)
+                LabeledContent("Inicio") {
+                    Text(shift.shiftStart.positionalTimeString)
+                        .timeStyle(with: .callout)
+                }
+                LabeledContent("Fin") {
+                    Text(shift.shiftEnd.positionalTimeString)
+                        .timeStyle(with: .callout)
+                }
             }
             .font(.callout)
-            .frame(width: 90, alignment: .leading)
+            .frame(width: 100, alignment: .leading)
             
             Spacer()
             
             VStack(alignment: .leading) {
-                LabeledContent("Jornada", value: shift.shiftDuration.positionalTimeString)
+                LabeledContent("Jornada") {
+                    Text(shift.shiftDuration.positionalTimeString)
+                        .timeStyle(with: .callout)
+                }
                 if let saturation = shift.saturation {
                     LabeledContent("Saturación") {
                         Text("\(saturation.formatted()) %")
+                            .font(.callout)
+                            .fontWeight(.semibold)
                     }
                 } else {
                     Text("")
                 }
             }
             .font(.callout)
-            .frame(width: 160, alignment: .leading)
+            .frame(width: 150, alignment: .leading)
         }
         .rowStyle()
         .lineLimit(1)
