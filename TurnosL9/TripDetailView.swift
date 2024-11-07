@@ -16,7 +16,7 @@ struct TripDetailView: View {
                 ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, stop in
                     LabeledContent(stop.location.rawValue) {
                         Text(arrival(for: stop))
-                            .timeStyle(with: .callout)
+                            .monospacedStyle()
                     }
                     .padding(.horizontal)
                     .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))

@@ -21,13 +21,13 @@ struct TripRowView: View {
                 VStack(alignment: .center) {
                     Text(trip.origin)
                     Text(trip.departure.timeString)
-                        .timeStyle(with: .callout)
+                        .monospacedStyle()
                 }
 
                 VStack(alignment: .center) {
                     Text(trip.destination)
                     Text(trip.arrival.timeString)
-                        .timeStyle(with: .callout)
+                        .monospacedStyle()
                 }
             }
             .font(.callout)

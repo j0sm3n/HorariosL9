@@ -23,11 +23,11 @@ struct ShiftRowView: View {
             VStack(alignment: .leading) {
                 LabeledContent("Inicio") {
                     Text(shift.shiftStart.positionalTimeString)
-                        .timeStyle(with: .callout)
+                        .monospacedStyle()
                 }
                 LabeledContent("Fin") {
                     Text(shift.shiftEnd.positionalTimeString)
-                        .timeStyle(with: .callout)
+                        .monospacedStyle()
                 }
             }
             .font(.callout)
@@ -38,12 +38,11 @@ struct ShiftRowView: View {
             VStack(alignment: .leading) {
                 LabeledContent("Jornada") {
                     Text(shift.shiftDuration.positionalTimeString)
-                        .timeStyle(with: .callout)
+                        .monospacedStyle()
                 }
                 if let saturation = shift.saturation {
                     LabeledContent("Saturación") {
                         Text("\(saturation.formatted()) %")
-                            .font(.callout)
                             .fontWeight(.semibold)
                     }
                 } else {

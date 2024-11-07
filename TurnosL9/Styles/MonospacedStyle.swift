@@ -1,5 +1,5 @@
 //
-//  TimeStyle.swift
+//  MonospacedStyle.swift
 //  TurnosL9
 //
 //  Created by Jose Antonio Mendoza on 4/11/24.
@@ -7,19 +7,17 @@
 
 import SwiftUI
 
-struct TimeStyle: ViewModifier {
-    let font: Font
-
+struct MonospacedStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(font)
+            .font(.callout)
             .fontDesign(.monospaced)
             .fontWeight(.semibold)
     }
 }
 
 extension View {
-    public func timeStyle(with font: Font) -> some View {
-        modifier(TimeStyle(font: font))
+    public func monospacedStyle() -> some View {
+        modifier(MonospacedStyle())
     }
 }
