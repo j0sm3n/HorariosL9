@@ -11,6 +11,10 @@ extension Shift {
     static var preview: Shift {
         [Shift].preview[0]
     }
+    
+    static var reserva: Shift {
+        [Shift].preview[4]
+    }
 }
 
 extension [Shift] {
