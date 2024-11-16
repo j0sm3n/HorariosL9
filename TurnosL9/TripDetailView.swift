@@ -22,7 +22,7 @@ struct TripDetailView: View {
                     .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))
                 }
             } header: {
-                TripRowView(trip: trip)
+                TripRowView(trip: trip, showIndicator: false)
             }
             .padding(.horizontal)
         }

@@ -17,7 +17,7 @@ struct ShiftDetailView: View {
                     NavigationLink {
                         TripDetailView(trip: trip)
                     } label: {
-                        TripRowView(trip: trip)
+                        TripRowView(trip: trip, showIndicator: true)
                     }
                 }
             } header: {
