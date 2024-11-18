@@ -17,12 +17,18 @@ struct Trip: Identifiable {
 }
 
 extension Trip {
-    var arrival: Duration {
-        departure + stops.last!.duration
+    var tripDeparture: TimeInterval {
+        TimeInterval(duration: departure)
+    }
+
+    var tripArrival: TimeInterval {
+        let lastStopArrival = TimeInterval(duration: stops.last!.duration)
+        let duration = tripDeparture + lastStopArrival
+        return duration
     }
     
-    var duration: Duration {
-        arrival - departure
+    var tripDuration: TimeInterval {
+        tripArrival - tripDeparture
     }
     
     var isEven: Bool {
@@ -36,12 +42,12 @@ extension Trip {
     }
     
     var isRunning: Bool {
-        return currentTime >= TimeInterval(duration: departure) && currentTime <= TimeInterval(duration: arrival)
+        return currentTime >= tripDeparture && currentTime <= tripArrival
     }
     
     var tripIndicatorPosition: Double {
         guard isRunning else { return 0.0 }
-        let position = 60.0 * ((currentTime - TimeInterval(duration: departure)) / TimeInterval(duration: duration))
+        let position = 60.0 * ((currentTime - tripDeparture) / tripDuration)
         return position
     }
 }

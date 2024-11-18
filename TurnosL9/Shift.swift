@@ -7,35 +7,6 @@
 
 import SwiftUI
 
-struct Duration: Decodable {
-    let hour: Int
-    let minute: Int
-}
-
-extension Duration {
-    var timeString: String {
-        TimeInterval(duration: self).positionalTimeString
-    }
-    
-    static func + (lhs: Duration, rhs: Duration) -> Duration {
-        if lhs.minute + rhs.minute >= 60 {
-            let hour = lhs.hour + rhs.hour + 1
-            return Duration(hour: hour, minute: lhs.minute + rhs.minute - 60)
-        } else {
-            return Duration(hour: lhs.hour + rhs.hour, minute: lhs.minute + rhs.minute)
-        }
-    }
-    
-    static func - (lhs: Duration, rhs: Duration) -> Duration {
-        if lhs.minute - rhs.minute < 0 {
-            let hour = lhs.hour - rhs.hour - 1
-            return Duration(hour: hour, minute: lhs.minute - rhs.minute + 60)
-        } else {
-            return Duration(hour: lhs.hour - rhs.hour, minute: lhs.minute - rhs.minute)
-        }
-    }
-}
-
 struct Shift: Identifiable {
     let id: UUID = .init()
     let name: String

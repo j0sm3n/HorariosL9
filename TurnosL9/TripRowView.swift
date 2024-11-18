@@ -25,13 +25,13 @@ struct TripRowView: View {
             Group {
                 VStack(alignment: .center) {
                     Text(trip.origin)
-                    Text(trip.departure.timeString)
+                    Text(trip.tripDeparture.positionalTimeString)
                         .monospacedStyle()
                 }
 
                 VStack(alignment: .center) {
                     Text(trip.destination)
-                    Text(trip.arrival.timeString)
+                    Text(trip.tripArrival.positionalTimeString)
                         .monospacedStyle()
                 }
             }
