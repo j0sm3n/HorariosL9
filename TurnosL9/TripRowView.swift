@@ -9,6 +9,12 @@ import SwiftUI
 
 struct TripRowView: View {
     let trip: Trip
+    let color: Color
+    let showIndicator: Bool
+    
+    var opacity: Double {
+        trip.isRunning && showIndicator ? 1 : 0
+    }
 
     var body: some View {
         HStack {
@@ -20,26 +26,35 @@ struct TripRowView: View {
             Group {
                 VStack(alignment: .center) {
                     Text(trip.origin)
-                    Text(trip.departure.timeString)
+                    Text(trip.tripDeparture.positionalTimeString)
                         .monospacedStyle()
                 }
 
                 VStack(alignment: .center) {
                     Text(trip.destination)
-                    Text(trip.arrival.timeString)
+                    Text(trip.tripArrival.positionalTimeString)
                         .monospacedStyle()
                 }
             }
             .font(.callout)
             .frame(width: 125, alignment: .center)
         }
-        .rowStyle(in: .gray.opacity(trip.isEven ? 0.5 : 0.2))
+        .rowStyle(in: color)
+        .overlay(alignment: .topLeading) {
+            TimelineView(.animation) { _ in
+                Circle()
+                    .frame(width: 8, height: 8)
+                    .foregroundStyle(.red)
+                    .offset(x: -12, y: trip.tripIndicatorPosition)
+                    .opacity(opacity)
+            }
+        }
     }
 }
 
 #if DEBUG
 #Preview {
-    TripRowView(trip: .preview)
+    TripRowView(trip: .preview, color: .row, showIndicator: true)
         .padding(.horizontal)
 }
 #endif
