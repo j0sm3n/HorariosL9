@@ -5,7 +5,7 @@
 //  Created by Jose Antonio Mendoza on 29/10/24.
 //
 
-import Foundation
+import SwiftUI
 
 struct Trip: Identifiable {
     let id: UUID = .init()
@@ -31,12 +31,16 @@ extension Trip {
         tripArrival - tripDeparture
     }
     
-    var isEven: Bool {
+    private var isEven: Bool {
         guard train.isNumeric else { return false }
         return Int(train)!.isMultiple(of: 2)
     }
     
-    private var currentTime: TimeInterval {
+    var tripColor: Color {
+        Color.gray.opacity(self.isEven ? 0.5 : 0.2)
+    }
+    
+    var currentTime: TimeInterval {
         let components = Calendar.current.dateComponents([.hour, .minute], from: .now)
         return TimeInterval(hour: components.hour!, minute: components.minute!)
     }

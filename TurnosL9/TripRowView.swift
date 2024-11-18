@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripRowView: View {
     let trip: Trip
+    let color: Color
     let showIndicator: Bool
     
     var opacity: Double {
@@ -38,13 +39,13 @@ struct TripRowView: View {
             .font(.callout)
             .frame(width: 125, alignment: .center)
         }
-        .rowStyle(in: .gray.opacity(trip.isEven ? 0.5 : 0.2))
+        .rowStyle(in: color)
         .overlay(alignment: .topLeading) {
             TimelineView(.animation) { _ in
                 Circle()
                     .frame(width: 8, height: 8)
-                    .tint(.red)
-                    .offset(x: -10, y: trip.tripIndicatorPosition)
+                    .foregroundStyle(.red)
+                    .offset(x: -12, y: trip.tripIndicatorPosition)
                     .opacity(opacity)
             }
         }
@@ -53,7 +54,7 @@ struct TripRowView: View {
 
 #if DEBUG
 #Preview {
-    TripRowView(trip: .preview, showIndicator: true)
+    TripRowView(trip: .preview, color: .row, showIndicator: true)
         .padding(.horizontal)
 }
 #endif
