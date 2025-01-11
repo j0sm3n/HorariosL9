@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8278DEDA2CC93DA500273B0E"
-               BuildableName = "TurnosL9.app"
-               BlueprintName = "TurnosL9"
+               BuildableName = "Horarios L9.app"
+               BlueprintName = "Horarios L9"
                ReferencedContainer = "container:TurnosL9.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8278DEDA2CC93DA500273B0E"
-            BuildableName = "TurnosL9.app"
-            BlueprintName = "TurnosL9"
+            BuildableName = "Horarios L9.app"
+            BlueprintName = "Horarios L9"
             ReferencedContainer = "container:TurnosL9.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8278DEDA2CC93DA500273B0E"
-            BuildableName = "TurnosL9.app"
-            BlueprintName = "TurnosL9"
+            BuildableName = "Horarios L9.app"
+            BlueprintName = "Horarios L9"
             ReferencedContainer = "container:TurnosL9.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

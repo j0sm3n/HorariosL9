@@ -8,12 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("showBenidormShifts") var showBenidormShifts: Bool = true
     let shifts: [Shift]
+    
+    private var toolbarForegroundColor: Color {
+        colorScheme == .dark ? Color.white : Color.black
+    }
+    
+    private var filteredShifts: [Shift] {
+        showBenidormShifts
+        ? shifts.filter { $0.location == Location.benidorm.rawValue }
+        : shifts.filter { $0.location == Location.denia.rawValue }
+    }
     
     var body: some View {
         NavigationStack {
+            Picker("Residencia", selection: $showBenidormShifts) {
+                Text(Location.benidorm.rawValue).tag(true)
+                Text(Location.denia.rawValue).tag(false)
+            }
+            .pickerStyle(.segmented)
+            .padding(.vertical)
+            .padding(.horizontal, 80)
+
             ScrollView {
-                ForEach(shifts) { shift in
+                ForEach(filteredShifts) { shift in
                     NavigationLink {
                         ShiftDetailView(shift: shift)
                     } label: {
@@ -21,9 +41,8 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal)
-                .navigationTitle("Turnos L9")
             }
-            .contentMargins([.top, .bottom], 40)
+            .navigationTitle("Horarios L9")
         }
     }
 }
