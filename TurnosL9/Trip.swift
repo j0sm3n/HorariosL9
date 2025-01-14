@@ -5,7 +5,7 @@
 //  Created by Jose Antonio Mendoza on 29/10/24.
 //
 
-import Foundation
+import SwiftUI
 
 struct Trip: Identifiable {
     let id: UUID = .init()
@@ -17,13 +17,42 @@ struct Trip: Identifiable {
 }
 
 extension Trip {
-    var arrival: Duration {
-        departure + stops.last!.duration
+    var tripDeparture: TimeInterval {
+        TimeInterval(duration: departure)
+    }
+
+    var tripArrival: TimeInterval {
+        let lastStopArrival = TimeInterval(duration: stops.last!.duration)
+        let duration = tripDeparture + lastStopArrival
+        return duration
     }
     
-    var isEven: Bool {
+    var tripDuration: TimeInterval {
+        tripArrival - tripDeparture
+    }
+    
+    private var isEven: Bool {
         guard train.isNumeric else { return false }
         return Int(train)!.isMultiple(of: 2)
+    }
+    
+    var tripColor: Color {
+        Color.gray.opacity(self.isEven ? 0.5 : 0.2)
+    }
+    
+    var currentTime: TimeInterval {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: .now)
+        return TimeInterval(hour: components.hour!, minute: components.minute!)
+    }
+    
+    var isRunning: Bool {
+        return currentTime >= tripDeparture && currentTime <= tripArrival
+    }
+    
+    var tripIndicatorPosition: Double {
+        guard isRunning else { return 0.0 }
+        let position = 60.0 * ((currentTime - tripDeparture) / tripDuration)
+        return position
     }
 }
 
@@ -31,10 +60,4 @@ extension Trip: Decodable {
     enum CodingKeys: String, CodingKey {
         case train, origin, destination, departure, stops
     }
-}
-
-extension Trip {
-//    static var shift1trips: [Trip] = [
-//        .init(train: "9003", origin: .benidorm, destination: .garganes, departure: .init(hour: 6), stops: Stop.train9003stops)
-//    ]
 }

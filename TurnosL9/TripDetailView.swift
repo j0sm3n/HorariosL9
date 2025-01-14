@@ -14,26 +14,61 @@ struct TripDetailView: View {
         ScrollView {
             Section {
                 ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, stop in
-                    LabeledContent(stop.location.rawValue, value: arrival(for: stop))
-                        .padding(.horizontal)
-                        .rowStyle(in: .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2))
+                    stopRowView(stop: stop)
+                        .rowStyle(in: color(for: index))
+                        .overlay(alignment: .leading) {
+                            TimelineView(.animation) { _ in
+                                Circle()
+                                    .frame(width: 8, height: 8)
+                                    .offset(x: -12)
+                                    .opacity(showIndicator(for: stop, with: index) ? 1 : 0)
+                                    .foregroundStyle(.red)
+                            }
+                        }
                 }
             } header: {
-                TripRowView(trip: trip)
+                TripRowView(trip: trip, color: .row, showIndicator: false)
             }
             .padding(.horizontal)
         }
         .contentMargins([.top, .bottom], 40)
     }
-    
-    private func arrival(for stop: Stop) -> String {
-        let arrival = TimeInterval(duration: trip.departure) + TimeInterval(duration: stop.duration)
-        return arrival.positionalTimeString
-    }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
         TripDetailView(trip: .preview)
+    }
+}
+#endif
+
+extension TripDetailView {
+    func stopRowView(stop: Stop) -> some View {
+        LabeledContent(stop.location.rawValue) {
+            Text(arrivalString(for: stop))
+                .monospacedStyle()
+        }
+        .padding(.horizontal)
+    }
+    
+    private func arrivalString(for stop: Stop) -> String {
+        (trip.tripDeparture + stop.stopDuration).positionalTimeString
+    }
+    
+    private func showIndicator(for stop: Stop, with index: Int) -> Bool {
+        guard trip.isRunning else { return false }
+        
+        let timeRunning = trip.currentTime - trip.tripDeparture
+
+        if index == 0 {
+            return timeRunning == 0 // Ok
+        } else {
+            return timeRunning <= stop.stopDuration && timeRunning > trip.stops[index - 1].stopDuration
+        }
+    }
+    
+    private func color(for index: Int) -> Color {
+        .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2)
     }
 }

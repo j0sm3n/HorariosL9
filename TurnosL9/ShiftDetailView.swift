@@ -17,7 +17,7 @@ struct ShiftDetailView: View {
                     NavigationLink {
                         TripDetailView(trip: trip)
                     } label: {
-                        TripRowView(trip: trip)
+                        TripRowView(trip: trip, color: trip.tripColor, showIndicator: true)
                     }
                 }
             } header: {
@@ -34,8 +34,10 @@ struct ShiftDetailView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
         ShiftDetailView(shift: .preview)
     }
 }
+#endif

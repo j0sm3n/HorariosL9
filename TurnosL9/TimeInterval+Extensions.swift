@@ -22,8 +22,9 @@ extension TimeInterval {
     
     var positionalTimeString: String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.allowedUnits = [.hour, .minute]
         formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
         return formatter.string(from: self) ?? ""
     }
 }

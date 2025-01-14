@@ -74,56 +74,6 @@
                     ]
                 },
                 {
-                    "train": "9902",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 6,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9901",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 7,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9002",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -239,56 +189,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9906",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 8,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9905",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 9,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -414,56 +314,6 @@
                     ]
                 },
                 {
-                    "train": "9910",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 10,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9909",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 11,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9010",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -579,56 +429,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9914",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 12,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9913",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 13,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -769,56 +569,6 @@
                     ]
                 },
                 {
-                    "train": "9904",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 7,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9903",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 8,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9004",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -934,56 +684,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9908",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 9,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9907",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 10,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -1109,56 +809,6 @@
                     ]
                 },
                 {
-                    "train": "9912",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 11,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9911",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 12,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9012",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -1274,56 +924,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9916",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 13,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9915",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 14,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -1464,56 +1064,6 @@
                     ]
                 },
                 {
-                    "train": "9918",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 14,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9917",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 15,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9018",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -1634,56 +1184,6 @@
                     ]
                 },
                 {
-                    "train": "9922",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 16,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9921",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 17,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9022",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -1799,56 +1299,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9926",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 18,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9925",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 19,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -2080,56 +1530,6 @@
                     ]
                 },
                 {
-                    "train": "9932",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 21,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9931",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 21,
-                        "minute": 50
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9032",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -2265,56 +1665,6 @@
                     ]
                 },
                 {
-                    "train": "9920",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 15,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9919",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 16,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9020",
                     "origin": "Garganes",
                     "destination": "Benidorm",
@@ -2430,56 +1780,6 @@
                             "duration": {
                                 "hour": 0,
                                 "minute": 18
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9924",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 17,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9923",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 18,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
                             }
                         }
                     ]
@@ -2605,56 +1905,6 @@
                     ]
                 },
                 {
-                    "train": "9928",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 19,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9927",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 20,
-                        "minute": 6
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
                     "train": "9028",
                     "origin": "Garganes",
                     "destination": "Altea",
@@ -2686,56 +1936,6 @@
                     "departure": {
                         "hour": 20,
                         "minute": 15
-                    },
-                    "stops": [
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9930",
-                    "origin": "Garganes",
-                    "destination": "Altea",
-                    "departure": {
-                        "hour": 20,
-                        "minute": 21
-                    },
-                    "stops": [
-                        {
-                            "location": "Garganes",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 0
-                            }
-                        },
-                        {
-                            "location": "Altea",
-                            "duration": {
-                                "hour": 0,
-                                "minute": 3
-                            }
-                        }
-                    ]
-                },
-                {
-                    "train": "9929",
-                    "origin": "Altea",
-                    "destination": "Garganes",
-                    "departure": {
-                        "hour": 21,
-                        "minute": 6
                     },
                     "stops": [
                         {
