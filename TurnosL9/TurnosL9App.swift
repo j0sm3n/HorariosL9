@@ -9,14 +9,20 @@ import SwiftUI
 
 @main
 struct TurnosL9App: App {
+    @State private var locationManger: LocationManager = .init()
     @State private var viewModel = ViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(shifts: viewModel.shifts)
-                .task {
-                    viewModel.fetchShifts()
-                }
+            if locationManger.isAuthorized {
+                ContentView(shifts: viewModel.shifts)
+                    .task {
+                        viewModel.fetchShifts()
+                    }
+            } else {
+                UnauthorizedView()
+            }
         }
+        .environment(locationManger)
     }
 }
