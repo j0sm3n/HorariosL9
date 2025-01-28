@@ -12,7 +12,7 @@ struct Trip: Identifiable {
     let train: String
     let origin: String
     let destination: String
-    let departure: Duration
+    let departure: Time
     let stops: [Stop]
 }
 
@@ -22,7 +22,7 @@ extension Trip {
     }
 
     var tripArrival: TimeInterval {
-        let lastStopArrival = TimeInterval(duration: stops.last!.duration)
+        let lastStopArrival = TimeInterval(minute: stops.last!.timeFromOrigin)
         let duration = tripDeparture + lastStopArrival
         return duration
     }

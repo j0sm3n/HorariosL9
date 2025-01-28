@@ -16,7 +16,7 @@ extension TimeInterval {
         self = TimeInterval(minute * 60)
     }
     
-    init(duration: Duration) {
+    init(duration: Time) {
         self = TimeInterval(hour: duration.hour, minute: duration.minute)
     }
     

@@ -10,8 +10,8 @@ import SwiftUI
 struct Shift: Identifiable {
     let id: UUID = .init()
     let name: String
-    let startTime: Duration
-    let duration: Duration
+    let startTime: Time
+    let duration: Time
     var saturation: Double?
     let location: String
     let trips: [Trip]
@@ -48,10 +48,10 @@ extension Shift: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
-        self.duration = try container.decode(Duration.self, forKey: .duration)
+        self.duration = try container.decode(Time.self, forKey: .duration)
         self.saturation = try container.decodeIfPresent(Double.self, forKey: .saturation)
         self.location = try container.decode(String.self, forKey: .location)
         self.trips = try container.decode([Trip].self, forKey: .trips)
-        self.startTime = try container.decode(Duration.self, forKey: .startTime)
+        self.startTime = try container.decode(Time.self, forKey: .startTime)
     }
 }
