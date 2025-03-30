@@ -1,5 +1,5 @@
 //
-//  TripRowView.swift
+//  TrainRowView.swift
 //  TurnosL9
 //
 //  Created by Jose Antonio Mendoza on 1/11/24.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct TripRowView: View {
+struct TrainRowView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-    let trip: Trip
+    let train: Train
     let color: Color
     let showIndicator: Bool
     
     var opacity: Double {
-        trip.isRunning && showIndicator ? 1 : 0
+        train.isRunning && showIndicator ? 1 : 0
     }
     
     var body: some View {
@@ -25,7 +25,7 @@ struct TripRowView: View {
                     Circle()
                         .frame(width: 8, height: 8)
                         .foregroundStyle(.red)
-                        .offset(x: -12, y: trip.tripIndicatorPosition)
+                        .offset(x: -12, y: train.indicatorPosition)
                         .opacity(opacity)
                 }
             }
@@ -34,15 +34,15 @@ struct TripRowView: View {
 
 #if DEBUG
 #Preview {
-    TripRowView(trip: .preview, color: .row, showIndicator: true)
+    TrainRowView(train: .preview, color: .row, showIndicator: true)
         .padding(.horizontal)
 }
 #endif
 
-extension TripRowView {
-    var smallTripRow: some View {
+extension TrainRowView {
+    var smallTrainRow: some View {
         HStack {
-            Text(trip.train)
+            Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 72)
             
@@ -50,14 +50,14 @@ extension TripRowView {
             
             Group {
                 VStack(alignment: .center) {
-                    Text(trip.origin)
-                    Text(trip.tripDeparture.positionalTimeString)
+                    Text(train.origin.rawValue)
+                    Text(train.departure.positionalTimeString)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
-                    Text(trip.destination)
-                    Text(trip.tripArrival.positionalTimeString)
+                    Text(train.destination.rawValue)
+                    Text(train.arrival.positionalTimeString)
                         .monospacedStyle()
                 }
             }
@@ -66,9 +66,9 @@ extension TripRowView {
         }
     }
     
-    var mediumTripRow: some View {
+    var mediumTrainRow: some View {
         HStack {
-            Text(trip.train)
+            Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 90)
             
@@ -76,14 +76,14 @@ extension TripRowView {
             
             Group {
                 VStack(alignment: .center) {
-                    Text(trip.origin)
-                    Text(trip.tripDeparture.positionalTimeString)
+                    Text(train.origin.rawValue)
+                    Text(train.departure.positionalTimeString)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
-                    Text(trip.destination)
-                    Text(trip.tripArrival.positionalTimeString)
+                    Text(train.destination.rawValue)
+                    Text(train.arrival.positionalTimeString)
                         .monospacedStyle()
                 }
             }
@@ -92,9 +92,9 @@ extension TripRowView {
         }
     }
     
-    var largeTripRow: some View {
+    var largeTrainRow: some View {
         HStack {
-            Text(trip.train)
+            Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 110)
             
@@ -102,14 +102,14 @@ extension TripRowView {
             
             Group {
                 VStack(alignment: .center) {
-                    Text(trip.origin)
-                    Text(trip.tripDeparture.positionalTimeString)
+                    Text(train.origin.rawValue)
+                    Text(train.departure.positionalTimeString)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
-                    Text(trip.destination)
-                    Text(trip.tripArrival.positionalTimeString)
+                    Text(train.destination.rawValue)
+                    Text(train.arrival.positionalTimeString)
                         .monospacedStyle()
                 }
             }
@@ -118,9 +118,9 @@ extension TripRowView {
         }
     }
     
-    var xLargeTripRow: some View {
+    var xLargeTrainRow: some View {
         HStack {
-            Text(trip.train)
+            Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 120)
             
@@ -128,17 +128,17 @@ extension TripRowView {
             
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
-                    Text(trip.tripDeparture.positionalTimeString)
+                    Text(train.departure.positionalTimeString)
                         .monospacedStyle()
                 } label: {
-                    Text(trip.origin)
+                    Text(train.origin.rawValue)
                 }
                 
                 LabeledContent {
-                    Text(trip.tripArrival.positionalTimeString)
+                    Text(train.arrival.positionalTimeString)
                         .monospacedStyle()
                 } label: {
-                    Text(trip.destination)
+                    Text(train.destination.rawValue)
                 }
             }
             .font(.callout)
@@ -146,25 +146,25 @@ extension TripRowView {
         }
     }
     
-    var xxLargeTripRow: some View {
+    var xxLargeTrainRow: some View {
         VStack(alignment: .leading) {
-            Text(trip.train)
+            Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 160)
                         
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
-                    Text(trip.tripDeparture.positionalTimeString)
+                    Text(train.departure.positionalTimeString)
                         .monospacedStyle()
                 } label: {
-                    Text(trip.origin)
+                    Text(train.origin.rawValue)
                 }
                 
                 LabeledContent {
-                    Text(trip.tripArrival.positionalTimeString)
+                    Text(train.arrival.positionalTimeString)
                         .monospacedStyle()
                 } label: {
-                    Text(trip.destination)
+                    Text(train.destination.rawValue)
                 }
             }
             .font(.callout)
@@ -173,20 +173,20 @@ extension TripRowView {
     }
 }
 
-extension TripRowView {
+extension TrainRowView {
     @ViewBuilder
     private func createRow(for size: DynamicTypeSize) -> some View {
                 if size > .accessibility2 {
-                    xxLargeTripRow
+                    xxLargeTrainRow
                 } else if size > .accessibility1 {
-                    xLargeTripRow
+                    xLargeTrainRow
                 } else
         if size > .xxxLarge {
-            largeTripRow
+            largeTrainRow
                 } else if size > .medium {
-            mediumTripRow
+            mediumTrainRow
         } else {
-            smallTripRow
+            smallTrainRow
         }
     }
 }

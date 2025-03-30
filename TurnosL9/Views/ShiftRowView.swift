@@ -37,11 +37,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.shiftStart.positionalTimeString)
+                        Text(shift.start.positionalTimeString)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.shiftEnd.positionalTimeString)
+                        Text(shift.end.positionalTimeString)
                             .monospacedStyle()
                     }
                 }
@@ -52,7 +52,7 @@ extension ShiftRowView {
                 
                 VStack(alignment: .leading) {
                     LabeledContent("Jornada") {
-                        Text(shift.shiftDuration.positionalTimeString)
+                        Text(shift.duration.positionalTimeString)
                             .monospacedStyle()
                     }
                     if let saturation = shift.saturation {
@@ -83,11 +83,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.shiftStart.positionalTimeString)
+                        Text(shift.start.positionalTimeString)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.shiftEnd.positionalTimeString)
+                        Text(shift.end.positionalTimeString)
                             .monospacedStyle()
                     }
                 }
@@ -98,7 +98,7 @@ extension ShiftRowView {
                 
                 VStack(alignment: .leading) {
                     LabeledContent("Jorn.") {
-                        Text(shift.shiftDuration.positionalTimeString)
+                        Text(shift.duration.positionalTimeString)
                             .monospacedStyle()
                     }
                     if let saturation = shift.saturation {
@@ -129,16 +129,16 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.shiftStart.positionalTimeString)
+                    Text(shift.start.positionalTimeString)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.shiftEnd.positionalTimeString)
+                    Text(shift.end.positionalTimeString)
                         .monospacedStyle()
                 }
                 
                 LabeledContent("Jornada") {
-                    Text(shift.shiftDuration.positionalTimeString)
+                    Text(shift.duration.positionalTimeString)
                         .monospacedStyle()
                 }
                 if let saturation = shift.saturation {
@@ -167,16 +167,16 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.shiftStart.positionalTimeString)
+                    Text(shift.start.positionalTimeString)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.shiftEnd.positionalTimeString)
+                    Text(shift.end.positionalTimeString)
                         .monospacedStyle()
                 }
                 
                 LabeledContent("Jor.") {
-                    Text(shift.shiftDuration.positionalTimeString)
+                    Text(shift.duration.positionalTimeString)
                         .monospacedStyle()
                 }
                 if let saturation = shift.saturation {
@@ -207,16 +207,16 @@ extension ShiftRowView {
             .frame(maxWidth: .infinity, alignment: .center)
             
             LabeledContent("Inicio") {
-                Text(shift.shiftStart.positionalTimeString)
+                Text(shift.start.positionalTimeString)
                     .monospacedStyle()
             }
             LabeledContent("Fin") {
-                Text(shift.shiftEnd.positionalTimeString)
+                Text(shift.end.positionalTimeString)
                     .monospacedStyle()
             }
             
             LabeledContent("Jorn.") {
-                Text(shift.shiftDuration.positionalTimeString)
+                Text(shift.duration.positionalTimeString)
                     .monospacedStyle()
             }
             if let saturation = shift.saturation {

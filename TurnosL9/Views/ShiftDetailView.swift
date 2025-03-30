@@ -13,11 +13,11 @@ struct ShiftDetailView: View {
     var body: some View {
         ScrollView {
             Section {
-                ForEach(shift.trips) { trip in
+                ForEach(shift.trains) { train in
                     NavigationLink {
-                        TripDetailView(trip: trip)
+                        TrainDetailView(train: train)
                     } label: {
-                        TripRowView(trip: trip, color: trip.tripColor, showIndicator: true)
+                        TrainRowView(train: train, color: train.color, showIndicator: true)
                     }
                 }
             } header: {
@@ -27,7 +27,7 @@ struct ShiftDetailView: View {
         }
         .contentMargins([.top, .bottom], 40)
         .overlay {
-            if shift.trips.isEmpty {
+            if shift.trains.isEmpty {
                     ContentUnavailableView("Reserva y Maniobras", systemImage: "exclamationmark.triangle.fill")
             }
         }

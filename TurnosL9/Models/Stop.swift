@@ -7,27 +7,21 @@
 
 import Foundation
 
-struct Stop: Identifiable {
+struct Stop: Identifiable, Hashable {
     let id: UUID = .init()
     let location: Location
-    let timeFromOrigin: Int
+    let departure: TimeInterval
 }
 
-extension Stop: Decodable {
+extension Stop: Codable {
     enum CodingKeys: String, CodingKey {
-        case location
-        case timeFromOrigin = "time_from_origin"
+        case location, departure
     }
-
+    
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.location = try container.decode(Location.self, forKey: .location)
-        self.timeFromOrigin = try container.decode(Int.self, forKey: .timeFromOrigin)
-    }
-}
-
-extension Stop {
-    var stopDuration: TimeInterval {
-        TimeInterval(minute: timeFromOrigin)
+        let stopDeparture = try container.decode(Time.self, forKey: .departure)
+        self.departure = TimeInterval(duration: stopDeparture)
     }
 }

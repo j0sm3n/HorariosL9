@@ -1,5 +1,5 @@
 //
-//  TripDetailView.swift
+//  TrainDetailView.swift
 //  TurnosL9
 //
 //  Created by Jose Antonio Mendoza on 31/10/24.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct TripDetailView: View {
-    let trip: Trip
+struct TrainDetailView: View {
+    let train: Train
     
     var body: some View {
         ScrollView {
             Section {
-                ForEach(Array(trip.stops.enumerated()), id: \.offset) { index, stop in
+                ForEach(Array(train.stops.enumerated()), id: \.offset) { index, stop in
                     stopRowView(stop: stop)
                         .rowStyle(in: color(for: index))
                         .overlay(alignment: .leading) {
@@ -23,11 +23,12 @@ struct TripDetailView: View {
                                     .offset(x: -12)
                                     .opacity(showIndicator(for: stop, with: index) ? 1 : 0)
                                     .foregroundStyle(.red)
+                                    .animation(.easeInOut(duration: 1), value: showIndicator(for: stop, with: index))
                             }
                         }
                 }
             } header: {
-                TripRowView(trip: trip, color: .row, showIndicator: false)
+                TrainRowView(train: train, color: .row, showIndicator: false)
             }
             .padding(.horizontal)
         }
@@ -38,33 +39,27 @@ struct TripDetailView: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        TripDetailView(trip: .preview)
+        TrainDetailView(train: .preview)
     }
 }
 #endif
 
-extension TripDetailView {
+extension TrainDetailView {
     func stopRowView(stop: Stop) -> some View {
         LabeledContent(stop.location.rawValue) {
-            Text(arrivalString(for: stop))
+            Text(stop.departure.positionalTimeString)
                 .monospacedStyle()
         }
         .padding(.horizontal)
     }
     
-    private func arrivalString(for stop: Stop) -> String {
-        (trip.tripDeparture + stop.stopDuration).positionalTimeString
-    }
-    
     private func showIndicator(for stop: Stop, with index: Int) -> Bool {
-        guard trip.isRunning else { return false }
+        guard train.isRunning else { return false }
         
-        let timeRunning = trip.currentTime - trip.tripDeparture
-
         if index == 0 {
-            return timeRunning == 0 // Ok
+            return train.currentTime == stop.departure
         } else {
-            return timeRunning <= stop.stopDuration && timeRunning > trip.stops[index - 1].stopDuration
+            return train.currentTime <= stop.departure && train.currentTime > train.stops[index - 1].departure
         }
     }
     

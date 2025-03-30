@@ -7,51 +7,70 @@
 
 import SwiftUI
 
-struct Shift: Identifiable {
+struct Shift: Hashable, Identifiable {
     let id: UUID = .init()
-    let name: String
-    let startTime: Time
-    let duration: Time
+    var name: String
+    var start: TimeInterval
+    var duration: TimeInterval
     var saturation: Double?
-    let location: String
-    let trips: [Trip]
+    var location: String
+    var trains: [Train]
     
-    var shiftStart: TimeInterval {
-        TimeInterval(duration: startTime)
-    }
-    
-    var shiftEnd: TimeInterval {
-        TimeInterval(duration: startTime) + TimeInterval(duration: duration)
-    }
-    
-    var shiftDuration: TimeInterval {
-        TimeInterval(duration: duration)
-    }
-    
-    var imageName: String {
-        location + "-" + name
-    }
+    var isLiveActivityRegistered: Bool = false
 }
 
 extension Shift {
-    struct Wrapper: Decodable {
-        let shifts: [Shift]
+    struct Wrapper: Codable {
+        var shifts: [Shift]
     }
 }
 
-extension Shift: Decodable {
+extension Shift: Codable {
     enum CodingKeys: String, CodingKey {
-        case name, duration, saturation, location, trips
-        case startTime = "start_time"
+        case name, duration, saturation, location, trains
+        case start = "start_time"
     }
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+
         self.name = try container.decode(String.self, forKey: .name)
-        self.duration = try container.decode(Time.self, forKey: .duration)
         self.saturation = try container.decodeIfPresent(Double.self, forKey: .saturation)
         self.location = try container.decode(String.self, forKey: .location)
-        self.trips = try container.decode([Trip].self, forKey: .trips)
-        self.startTime = try container.decode(Time.self, forKey: .startTime)
+        self.trains = try container.decode([Train].self, forKey: .trains)
+
+        let startTime = try container.decode(Time.self, forKey: .start)
+        self.start = TimeInterval(duration: startTime)
+        
+        let shiftDuration = try container.decode(Time.self, forKey: .duration)
+        self.duration = TimeInterval(duration: shiftDuration)
+    }
+}
+
+extension Shift {
+    var end: TimeInterval { start + duration }
+    
+    var isWorking: Bool {
+       let timeSinceStartOfDay = timeSinceStartOfDay()
+        return timeSinceStartOfDay >= start && timeSinceStartOfDay < end
+    }
+
+    var currentTrain: Train? { trains.first { $0.isRunning } }
+    
+    var nextTrain: Train? { trains.first { $0.departure > timeSinceStartOfDay() } }
+    
+    var isRunning: Bool { currentTrain != nil }
+    
+    var isResting: Bool { !isRunning && nextTrain != nil }
+    
+    private func timeSinceStartOfDay() -> TimeInterval {
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        return now.timeIntervalSince(startOfDay)
+    }
+    
+    var timeToFinish: TimeInterval {
+        guard isWorking else { return 0.0 }
+        return end - timeSinceStartOfDay()
     }
 }
