@@ -10,7 +10,7 @@ import SwiftUI
 struct Shift: Hashable, Identifiable {
     let id: UUID = .init()
     var name: String
-    var start: TimeInterval
+    var start: DateComponents
     var duration: TimeInterval
     var saturation: Double?
     var location: String
@@ -40,7 +40,7 @@ extension Shift: Codable {
         self.trains = try container.decode([Train].self, forKey: .trains)
 
         let startTime = try container.decode(Time.self, forKey: .start)
-        self.start = TimeInterval(duration: startTime)
+        self.start = DateComponents(hour: startTime.hour, minute: startTime.minute)
         
         let shiftDuration = try container.decode(Time.self, forKey: .duration)
         self.duration = TimeInterval(duration: shiftDuration)
@@ -48,29 +48,37 @@ extension Shift: Codable {
 }
 
 extension Shift {
-    var end: TimeInterval { start + duration }
+    var end: DateComponents {
+        let startDate = Calendar.current.date(from: start)!
+        let endDate = startDate.addingTimeInterval(duration)
+        return Calendar.current.dateComponents([.hour, .minute], from: endDate)
+    }
     
     var isWorking: Bool {
-       let timeSinceStartOfDay = timeSinceStartOfDay()
-        return timeSinceStartOfDay >= start && timeSinceStartOfDay < end
+//       let timeSinceStartOfDay = timeSinceStartOfDay()
+//        return timeSinceStartOfDay >= start && timeSinceStartOfDay < end
+        start.isEarlierOrEqual(to: currentTime) && currentTime.isEarlier(than: end)
     }
 
     var currentTrain: Train? { trains.first { $0.isRunning } }
     
-    var nextTrain: Train? { trains.first { $0.departure > timeSinceStartOfDay() } }
+    var nextTrain: Train? { trains.first { currentTime.isEarlier(than: $0.departure) } }
     
     var isRunning: Bool { currentTrain != nil }
     
     var isResting: Bool { !isRunning && nextTrain != nil }
     
-    private func timeSinceStartOfDay() -> TimeInterval {
-        let now = Date()
-        let startOfDay = Calendar.current.startOfDay(for: now)
-        return now.timeIntervalSince(startOfDay)
+//    private func timeSinceStartOfDay() -> TimeInterval {
+//        let now = Date()
+//        let startOfDay = Calendar.current.startOfDay(for: now)
+//        return now.timeIntervalSince(startOfDay)
+//    }
+    var currentTime: DateComponents {
+        return Calendar.current.dateComponents([.hour, .minute], from: .now)
     }
     
-    var timeToFinish: TimeInterval {
-        guard isWorking else { return 0.0 }
-        return end - timeSinceStartOfDay()
-    }
+//    var timeToFinish: TimeInterval {
+//        guard isWorking else { return 0.0 }
+//        return end - timeSinceStartOfDay()
+//    }
 }

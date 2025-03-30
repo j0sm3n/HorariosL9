@@ -47,7 +47,7 @@ struct TrainDetailView: View {
 extension TrainDetailView {
     func stopRowView(stop: Stop) -> some View {
         LabeledContent(stop.location.rawValue) {
-            Text(stop.departure.positionalTimeString)
+            Text(stop.departure.formattedTime)
                 .monospacedStyle()
         }
         .padding(.horizontal)
@@ -59,7 +59,7 @@ extension TrainDetailView {
         if index == 0 {
             return train.currentTime == stop.departure
         } else {
-            return train.currentTime <= stop.departure && train.currentTime > train.stops[index - 1].departure
+            return train.currentTime.isEarlierOrEqual(to: stop.departure) && train.stops[index - 1].departure.isEarlier(than: train.currentTime)
         }
     }
     

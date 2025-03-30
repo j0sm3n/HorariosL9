@@ -12,17 +12,19 @@ struct Train: Identifiable {
     let number: Int
     let origin: Location
     let destination: Location
-    let departure: TimeInterval
+    let departure: DateComponents
     let stops: [Stop]
 }
 
 extension Train {
-    var arrival: TimeInterval {
+    var arrival: DateComponents {
         stops.last!.departure
     }
     
-    var duration: TimeInterval {
-        arrival - departure
+    var duration: DateComponents {
+        let arrivalDate = Calendar.current.date(from: arrival)!
+        let departureDate = Calendar.current.date(from: departure)!
+        return Calendar.current.dateComponents([.hour, .minute], from: departureDate, to: arrivalDate)
     }
     
     private var isEven: Bool { number.isMultiple(of: 2) }
@@ -31,18 +33,22 @@ extension Train {
         Color.gray.opacity(self.isEven ? 0.5 : 0.2)
     }
     
-    var currentTime: TimeInterval {
-        let components = Calendar.current.dateComponents([.hour, .minute], from: .now)
-        return TimeInterval(hour: components.hour!, minute: components.minute!)
+    var currentTime: DateComponents {
+        return Calendar.current.dateComponents([.hour, .minute], from: .now)
     }
     
     var isRunning: Bool {
-        return currentTime >= departure && currentTime <= arrival
+        return departure.isEarlierOrEqual(to: currentTime) && currentTime.isEarlierOrEqual(to: arrival)
     }
     
     var indicatorPosition: Double {
         guard isRunning else { return 0.0 }
-        let position = 60.0 * ((currentTime - departure) / duration)
+        let position = 60.0 * Double((currentTime.inSeconds - departure.inSeconds) / duration.inSeconds)
+        print("Current time: \(currentTime.inSeconds)")
+        print("Departure: \(departure.inSeconds)")
+        print("Duration: \(duration.inSeconds)")
+        print("Position: \(position)")
+        print("--------------------")
         return position
     }
     
@@ -50,21 +56,21 @@ extension Train {
         guard isRunning else { return nil }
         
         return stops
-            .sorted { $0.departure > $1.departure } // sort in descending order
-            .first(where: { $0.departure <= departure })
+            .sorted { $1.departure.isEarlier(than: $0.departure) } // sort in descending order
+            .first(where: { $0.departure.isEarlierOrEqual(to: departure) })
     }
     
     var currentStopString: String {
         currentStop?.location.monogram ?? "No current stop"
     }
     
-    var currentStopArrival: TimeInterval {
+    var currentStopArrival: DateComponents? {
         departureTime(currentStop)
     }
     
     var nextStop: Stop? {
         guard let currentStop else { return stops.first }
-        let sortedStops = stops.sorted { $0.departure < $1.departure }
+        let sortedStops = stops.sorted { $0.departure.isEarlier(than: $1.departure) }
         guard sortedStops.last != currentStop else { return nil }
         let currentStopIndex = sortedStops.firstIndex(of: currentStop)!
         return sortedStops[currentStopIndex + 1]
@@ -74,12 +80,12 @@ extension Train {
         nextStop?.location.monogram ?? "No next stop"
     }
     
-    var nextStopArrival: TimeInterval {
+    var nextStopArrival: DateComponents? {
         departureTime(nextStop)
     }
     
-    private func departureTime(_ stop: Stop?) -> TimeInterval {
-        guard let stop else { return 0.0 }
+    private func departureTime(_ stop: Stop?) -> DateComponents? {
+        guard let stop else { return nil }
         return stop.departure
     }
 }
@@ -98,7 +104,7 @@ extension Train: Codable {
         self.stops = try container.decode([Stop].self, forKey: .stops)
         
         let trainDeparture = try container.decode(Time.self, forKey: .departure)
-        self.departure = TimeInterval(duration: trainDeparture)
+        self.departure = DateComponents(hour: trainDeparture.hour, minute: trainDeparture.minute)
     }
 }
 

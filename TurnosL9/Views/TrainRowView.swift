@@ -51,13 +51,13 @@ extension TrainRowView {
             Group {
                 VStack(alignment: .center) {
                     Text(train.origin.rawValue)
-                    Text(train.departure.positionalTimeString)
+                    Text(train.departure.formattedTime)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
                     Text(train.destination.rawValue)
-                    Text(train.arrival.positionalTimeString)
+                    Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 }
             }
@@ -77,13 +77,13 @@ extension TrainRowView {
             Group {
                 VStack(alignment: .center) {
                     Text(train.origin.rawValue)
-                    Text(train.departure.positionalTimeString)
+                    Text(train.departure.formattedTime)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
                     Text(train.destination.rawValue)
-                    Text(train.arrival.positionalTimeString)
+                    Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 }
             }
@@ -103,13 +103,13 @@ extension TrainRowView {
             Group {
                 VStack(alignment: .center) {
                     Text(train.origin.rawValue)
-                    Text(train.departure.positionalTimeString)
+                    Text(train.departure.formattedTime)
                         .monospacedStyle()
                 }
                 
                 VStack(alignment: .center) {
                     Text(train.destination.rawValue)
-                    Text(train.arrival.positionalTimeString)
+                    Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 }
             }
@@ -128,14 +128,14 @@ extension TrainRowView {
             
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
-                    Text(train.departure.positionalTimeString)
+                    Text(train.departure.formattedTime)
                         .monospacedStyle()
                 } label: {
                     Text(train.origin.rawValue)
                 }
                 
                 LabeledContent {
-                    Text(train.arrival.positionalTimeString)
+                    Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 } label: {
                     Text(train.destination.rawValue)
@@ -154,14 +154,14 @@ extension TrainRowView {
                         
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
-                    Text(train.departure.positionalTimeString)
+                    Text(train.departure.formattedTime)
                         .monospacedStyle()
                 } label: {
                     Text(train.origin.rawValue)
                 }
                 
                 LabeledContent {
-                    Text(train.arrival.positionalTimeString)
+                    Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 } label: {
                     Text(train.destination.rawValue)

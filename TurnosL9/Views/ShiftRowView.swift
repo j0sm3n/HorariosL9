@@ -37,11 +37,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.start.positionalTimeString)
+                        Text(shift.start.formattedTime)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.end.positionalTimeString)
+                        Text(shift.end.formattedTime)
                             .monospacedStyle()
                     }
                 }
@@ -83,11 +83,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.start.positionalTimeString)
+                        Text(shift.start.formattedTime)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.end.positionalTimeString)
+                        Text(shift.end.formattedTime)
                             .monospacedStyle()
                     }
                 }
@@ -129,11 +129,11 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.start.positionalTimeString)
+                    Text(shift.start.formattedTime)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.end.positionalTimeString)
+                    Text(shift.end.formattedTime)
                         .monospacedStyle()
                 }
                 
@@ -167,11 +167,11 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.start.positionalTimeString)
+                    Text(shift.start.formattedTime)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.end.positionalTimeString)
+                    Text(shift.end.formattedTime)
                         .monospacedStyle()
                 }
                 
@@ -207,11 +207,11 @@ extension ShiftRowView {
             .frame(maxWidth: .infinity, alignment: .center)
             
             LabeledContent("Inicio") {
-                Text(shift.start.positionalTimeString)
+                Text(shift.start.formattedTime)
                     .monospacedStyle()
             }
             LabeledContent("Fin") {
-                Text(shift.end.positionalTimeString)
+                Text(shift.end.formattedTime)
                     .monospacedStyle()
             }
             
