@@ -55,8 +55,6 @@ extension Shift {
     }
     
     var isWorking: Bool {
-//       let timeSinceStartOfDay = timeSinceStartOfDay()
-//        return timeSinceStartOfDay >= start && timeSinceStartOfDay < end
         start.isEarlierOrEqual(to: currentTime) && currentTime.isEarlier(than: end)
     }
 
@@ -68,17 +66,7 @@ extension Shift {
     
     var isResting: Bool { !isRunning && nextTrain != nil }
     
-//    private func timeSinceStartOfDay() -> TimeInterval {
-//        let now = Date()
-//        let startOfDay = Calendar.current.startOfDay(for: now)
-//        return now.timeIntervalSince(startOfDay)
-//    }
     var currentTime: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute], from: .now)
     }
-    
-//    var timeToFinish: TimeInterval {
-//        guard isWorking else { return 0.0 }
-//        return end - timeSinceStartOfDay()
-//    }
 }

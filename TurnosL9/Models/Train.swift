@@ -21,10 +21,10 @@ extension Train {
         stops.last!.departure
     }
     
-    var duration: DateComponents {
+    var duration: TimeInterval {
         let arrivalDate = Calendar.current.date(from: arrival)!
         let departureDate = Calendar.current.date(from: departure)!
-        return Calendar.current.dateComponents([.hour, .minute], from: departureDate, to: arrivalDate)
+        return arrivalDate.timeIntervalSince(departureDate)
     }
     
     private var isEven: Bool { number.isMultiple(of: 2) }
@@ -43,12 +43,7 @@ extension Train {
     
     var indicatorPosition: Double {
         guard isRunning else { return 0.0 }
-        let position = 60.0 * Double((currentTime.inSeconds - departure.inSeconds) / duration.inSeconds)
-        print("Current time: \(currentTime.inSeconds)")
-        print("Departure: \(departure.inSeconds)")
-        print("Duration: \(duration.inSeconds)")
-        print("Position: \(position)")
-        print("--------------------")
+        let position = 60.0 * Double((currentTime.inSeconds - departure.inSeconds) / duration)
         return position
     }
     
