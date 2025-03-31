@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct TurnosL9App: App {
-    @State private var locationManger: LocationManager = .init()
+    @State private var locationManger = LocationManager()
     @State private var viewModel = ViewModel()
     
     var body: some Scene {
@@ -23,6 +23,6 @@ struct TurnosL9App: App {
                 UnauthorizedView()
             }
         }
-        .environment(locationManger)
+//        .environment(locationManger)
     }
 }
