@@ -10,9 +10,9 @@ import WidgetKit
 
 struct LockScreenView: View {
     let context: ActivityViewContext<ShiftAttributes>
-//    var remainingMinutes: String {
-//        context.attributes.endTime.timeIntervalSinceNow.positionalTimeString
-//    }
+    //    var remainingMinutes: String {
+    //        context.attributes.endTime.timeIntervalSinceNow.positionalTimeString
+    //    }
     // for testing
     var remainingMinutes: String {
         let now = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 11, minute: 13))!
@@ -98,24 +98,21 @@ struct LockScreenView: View {
     }
     
     var finishedView: some View {
-        HStack(spacing: 32) {
-            VStack {
-                Text("Turno")
-                    .foregroundStyle(.secondary)
-                Text(context.attributes.shiftName)
-                    .font(.largeTitle)
-                    .fontWeight(.black)
-                    .fontDesign(.rounded)
-            }
-            VStack {
-                Text("Termina en")
-                    .foregroundStyle(.secondary)
-                Text("\(remainingMinutes) min")
-//                Text(finishDate, style: .timer)
-                        .font(.largeTitle)
-                        .fontWeight(.black)
-                        .fontDesign(.rounded)
-            }
+        HStack(alignment: .lastTextBaseline) {
+            Text("Turno")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+            Text(context.attributes.shiftName)
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .fontDesign(.rounded)
+            Text("termina en")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+            Text(context.attributes.endTime, style: .relative)
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .fontDesign(.rounded)
         }
         .padding()
     }
