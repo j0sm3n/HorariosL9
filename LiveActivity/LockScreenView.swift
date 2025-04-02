@@ -18,7 +18,9 @@ struct LockScreenView: View {
         let now = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 11, minute: 13))!
         return context.attributes.endTime.timeIntervalSince(now).minutesString
     }
-
+    
+    var finishDate: Date = Date().addingTimeInterval(300)
+    
     var body: some View {
         switch context.state.shiftStatus {
         case .waiting:
@@ -109,12 +111,10 @@ struct LockScreenView: View {
                 Text("Termina en")
                     .foregroundStyle(.secondary)
                 Text("\(remainingMinutes) min")
-                    .font(.largeTitle)
-                    .fontWeight(.black)
-                    .fontDesign(.rounded)
-                Text("Termina a las \(context.attributes.endTime.formatted(date: .omitted, time: .shortened))")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+//                Text(finishDate, style: .timer)
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .fontDesign(.rounded)
             }
         }
         .padding()

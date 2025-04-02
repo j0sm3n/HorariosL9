@@ -12,35 +12,109 @@ import SwiftUI
 struct LiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: ShiftAttributes.self) { context in
-            // Lock screen/banner UI goes here
             LockScreenView(context: context)
                 .activityBackgroundTint(Color.cyan)
                 .activitySystemActionForegroundColor(Color.black)
-            
         } dynamicIsland: { context in
-            DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
-                DynamicIslandExpandedRegion(.leading) {
-                    Text("\(context.state.origin ?? "")")
+            createDynamicIsland(context: context)
+        }
+    }
+}
+
+extension LiveActivity {
+    func createDynamicIsland(context: ActivityViewContext<ShiftAttributes>) -> DynamicIsland {
+        switch context.state.shiftStatus {
+            case .waiting:
+                return waitingDynamicIsland(context: context)
+            case .working:
+                return workingDynamicIsland(context: context)
+            case .finished:
+                return finishedDynamicIsland(context: context)
+        }
+    }
+    
+    func waitingDynamicIsland(context: ActivityViewContext<ShiftAttributes>) -> DynamicIsland {
+        DynamicIsland {
+            DynamicIslandExpandedRegion(.leading) {
+                VStack {
+                    Text("\(context.state.origin!)")
+                    Text("\(context.state.departureTime!.formatted(date: .omitted, time: .shortened))")
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("\(context.state.destination ?? "")")
+                .padding(.top)
+            }
+            DynamicIslandExpandedRegion(.trailing) {
+                VStack {
+                    Text("\(context.state.destination!)")
+                    Text("\(context.state.arrivalTime!.formatted(date: .omitted, time: .shortened))")
                 }
-                DynamicIslandExpandedRegion(.bottom) {
-                    Text("\(context.state.trainNumber ?? "")")
-                    // more content
+                .padding(.top)
+            }
+            DynamicIslandExpandedRegion(.center) {
+                VStack {
+                    Text("Próximo tren")
+                        .foregroundStyle(.secondary)
+                    Label(context.state.trainNumber ?? "", systemImage: "tram.fill")
+                        .font(.title3)
+                        .bold()
                 }
-            } compactLeading: {
+            }
+            DynamicIslandExpandedRegion(.bottom) {
+                Text("Sale en \(context.state.departureTime!, style: .offset)")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+        } compactLeading: {
+            Image(systemName: "tram.circle")
+        } compactTrailing: {
+            Text(context.state.departureTime!, style: .offset)
+        } minimal: {
+            Text(context.state.departureTime!, style: .offset)
+        }
+        .keylineTint(Color.red)
+    }
+    
+    func workingDynamicIsland(context: ActivityViewContext<ShiftAttributes>) -> DynamicIsland {
+        DynamicIsland {
+            DynamicIslandExpandedRegion(.leading) {
                 Text("\(context.state.origin ?? "")")
-            } compactTrailing: {
-                Text("\(context.state.destination ?? "")")
-            } minimal: {
+            }
+            DynamicIslandExpandedRegion(.trailing) {
                 Text("\(context.state.destination ?? "")")
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
+            DynamicIslandExpandedRegion(.bottom) {
+                Text("\(context.state.trainNumber ?? "")")
+                // more content
+            }
+        } compactLeading: {
+            Text("\(context.state.origin ?? "")")
+        } compactTrailing: {
+            Text("\(context.state.destination ?? "")")
+        } minimal: {
+            Text("\(context.state.destination ?? "")")
         }
+        .keylineTint(Color.red)
+    }
+    
+    func finishedDynamicIsland(context: ActivityViewContext<ShiftAttributes>) -> DynamicIsland {
+        DynamicIsland {
+            DynamicIslandExpandedRegion(.leading) {
+                Text("\(context.state.origin ?? "")")
+            }
+            DynamicIslandExpandedRegion(.trailing) {
+                Text("\(context.state.destination ?? "")")
+            }
+            DynamicIslandExpandedRegion(.bottom) {
+                Text("\(context.state.trainNumber ?? "")")
+                // more content
+            }
+        } compactLeading: {
+            Text("\(context.state.origin ?? "")")
+        } compactTrailing: {
+            Text("\(context.state.destination ?? "")")
+        } minimal: {
+            Text("\(context.state.destination ?? "")")
+        }
+        .keylineTint(Color.red)
     }
 }
 
