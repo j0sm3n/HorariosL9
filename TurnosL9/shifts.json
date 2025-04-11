@@ -3340,6 +3340,34 @@
             "trains": []
         },
         {
+            "name": "CI1",
+            "start_time": {
+                "hour": 6,
+                "minute": 30
+            },
+            "duration": {
+                "hour": 7,
+                "minute": 46
+            },
+            "saturation": 64.65,
+            "location": "Benidorm",
+            "trains": []
+        },
+        {
+            "name": "CI2",
+            "start_time": {
+                "hour": 15,
+                "minute": 30
+            },
+            "duration": {
+                "hour": 7,
+                "minute": 46
+            },
+            "saturation": 64.65,
+            "location": "Benidorm",
+            "trains": []
+        },
+        {
             "name": "21",
             "start_time": {
                 "hour": 5,
