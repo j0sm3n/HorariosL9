@@ -37,7 +37,7 @@ struct LockScreenView: View {
             VStack {
                 Text("Próximo tren")
                     .foregroundStyle(.secondary)
-                Label(context.state.trainNumber ?? "", systemImage: "tram.fill")
+                Label(context.state.trainNumber?.formatted() ?? "", systemImage: "tram.fill")
                     .font(.title3)
                     .bold()
             }
@@ -73,7 +73,7 @@ struct LockScreenView: View {
             VStack {
                 Text("Circulando")
                     .foregroundStyle(.secondary)
-                Label(context.state.trainNumber ?? "", systemImage: "tram.fill")
+                Label(context.state.trainNumber?.formatted() ?? "", systemImage: "tram.fill")
                     .font(.title3)
                     .bold()
             }

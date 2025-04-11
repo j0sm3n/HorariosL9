@@ -53,7 +53,7 @@ extension LiveActivity {
                 VStack {
                     Text("Próximo tren")
                         .foregroundStyle(.secondary)
-                    Label(context.state.trainNumber ?? "", systemImage: "tram.fill")
+                    Label(context.state.trainNumber?.formatted() ?? "", systemImage: "tram.fill")
                         .font(.title3)
                         .bold()
                 }
@@ -82,7 +82,7 @@ extension LiveActivity {
                 Text("\(context.state.destination ?? "")")
             }
             DynamicIslandExpandedRegion(.bottom) {
-                Text("\(context.state.trainNumber ?? "")")
+                Text("\(context.state.trainNumber?.formatted() ?? "")")
                 // more content
             }
         } compactLeading: {
@@ -104,7 +104,7 @@ extension LiveActivity {
                 Text("\(context.state.destination ?? "")")
             }
             DynamicIslandExpandedRegion(.bottom) {
-                Text("\(context.state.trainNumber ?? "")")
+                Text("\(context.state.trainNumber?.formatted() ?? "")")
                 // more content
             }
         } compactLeading: {
@@ -126,41 +126,41 @@ extension ShiftAttributes {
 }
 
 extension ShiftAttributes.ContentState {
-    fileprivate static var waiting9001: ShiftAttributes.ContentState {
-        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 35))!
-        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 6, minute: 56))!
-        return ShiftAttributes.ContentState(shiftStatus: .waiting, trainNumber: "9001", origin: "B", destination: "D", departureTime: departureTime, arrivalTime: arrivalTime)
-    }
-    
-    fileprivate static var working9001: ShiftAttributes.ContentState {
-        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 50))!
-        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 53))!
-        return ShiftAttributes.ContentState(shiftStatus: .working, trainNumber: "9001", origin: "AT", destination: "GR", departureTime: departureTime, arrivalTime: arrivalTime)
-    }
-    
-    fileprivate static var waiting9006: ShiftAttributes.ContentState {
-        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 2))!
-        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 8, minute: 24))!
-        return ShiftAttributes.ContentState(shiftStatus: .waiting, trainNumber: "9006", origin: "D", destination: "B", departureTime: departureTime, arrivalTime: arrivalTime)
-    }
-    
-    fileprivate static var working9006: ShiftAttributes.ContentState {
-        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 17))!
-        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 29))!
-        return ShiftAttributes.ContentState(shiftStatus: .working, trainNumber: "9006", origin: "G", destination: "TE", departureTime: departureTime, arrivalTime: arrivalTime)
-    }
-    
-    fileprivate static var finished: ShiftAttributes.ContentState {
-        ShiftAttributes.ContentState(shiftStatus: .finished)
-    }
+//    fileprivate static var waiting9001: ShiftAttributes.ContentState {
+//        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 35))!
+//        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 6, minute: 56))!
+//        return ShiftAttributes.ContentState(shiftStatus: .waiting, trainNumber: 9001, origin: "B", destination: "D", departureTime: departureTime, arrivalTime: arrivalTime)
+//    }
+//    
+//    fileprivate static var working9001: ShiftAttributes.ContentState {
+//        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 50))!
+//        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 5, minute: 53))!
+//        return ShiftAttributes.ContentState(shiftStatus: .working, trainNumber: 9001, origin: "AT", destination: "GR", departureTime: departureTime, arrivalTime: arrivalTime)
+//    }
+//    
+//    fileprivate static var waiting9006: ShiftAttributes.ContentState {
+//        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 2))!
+//        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 8, minute: 24))!
+//        return ShiftAttributes.ContentState(shiftStatus: .waiting, trainNumber: 9006, origin: "D", destination: "B", departureTime: departureTime, arrivalTime: arrivalTime)
+//    }
+//    
+//    fileprivate static var working9006: ShiftAttributes.ContentState {
+//        let departureTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 17))!
+//        let arrivalTime = Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 31, hour: 7, minute: 29))!
+//        return ShiftAttributes.ContentState(shiftStatus: .working, trainNumber: 9006, origin: "G", destination: "TE", departureTime: departureTime, arrivalTime: arrivalTime)
+//    }
+//    
+//    fileprivate static var finished: ShiftAttributes.ContentState {
+//        ShiftAttributes.ContentState(shiftStatus: .finished)
+//    }
 }
 
-#Preview("Notification", as: .content, using: ShiftAttributes.preview) {
-    LiveActivity()
-} contentStates: {
-    ShiftAttributes.ContentState.waiting9001
-    ShiftAttributes.ContentState.working9001
-    ShiftAttributes.ContentState.waiting9006
-    ShiftAttributes.ContentState.working9006
-    ShiftAttributes.ContentState.finished
-}
+//#Preview("Notification", as: .content, using: ShiftAttributes.preview) {
+//    LiveActivity()
+//} contentStates: {
+//    ShiftAttributes.ContentState.waiting9001
+//    ShiftAttributes.ContentState.working9001
+//    ShiftAttributes.ContentState.waiting9006
+//    ShiftAttributes.ContentState.working9006
+//    ShiftAttributes.ContentState.finished
+//}

@@ -54,6 +54,7 @@ extension Shift {
         return Calendar.current.dateComponents([.hour, .minute], from: endDate)
     }
     
+    // TODO: Think about whether the following variables are necessary
     var isWorking: Bool {
         start.isEarlierOrEqual(to: currentTime) && currentTime.isEarlier(than: end)
     }
@@ -68,5 +69,79 @@ extension Shift {
     
     var currentTime: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute], from: .now)
+    }
+    // -----------------------
+    
+    var shiftStatus: ShiftStatus {
+        if isWorking && isRunning {
+            return .working
+        } else if isWorking && isResting {
+            return .waiting
+        } else {
+            return .finished
+        }
+    }
+    
+    var trainNumber: Int {
+        switch shiftStatus {
+        case .working:
+            return currentTrain!.number
+        case .waiting:
+            return nextTrain!.number
+        case .finished:
+            return 0
+        }
+    }
+    
+    var origin: String {
+        switch shiftStatus {
+        case .working:
+            return currentTrain!.currentStopString
+        case .waiting:
+            return nextTrain!.origin.monogram
+        case .finished:
+            return ""
+        }
+    }
+    
+    var destination: String {
+        switch shiftStatus {
+        case .working:
+            return currentTrain!.nextStopString
+        case .waiting:
+            return nextTrain!.destination.monogram
+        case .finished:
+            return ""
+        }
+    }
+    
+    var departure: Date {
+        let now = Date()
+        let calendar = Calendar.current
+        switch shiftStatus {
+        case .waiting:
+            let departureComponents = nextTrain!.departure
+            return calendar.date(bySettingHour: departureComponents.hour!, minute: departureComponents.minute!, second: 0, of: now)!
+        case .working:
+            let departureComponents = currentTrain!.currentStop!.departure
+            return calendar.date(bySettingHour: departureComponents.hour!, minute: departureComponents.minute!, second: 0, of: now)!
+        case .finished:
+            return now
+        }
+    }
+    
+    var arrival: Date {
+        let now = Date()
+        let calendar = Calendar.current
+        switch shiftStatus {
+        case .waiting:
+            let arrivalComponents = nextTrain!.arrival
+            return calendar.date(bySettingHour: arrivalComponents.hour!, minute: arrivalComponents.minute!, second: 0, of: now)!
+        case .working:
+            let arrivalComponents = currentTrain!.nextStop!.departure
+            return calendar.date(bySettingHour: arrivalComponents.hour!, minute: arrivalComponents.minute!, second: 0, of: now)!
+        case .finished:
+            return now
+        }
     }
 }

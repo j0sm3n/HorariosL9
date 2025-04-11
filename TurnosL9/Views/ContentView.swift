@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(ViewModel.self) var viewModel
     @AppStorage("showBenidormShifts") var showBenidormShifts: Bool = true
-    let shifts: [Shift]
     
     private var toolbarForegroundColor: Color {
         colorScheme == .dark ? Color.white : Color.black
@@ -18,8 +18,8 @@ struct ContentView: View {
     
     private var filteredShifts: [Shift] {
         showBenidormShifts
-        ? shifts.filter { $0.location == Location.benidorm.rawValue }
-        : shifts.filter { $0.location == Location.denia.rawValue }
+        ? viewModel.shifts.filter { $0.location == Location.benidorm.rawValue }
+        : viewModel.shifts.filter { $0.location == Location.denia.rawValue }
     }
     
     var body: some View {
@@ -35,7 +35,14 @@ struct ContentView: View {
             ScrollView {
                 ForEach(filteredShifts) { shift in
                     NavigationLink {
-                        ShiftDetailView(shift: shift)
+                        ShiftDetailView(shift: Binding<Shift>(
+                            get: { shift },
+                            set: { newShift in
+                                if let index = viewModel.shifts.firstIndex(where: { $0.id == shift.id }) {
+                                    viewModel.shifts[index] = newShift
+                                }
+                            }
+                        ))
                     } label: {
                         ShiftRowView(shift: shift)
                     }
@@ -49,6 +56,7 @@ struct ContentView: View {
 
 #if DEBUG
 #Preview {
-    ContentView(shifts: .preview)
+    ContentView()
+        .environment(ViewModel())
 }
 #endif

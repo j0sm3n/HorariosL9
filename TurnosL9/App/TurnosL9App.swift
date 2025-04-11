@@ -15,14 +15,15 @@ struct TurnosL9App: App {
     var body: some Scene {
         WindowGroup {
             if locationManger.isAuthorized {
-                ContentView(shifts: viewModel.shifts)
+                ContentView()
                     .task {
                         viewModel.fetchShifts()
                     }
+                    .environment(viewModel)
+                //        .environment(locationManger)
             } else {
                 UnauthorizedView()
             }
         }
-//        .environment(locationManger)
     }
 }

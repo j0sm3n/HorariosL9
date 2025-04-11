@@ -69,8 +69,13 @@
 		82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Extensions/DateComponents+Extensions.swift",
 				"Extensions/TimeInterval+Extensions.swift",
+				Models/Location.swift,
+				Models/Shift.swift,
+				Models/Stop.swift,
 				Models/Time.swift,
+				Models/Train.swift,
 			);
 			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
 		};
