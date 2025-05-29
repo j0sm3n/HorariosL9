@@ -52,15 +52,19 @@ extension Train {
         
         return stops
             .sorted { $1.departure.isEarlier(than: $0.departure) } // sort in descending order
-            .first(where: { $0.departure.isEarlierOrEqual(to: departure) })
+            .first(where: { $0.departure.isEarlierOrEqual(to: currentTime) })
     }
     
     var currentStopString: String {
-        currentStop?.location.monogram ?? "No current stop"
+        currentStop?.location.monogram ?? ""
     }
     
     var currentStopArrival: DateComponents? {
         departureTime(currentStop)
+    }
+    
+    var currentStopIndex: Int {
+        stops.firstIndex(of: currentStop!) ?? 0
     }
     
     var nextStop: Stop? {

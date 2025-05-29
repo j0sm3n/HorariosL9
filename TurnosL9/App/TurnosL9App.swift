@@ -20,7 +20,7 @@ struct TurnosL9App: App {
                         viewModel.fetchShifts()
                     }
                     .environment(viewModel)
-                //        .environment(locationManger)
+                    .environment(locationManger)
             } else {
                 UnauthorizedView()
             }

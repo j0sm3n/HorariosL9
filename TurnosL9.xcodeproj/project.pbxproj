@@ -54,8 +54,8 @@
 		8266AE4A2D9AD7CC00976E73 /* Exceptions for "LiveActivity" folder in "Horarios L9" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				JourneyAttributes.swift,
 				LockScreenView.swift,
-				ShiftAttributes.swift,
 			);
 			target = 8278DEDA2CC93DA500273B0E /* Horarios L9 */;
 		};
@@ -73,6 +73,7 @@
 				"Extensions/TimeInterval+Extensions.swift",
 				Models/Location.swift,
 				Models/Shift.swift,
+				Models/ShiftStatus.swift,
 				Models/Stop.swift,
 				Models/Time.swift,
 				Models/Train.swift,
@@ -469,14 +470,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"TurnosL9/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TurnosL9/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Turnos L9";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para calcular el tiempo restante hasta la siguiente parada";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para mostrar actualizaciones basadas en tu ubicación.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -506,14 +507,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"TurnosL9/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TurnosL9/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Turnos L9";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para calcular el tiempo restante hasta la siguiente parada";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para mostrar actualizaciones basadas en tu ubicación.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

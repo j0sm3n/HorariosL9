@@ -1,19 +1,31 @@
 //
-//  LockScreenView.swift
-//  Horarios L9
+//  JourneyActivityWidget.swift
+//  LiveActivityExtension
 //
-//  Created by Jose Antonio Mendoza on 1/4/25.
+//  Created by Jose Antonio Mendoza on 14/5/25.
 //
 
 import SwiftUI
 import WidgetKit
 
-struct LockScreenView: View {
-    let context: ActivityViewContext<JourneyAttributes>
-    
-    var body: some View {
-        VStack {
-            HStack {
+struct JourneyActivityWidget: Widget {
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: JourneyAttributes.self) { context in
+            LockScreenView(context: context)
+                .activityBackgroundTint(Color.row)
+                .activitySystemActionForegroundColor(Color.black)
+        } dynamicIsland: { context in
+            createDynamicIsland(context: context)
+        }
+    }
+}
+
+extension JourneyActivityWidget {
+    func createDynamicIsland(context: ActivityViewContext<JourneyAttributes>) -> DynamicIsland {
+        DynamicIsland {
+            DynamicIslandExpandedRegion(.leading) {
                 VStack(alignment: .leading) {
                     Text(context.state.shiftStatus.description)
                         .font(.headline)
@@ -21,11 +33,11 @@ struct LockScreenView: View {
                         Image(systemName: context.state.shiftStatus.systemImageName)
                         if context.state.trainNumber > 0 {
                             Text(context.state.trainNumber, format: .number)
-                                .contentTransition(.numericText())
                         }
                     }
                 }
-                Spacer()
+            }
+            DynamicIslandExpandedRegion(.trailing) {
                 VStack(alignment: .trailing) {
                     if !context.state.nextStop.isEmpty {
                         Text("Próxima parada")
@@ -46,7 +58,15 @@ struct LockScreenView: View {
                     }
                 }
             }
+        } compactLeading: {
+            Text(context.state.nextStop)
+        } compactTrailing: {
+            Text(context.state.timeString)
+                .font(.caption)
+                .contentTransition(.numericText())
+        } minimal: {
+            Text(context.state.timeString)
+                .font(.caption)
         }
-        .padding()
     }
 }
