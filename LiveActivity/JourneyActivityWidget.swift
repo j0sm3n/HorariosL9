@@ -9,16 +9,20 @@ import SwiftUI
 import WidgetKit
 
 struct JourneyActivityWidget: Widget {
+    @Environment(\.activityFamily) var activityFamily
     @Environment(\.colorScheme) var colorScheme
 
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: JourneyAttributes.self) { context in
             LockScreenView(context: context)
+            
+            .preferredColorScheme(activityFamily == .small ? .dark : colorScheme)
                 .activityBackgroundTint(Color.row)
                 .activitySystemActionForegroundColor(Color.black)
         } dynamicIsland: { context in
             createDynamicIsland(context: context)
         }
+        .supplementalActivityFamilies([.medium, .small])
     }
 }
 
@@ -62,11 +66,9 @@ extension JourneyActivityWidget {
             Text(context.state.nextStop)
         } compactTrailing: {
             Text(context.state.timeString)
-                .font(.caption)
                 .contentTransition(.numericText())
         } minimal: {
             Text(context.state.timeString)
-                .font(.caption)
         }
     }
 }

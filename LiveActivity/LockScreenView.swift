@@ -9,20 +9,30 @@ import SwiftUI
 import WidgetKit
 
 struct LockScreenView: View {
+    @Environment(\.activityFamily) var activityFamily
+
     let context: ActivityViewContext<JourneyAttributes>
     
     var body: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading) {
-                    Text(context.state.shiftStatus.description)
-                        .font(.headline)
-                    HStack {
-                        Image(systemName: context.state.shiftStatus.systemImageName)
-                        if context.state.trainNumber > 0 {
+                if context.state.trainNumber > 0 {
+                    VStack(alignment: .leading) {
+                        if activityFamily == .medium {
+                            Text(context.state.shiftStatus.description)
+                                .font(.headline)
+                        }
+                        HStack {
+                            Image(systemName: context.state.shiftStatus.systemImageName)
                             Text(context.state.trainNumber, format: .number)
                                 .contentTransition(.numericText())
                         }
+                    }
+                } else {
+                    HStack(spacing: 8) {
+                        Text(context.state.shiftStatus.description)
+                            .font(.headline)
+                        Image(systemName: context.state.shiftStatus.systemImageName)
                     }
                 }
                 Spacer()

@@ -25,14 +25,6 @@ final class LiveActivityManager {
         }
     }
     
-    var staleDate: Date? {
-        guard let selectedShift else { return nil }
-        var components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
-        components.hour = selectedShift.end.hour
-        components.minute = selectedShift.end.minute
-        return Calendar.current.date(from: components)!
-    }
-    
 //    var shouldUpdateLiveActivity: Bool {
 //        guard let activity, let selectedShift else { return false }
 //        switch selectedShift.shiftStatus {
@@ -109,7 +101,7 @@ final class LiveActivityManager {
                 do {
                     let activity = try Activity<JourneyAttributes>.request(
                         attributes: journeyAttributes,
-                        content: .init(state: journeyContentState, staleDate: staleDate),
+                        content: .init(state: journeyContentState, staleDate: nil),
                         pushType: nil
                     )
                     self.activity = activity
@@ -185,24 +177,24 @@ final class LiveActivityManager {
             
         if let journeyContentState {
             Task {
-                await activity.update(.init(state: journeyContentState, staleDate: staleDate), alertConfiguration: alertConfiguration)
+                await activity.update(.init(state: journeyContentState, staleDate: nil), alertConfiguration: alertConfiguration)
                 print("Live activity updated: \(activity.id)")
             }
         }
     }
 
     func stopActivity() {
-        guard let activity, let selectedShift, let currentTrain = selectedShift.currentTrain else { return }
+//        guard let activity, let selectedShift, let currentTrain = selectedShift.currentTrain else { return }
         let journeyContentState = JourneyAttributes.ContentState(
-            currentLocationName: currentTrain.currentStopString,
+            currentLocationName: selectedShift?.currentTrain?.currentStopString ?? "",
             nextStop: "",
             timeString: timeToShow,
-            shiftStatus: selectedShift.shiftStatus,
-            trainNumber: currentTrain.number
+            shiftStatus: .finished,
+            trainNumber: 0
         )
         Task {
-            await activity.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
-            print("🛑 Live activity ended: \(activity.id)")
+            await activity?.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
+            print("🛑 Live activity ended: \(activity?.id ?? "unknown")")
             self.activity = nil
             self.selectedShift = nil
         }
