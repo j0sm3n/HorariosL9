@@ -15,8 +15,7 @@ struct JourneyActivityWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: JourneyAttributes.self) { context in
             LockScreenView(context: context)
-            
-            .preferredColorScheme(activityFamily == .small ? .dark : colorScheme)
+                .preferredColorScheme(activityFamily == .small ? .dark : colorScheme)
                 .activityBackgroundTint(Color.row)
                 .activitySystemActionForegroundColor(Color.black)
         } dynamicIsland: { context in

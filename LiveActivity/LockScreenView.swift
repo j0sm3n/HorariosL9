@@ -14,14 +14,66 @@ struct LockScreenView: View {
     let context: ActivityViewContext<JourneyAttributes>
     
     var body: some View {
+        switch activityFamily {
+        case .small:
+            smallFamilyLockScreenView
+        case .medium:
+            mediumFamilyLockScreenView
+        @unknown default:
+            mediumFamilyLockScreenView
+        }
+    }
+}
+
+extension LockScreenView {
+    var smallFamilyLockScreenView: some View {
         VStack {
             HStack {
                 if context.state.trainNumber > 0 {
                     VStack(alignment: .leading) {
-                        if activityFamily == .medium {
-                            Text(context.state.shiftStatus.description)
-                                .font(.headline)
+                        HStack {
+                            Image(systemName: context.state.shiftStatus.systemImageName)
+                            Text(context.state.trainNumber, format: .number)
+                                .contentTransition(.numericText())
                         }
+                    }
+                } else {
+                    HStack(spacing: 8) {
+                        Image(systemName: context.state.shiftStatus.systemImageName)
+                    }
+                }
+                Spacer()
+                VStack(alignment: .trailing) {
+                    if !context.state.nextStop.isEmpty {
+                        Text("Próxima parada")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        HStack {
+                            Text(context.state.nextStop)
+                            Text(context.state.timeString)
+                                .contentTransition(.numericText())
+                        }
+                        .font(.headline)
+                    } else {
+                        Text("Hora de salida")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Text(context.state.timeString)
+                            .font(.headline)
+                    }
+                }
+            }
+        }
+        .padding()
+    }
+    
+    var mediumFamilyLockScreenView: some View {
+        VStack {
+            HStack {
+                if context.state.trainNumber > 0 {
+                    VStack(alignment: .leading) {
+                        Text(context.state.shiftStatus.description)
+                            .font(.headline)
                         HStack {
                             Image(systemName: context.state.shiftStatus.systemImageName)
                             Text(context.state.trainNumber, format: .number)
