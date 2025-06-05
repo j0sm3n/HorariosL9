@@ -9,7 +9,6 @@ import ActivityKit
 
 struct JourneyAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
-        var currentLocationName: String
         var nextStop: String
         var timeString: String
         var shiftStatus: ShiftStatus

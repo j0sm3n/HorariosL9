@@ -67,7 +67,9 @@ struct ShiftDetailView: View {
                 if Date.now > endOfShift {
                     stopActivity()
                 } else {
-                    activityManager.updateActivity()
+                    if let nextUpdate = activityManager.nextUpdate, Date.now >= nextUpdate {
+                        activityManager.updateActivity()
+                    }
                 }
             }
         }

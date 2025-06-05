@@ -10,7 +10,6 @@ import WidgetKit
 
 struct LockScreenView: View {
     @Environment(\.activityFamily) var activityFamily
-
     let context: ActivityViewContext<JourneyAttributes>
     
     var body: some View {
@@ -29,23 +28,26 @@ extension LockScreenView {
     var smallFamilyLockScreenView: some View {
         VStack {
             HStack {
-                if context.state.trainNumber > 0 {
-                    VStack(alignment: .leading) {
-                        HStack {
+                VStack(alignment: .leading) {
+                    Text(context.state.shiftStatus.description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    if context.state.trainNumber > 0 {
+                        HStack(spacing: 2) {
                             Image(systemName: context.state.shiftStatus.systemImageName)
                             Text(context.state.trainNumber, format: .number)
                                 .contentTransition(.numericText())
                         }
-                    }
-                } else {
-                    HStack(spacing: 8) {
-                        Image(systemName: context.state.shiftStatus.systemImageName)
+                    } else {
+                        HStack(spacing: 8) {
+                            Image(systemName: context.state.shiftStatus.systemImageName)
+                        }
                     }
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
                     if !context.state.nextStop.isEmpty {
-                        Text("Próxima parada")
+                        Text("Próxima")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         HStack {
@@ -53,9 +55,8 @@ extension LockScreenView {
                             Text(context.state.timeString)
                                 .contentTransition(.numericText())
                         }
-                        .font(.headline)
                     } else {
-                        Text("Hora de salida")
+                        Text("Salida")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Text(context.state.timeString)
@@ -64,7 +65,7 @@ extension LockScreenView {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal, 6)
     }
     
     var mediumFamilyLockScreenView: some View {

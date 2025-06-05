@@ -16,8 +16,8 @@ struct JourneyActivityWidget: Widget {
         ActivityConfiguration(for: JourneyAttributes.self) { context in
             LockScreenView(context: context)
                 .preferredColorScheme(activityFamily == .small ? .dark : colorScheme)
-                .activityBackgroundTint(Color.row)
-                .activitySystemActionForegroundColor(Color.black)
+                .activityBackgroundTint(.row)
+                .activitySystemActionForegroundColor(.black)
         } dynamicIsland: { context in
             createDynamicIsland(context: context)
         }
@@ -67,7 +67,13 @@ extension JourneyActivityWidget {
             Text(context.state.timeString)
                 .contentTransition(.numericText())
         } minimal: {
-            Text(context.state.timeString)
+            Text(context.state.timeString.minuteString)
         }
+    }
+}
+
+extension String {
+    var minuteString: String {
+        ":" + String(self.split(separator: ":")[1])
     }
 }
