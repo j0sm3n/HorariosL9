@@ -74,18 +74,20 @@ extension LockScreenView {
                 if context.state.trainNumber > 0 {
                     VStack(alignment: .leading) {
                         Text(context.state.shiftStatus.description)
-                            .font(.headline)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                         HStack {
                             Image(systemName: context.state.shiftStatus.systemImageName)
                             Text(context.state.trainNumber, format: .number)
+                                .lockScreenStyle()
                                 .contentTransition(.numericText())
                         }
                     }
                 } else {
                     HStack(spacing: 8) {
-                        Text(context.state.shiftStatus.description)
-                            .font(.headline)
                         Image(systemName: context.state.shiftStatus.systemImageName)
+                        Text(context.state.shiftStatus.description)
+                            .lockScreenStyle()
                     }
                 }
                 Spacer()
@@ -97,15 +99,16 @@ extension LockScreenView {
                         HStack {
                             Text(context.state.nextStop)
                             Text(context.state.timeString)
+                                .fontDesign(.monospaced)
                                 .contentTransition(.numericText())
                         }
-                        .font(.headline)
+                        .lockScreenStyle()
                     } else {
                         Text("Hora de salida")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Text(context.state.timeString)
-                            .font(.headline)
+                            .lockScreenStyle()
                     }
                 }
             }
