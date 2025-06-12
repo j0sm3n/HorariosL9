@@ -33,34 +33,31 @@ extension LockScreenView {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     if context.state.trainNumber > 0 {
-                        HStack(spacing: 2) {
-                            Image(systemName: context.state.shiftStatus.systemImageName)
-                            Text(context.state.trainNumber, format: .number)
-                                .contentTransition(.numericText())
-                        }
+                        Text(context.state.trainNumber, format: .number)
+                            .font(.title3)
+                            .contentTransition(.numericText())
                     } else {
-                        HStack(spacing: 8) {
-                            Image(systemName: context.state.shiftStatus.systemImageName)
-                        }
+                        Image(systemName: context.state.shiftStatus.systemImageName)
                     }
                 }
-                Spacer()
+                Spacer(minLength: 0)
                 VStack(alignment: .trailing) {
                     if !context.state.nextStop.isEmpty {
-                        Text("Próxima")
+                        Text("Próxima parada")
                             .font(.caption)
                             .foregroundColor(.secondary)
-                        HStack {
+                        HStack(spacing: 2) {
                             Text(context.state.nextStop)
                             Text(context.state.timeString)
                                 .contentTransition(.numericText())
                         }
+                        .font(.title3)
                     } else {
                         Text("Salida")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Text(context.state.timeString)
-                            .font(.headline)
+                            .font(.title3)
                     }
                 }
             }
