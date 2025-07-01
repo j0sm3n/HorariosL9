@@ -54,6 +54,14 @@ extension Shift {
         return Calendar.current.dateComponents([.hour, .minute], from: endDate)
     }
     
+    var endDate: Date {
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
+        components.hour = end.hour
+        components.minute = end.minute
+        return Calendar.current.date(from: components)!
+    }
+    
+    // TODO: Think about whether the following variables are necessary
     var isWorking: Bool {
         start.isEarlierOrEqual(to: currentTime) && currentTime.isEarlier(than: end)
     }
@@ -66,7 +74,125 @@ extension Shift {
     
     var isResting: Bool { !isRunning && nextTrain != nil }
     
+    var startOfRest: DateComponents {
+        guard isResting else { return DateComponents() }
+        if let firstTrain = trains.first, currentTime.isEarlier(than: firstTrain.departure) {
+            return start
+        }
+        return trains
+            .sorted { $1.arrival.isEarlier(than: $0.arrival) }
+            .first { $0.arrival.isEarlierOrEqual(to: currentTime) }?.arrival ?? DateComponents()
+    }
+    
     var currentTime: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute], from: .now)
     }
+    // -----------------------
+    
+    var shiftStatus: ShiftStatus {
+        if isWorking && isRunning {
+            return .working
+        } else if isWorking && isResting {
+            return .waiting
+        } else {
+            return .finished
+        }
+    }
+    
+    var trainNumber: Int {
+        switch shiftStatus {
+        case .working:
+            guard let trainNumber = currentTrain?.number else { return 0 }
+            return trainNumber
+        case .waiting:
+            guard let trainNumber = nextTrain?.number else { return 0 }
+            return trainNumber
+        case .finished:
+            return 0
+        }
+    }
+    
+    var origin: String {
+        switch shiftStatus {
+        case .working:
+            guard let origin = currentTrain?.currentStopString else { return "" }
+            return origin
+        case .waiting:
+            guard let origin = nextTrain?.origin.monogram else { return "" }
+            return origin
+        case .finished:
+            return ""
+        }
+    }
+    
+    var destination: String {
+        switch shiftStatus {
+        case .working:
+            guard let nextStopString = currentTrain?.nextStopString else { return "" }
+            return nextStopString
+        case .waiting:
+            guard let nextTrainDestinationString = nextTrain?.destination.monogram else { return "" }
+            return nextTrainDestinationString
+        case .finished:
+            return ""
+        }
+    }
+    
+    var departure: Date {
+        let now = Date()
+        let calendar = Calendar.current
+        switch shiftStatus {
+        case .waiting:
+            guard let departureComponents = nextTrain?.departure,
+                  let hour = departureComponents.hour,
+                  let minute = departureComponents.minute else { return now }
+            return calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now)!
+        case .working:
+            guard let departureComponents = currentTrain?.currentStop?.departure,
+                  let hour = departureComponents.hour,
+                  let minute = departureComponents.minute else { return now }
+            return calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now)!
+        case .finished:
+            return endDate
+        }
+    }
+    
+    var arrival: Date {
+        let calendar = Calendar.current
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
+        switch shiftStatus {
+        case .waiting:
+            guard let arrivalComponents = nextTrain?.arrival else { return .now }
+                components.hour = arrivalComponents.hour
+                components.minute = arrivalComponents.minute
+            return calendar.date(from: components)!
+        case .working:
+            guard let currentTrain else { return .now }
+            if let nextStop = currentTrain.nextStop { // not in last stop
+                components.hour = nextStop.departure.hour
+                components.minute = nextStop.departure.minute
+//            } else { // last stop
+//                components.hour = currentTrain.arrival.hour
+//                components.minute = currentTrain.arrival.minute
+//                components.second = 59
+            }
+            return Calendar.current.date(from: components)!
+        case .finished:
+            return endDate
+        }
+    }
+    
+//    var progress: Double {
+//        switch shiftStatus {
+//        case .waiting:
+//            let startOfRestDate = Calendar.current.date(from: startOfRest)!
+//            return ((Date.now.timeIntervalSince(startOfRestDate)) / (departure.timeIntervalSince(startOfRestDate))) * 100
+//        case .working:
+//            return currentTrain?.progress ?? 0
+//        case .finished:
+//            // Time until end
+//            let startOfRest = Calendar.current.date(from: startOfRest)!
+//            return ((Date.now.timeIntervalSince(startOfRest)) / (departure.timeIntervalSince(startOfRest))) * 100
+//        }
+//    }
 }
