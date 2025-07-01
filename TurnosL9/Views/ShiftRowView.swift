@@ -11,6 +11,10 @@ struct ShiftRowView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let shift: Shift
     
+    var font: Font {
+        shift.name.count > 2 ? .title : .largeTitle
+    }
+    
     var body: some View {
         createRow(for: dynamicTypeSize)
     }
@@ -27,7 +31,7 @@ extension ShiftRowView {
     var smallShiftRow: some View {
         HStack {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 72, height: 48)
@@ -75,7 +79,7 @@ extension ShiftRowView {
     var mediumShiftRow: some View {
         HStack {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 72, height: 48)
@@ -121,7 +125,7 @@ extension ShiftRowView {
     var largeShiftRow: some View {
         HStack(alignment: .top) {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 80, height: 48)
@@ -159,7 +163,7 @@ extension ShiftRowView {
     var xLargeShiftRow: some View {
         HStack(alignment: .top) {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 90, height: 48)
@@ -198,7 +202,7 @@ extension ShiftRowView {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
                 Text(shift.name)
-                    .font(.largeTitle)
+                    .font(font)
                     .bold()
                     .rowTitleStyle()
                     .frame(width: 96, height: 48)
