@@ -11,7 +11,11 @@ import Foundation
 final class ViewModel {
     var shifts: [Shift] = []
     
-    func fetchShifts() {
+    init() {
+        self.fetchShifts()
+    }
+    
+    private func fetchShifts() {
         do {
             guard let url = Bundle.main.url(forResource: "shifts", withExtension: "json") else {
                 throw DecodingError.fileNotFound

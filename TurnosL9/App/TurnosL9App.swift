@@ -16,9 +16,6 @@ struct TurnosL9App: App {
         WindowGroup {
             if locationManger.isAuthorized {
                 ContentView()
-                    .task {
-                        viewModel.fetchShifts()
-                    }
                     .environment(viewModel)
                     .environment(locationManger)
             } else {
