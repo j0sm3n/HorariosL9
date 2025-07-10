@@ -12,8 +12,6 @@ struct RowTitleStyle: ViewModifier {
         content
             .font(.title2)
             .fontDesign(.monospaced)
-            .foregroundStyle(.background)
-            .rowStyle(in: Color.primary)
     }
 }
 
