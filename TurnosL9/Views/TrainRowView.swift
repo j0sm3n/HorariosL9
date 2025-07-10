@@ -18,17 +18,17 @@ struct TrainRowView: View {
     }
     
     var body: some View {
-        createRow(for: dynamicTypeSize)
-            .rowStyle(in: color)
-            .overlay(alignment: .topLeading) {
-                TimelineView(.animation) { _ in
+        TimelineView(.animation) { _ in
+            createRow(for: dynamicTypeSize)
+                .rowStyle(in: color)
+                .overlay(alignment: .leading) {
                     Circle()
                         .frame(width: 8, height: 8)
                         .foregroundStyle(.red)
-                        .offset(x: -12, y: train.indicatorPosition)
+                        .offset(x: 12)
                         .opacity(opacity)
                 }
-            }
+        }
     }
 }
 
@@ -151,7 +151,7 @@ extension TrainRowView {
             Text(train.number.formatted())
                 .rowTitleStyle()
                 .frame(width: 160)
-                        
+            
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
                     Text(train.departure.formattedTime)
@@ -176,14 +176,14 @@ extension TrainRowView {
 extension TrainRowView {
     @ViewBuilder
     private func createRow(for size: DynamicTypeSize) -> some View {
-                if size > .accessibility2 {
-                    xxLargeTrainRow
-                } else if size > .accessibility1 {
-                    xLargeTrainRow
-                } else
+        if size > .accessibility2 {
+            xxLargeTrainRow
+        } else if size > .accessibility1 {
+            xLargeTrainRow
+        } else
         if size > .xxxLarge {
             largeTrainRow
-                } else if size > .medium {
+        } else if size > .medium {
             mediumTrainRow
         } else {
             smallTrainRow

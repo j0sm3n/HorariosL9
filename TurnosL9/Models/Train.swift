@@ -41,12 +41,6 @@ extension Train {
         return departure.isEarlierOrEqual(to: currentTime) && currentTime.isEarlierOrEqual(to: arrival)
     }
     
-    var indicatorPosition: Double {
-        guard isRunning else { return 0.0 }
-        let position = 60.0 * Double((currentTime.inSeconds - departure.inSeconds) / duration)
-        return position
-    }
-    
     var currentStop: Stop? {
         guard isRunning else { return nil }
         
