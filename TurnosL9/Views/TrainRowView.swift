@@ -147,10 +147,9 @@ extension TrainRowView {
     }
     
     var xxLargeTrainRow: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(train.number.formatted())
                 .rowTitleStyle()
-                .frame(width: 160)
             
             VStack(alignment: .leading, spacing: 0) {
                 LabeledContent {
@@ -168,7 +167,6 @@ extension TrainRowView {
                 }
             }
             .font(.callout)
-            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }
