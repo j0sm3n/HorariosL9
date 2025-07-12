@@ -17,13 +17,6 @@ struct TrainRowView: View {
         TimelineView(.animation) { _ in
             createRow(for: dynamicTypeSize)
                 .rowStyle(in: color)
-                .overlay(alignment: overlayAlignment) {
-                    Circle()
-                        .frame(width: width, height: width)
-                        .foregroundStyle(.red)
-                        .offset(x: offset.x, y: offset.y)
-                        .opacity(opacity)
-                }
         }
     }
 }
@@ -35,45 +28,12 @@ struct TrainRowView: View {
 }
 #endif
 
-// MARK: - Computed properties
-extension TrainRowView {
-    var opacity: Double {
-        train.isRunning && showIndicator ? 1 : 0
-    }
-    
-    var width: CGFloat {
-        switch dynamicTypeSize {
-            case .accessibility1, .accessibility2:
-                return 12
-            case .accessibility3, .accessibility4, .accessibility5:
-                return 16
-            default:
-                return 8
-        }
-    }
-    
-    var overlayAlignment: Alignment {
-        dynamicTypeSize > .accessibility2 ? .topLeading : .leading
-    }
-    
-    var offset: (x: CGFloat, y: CGFloat) {
-        switch dynamicTypeSize {
-            case .xxxLarge, .accessibility1, .accessibility2:
-                return (x: 6, y: 0)
-            case .accessibility3, .accessibility4, .accessibility5:
-                return (x: 12, y: 24)
-            default:
-                return (x: 12, y: 0)
-        }
-    }
-}
-
 // MARK: - Dynamic size row
 extension TrainRowView {
     var smallTrainRow: some View {
         HStack {
             Text(train.number.formatted())
-                .rowTitleStyle()
+                .rowTitleStyle(bold: train.isRunning)
                 .frame(width: 72)
             
             Spacer()
@@ -91,7 +51,7 @@ extension TrainRowView {
                         .monospacedStyle()
                 }
             }
-            .font(.callout)
+            .groupStyle(highlight: train.isRunning)
             .frame(maxWidth: .infinity, alignment: .center)
         }
     }
@@ -99,7 +59,7 @@ extension TrainRowView {
     var mediumTrainRow: some View {
         HStack {
             Text(train.number.formatted())
-                .rowTitleStyle()
+                .rowTitleStyle(bold: train.isRunning)
                 .frame(width: 90)
             
             Spacer()
@@ -117,7 +77,7 @@ extension TrainRowView {
                         .monospacedStyle()
                 }
             }
-            .font(.callout)
+            .groupStyle(highlight: train.isRunning)
             .frame(maxWidth: .infinity, alignment: .center)
         }
     }
@@ -125,7 +85,7 @@ extension TrainRowView {
     var largeTrainRow: some View {
         HStack {
             Text(train.number.formatted())
-                .rowTitleStyle()
+                .rowTitleStyle(bold: train.isRunning)
                 .frame(width: 110)
             
             Spacer()
@@ -143,7 +103,7 @@ extension TrainRowView {
                         .monospacedStyle()
                 }
             }
-            .font(.callout)
+            .groupStyle(highlight: train.isRunning)
             .frame(maxWidth: .infinity, alignment: .center)
         }
     }
@@ -151,7 +111,7 @@ extension TrainRowView {
     var xLargeTrainRow: some View {
         HStack {
             Text(train.number.formatted())
-                .rowTitleStyle()
+                .rowTitleStyle(bold: train.isRunning)
                 .frame(width: 130)
             
             VStack(spacing: 0) {
@@ -169,14 +129,14 @@ extension TrainRowView {
                     Text(train.destination.monogram)
                 }
             }
-            .font(.callout)
+            .groupStyle(highlight: train.isRunning)
         }
     }
     
     var xxLargeTrainRow: some View {
         VStack(spacing: 0) {
             Text(train.number.formatted())
-                .rowTitleStyle()
+                .rowTitleStyle(bold: train.isRunning)
             
             Group {
                 LabeledContent {
@@ -193,7 +153,7 @@ extension TrainRowView {
                     Text(train.destination.monogram)
                 }
             }
-            .font(.callout)
+            .groupStyle(highlight: train.isRunning)
         }
     }
 
@@ -211,5 +171,21 @@ extension TrainRowView {
         } else {
             smallTrainRow
         }
+    }
+}
+
+fileprivate struct GroupStyle: ViewModifier {
+    let highlight: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .font(.callout)
+            .fontWeight(highlight ? .bold : .light)
+    }
+}
+
+extension View {
+    public func groupStyle(highlight: Bool = false) -> some View {
+        modifier(GroupStyle(highlight: highlight))
     }
 }

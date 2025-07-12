@@ -32,8 +32,7 @@ extension ShiftRowView {
         HStack {
             Text(shift.name)
                 .font(font)
-                .bold()
-                .rowTitleStyle()
+                .rowTitleStyle(bold: shift.isWorking ? true : false)
                 .frame(width: 72, height: 48)
             
             Spacer()

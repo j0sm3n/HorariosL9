@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct RowTitleStyle: ViewModifier {
+    let bold: Bool
+
     func body(content: Content) -> some View {
         content
             .font(.title2)
+            .fontWeight(bold ? .heavy : .light)
             .fontDesign(.monospaced)
     }
 }
 
 extension View {
-    public func rowTitleStyle() -> some View {
-        modifier(RowTitleStyle())
+    public func rowTitleStyle(bold: Bool = false) -> some View {
+        modifier(RowTitleStyle(bold: bold))
     }
 }

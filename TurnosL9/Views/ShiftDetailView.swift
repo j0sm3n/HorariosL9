@@ -68,8 +68,7 @@ extension ShiftDetailView {
         VStack {
             Text(shift.name)
                 .font(.largeTitle)
-                .bold()
-                .rowTitleStyle()
+                .rowTitleStyle(bold: true)
             
             if dynamicTypeSize < .xxLarge {
                 HStack(spacing: 16) {

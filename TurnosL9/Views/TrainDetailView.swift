@@ -17,20 +17,13 @@ struct TrainDetailView: View {
             ScrollView {
                 TimelineView(.animation) { _ in
                     ForEach(Array(train.stops.enumerated()), id: \.offset) { index, stop in
-                        LabeledContent(dynamicTypeSize > .accessibility2 ? stop.location.monogram : stop.location.rawValue) {
+                        LabeledContent(stopString(for: stop.location)) {
                             Text(stop.departure.formattedTime)
-                                .monospacedStyle()
+                                .monospaced()
                         }
                         .padding(.horizontal)
+                        .fontWeight(isHighlighted(for: stop, with: index) ? .heavy : .light)
                         .rowStyle(in: color(for: index))
-                        .overlay(alignment: .leading) {
-                            Circle()
-                                .frame(width: 8, height: 8)
-                                .offset(x: 12)
-                                .opacity(showIndicator(for: stop, with: index) ? 1 : 0)
-                                .foregroundStyle(.red)
-                                .animation(.easeInOut(duration: 1), value: showIndicator(for: stop, with: index))
-                        }
                     }
                 }
                 .padding(.horizontal)
@@ -62,13 +55,13 @@ extension TrainDetailView {
             HStack {
                 Group {
                     VStack(alignment: .center) {
-                        Text(dynamicTypeSize > .accessibility2 ? train.origin.monogram : train.origin.rawValue)
+                        Text(stopString(for: train.origin))
                         Text(train.departure.formattedTime)
                             .monospacedStyle()
                     }
                     
                     VStack(alignment: .center) {
-                        Text(dynamicTypeSize > .accessibility2 ? train.destination.monogram : train.destination.rawValue)
+                        Text(stopString(for: train.destination))
                         Text(train.arrival.formattedTime)
                             .monospacedStyle()
                     }
@@ -80,8 +73,9 @@ extension TrainDetailView {
         .padding()
         .background(Color.row)
     }
+
     // MARK: - Private functions
-    private func showIndicator(for stop: Stop, with index: Int) -> Bool {
+    private func isHighlighted(for stop: Stop, with index: Int) -> Bool {
         guard train.isRunning else { return false }
         
         if index == 0 {
@@ -93,5 +87,9 @@ extension TrainDetailView {
     
     private func color(for index: Int) -> Color {
         .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2)
+    }
+    
+    private func stopString(for location: Location) -> String {
+        dynamicTypeSize > .accessibility2 ? location.monogram : location.rawValue
     }
 }
