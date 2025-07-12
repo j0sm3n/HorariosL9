@@ -13,19 +13,15 @@ struct TrainRowView: View {
     let color: Color
     let showIndicator: Bool
     
-    var opacity: Double {
-        train.isRunning && showIndicator ? 1 : 0
-    }
-    
     var body: some View {
         TimelineView(.animation) { _ in
             createRow(for: dynamicTypeSize)
                 .rowStyle(in: color)
-                .overlay(alignment: .leading) {
+                .overlay(alignment: overlayAlignment) {
                     Circle()
-                        .frame(width: 8, height: 8)
+                        .frame(width: width, height: width)
                         .foregroundStyle(.red)
-                        .offset(x: 12)
+                        .offset(x: offset.x, y: offset.y)
                         .opacity(opacity)
                 }
         }
@@ -39,6 +35,40 @@ struct TrainRowView: View {
 }
 #endif
 
+// MARK: - Computed properties
+extension TrainRowView {
+    var opacity: Double {
+        train.isRunning && showIndicator ? 1 : 0
+    }
+    
+    var width: CGFloat {
+        switch dynamicTypeSize {
+            case .accessibility1, .accessibility2:
+                return 12
+            case .accessibility3, .accessibility4, .accessibility5:
+                return 16
+            default:
+                return 8
+        }
+    }
+    
+    var overlayAlignment: Alignment {
+        dynamicTypeSize > .accessibility2 ? .topLeading : .leading
+    }
+    
+    var offset: (x: CGFloat, y: CGFloat) {
+        switch dynamicTypeSize {
+            case .xxxLarge, .accessibility1, .accessibility2:
+                return (x: 6, y: 0)
+            case .accessibility3, .accessibility4, .accessibility5:
+                return (x: 12, y: 24)
+            default:
+                return (x: 12, y: 0)
+        }
+    }
+}
+
+// MARK: - Dynamic size row
 extension TrainRowView {
     var smallTrainRow: some View {
         HStack {
@@ -122,56 +152,51 @@ extension TrainRowView {
         HStack {
             Text(train.number.formatted())
                 .rowTitleStyle()
-                .frame(width: 120)
+                .frame(width: 130)
             
-            Spacer()
-            
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(spacing: 0) {
                 LabeledContent {
                     Text(train.departure.formattedTime)
                         .monospacedStyle()
                 } label: {
-                    Text(train.origin.rawValue)
+                    Text(train.origin.monogram)
                 }
                 
                 LabeledContent {
                     Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 } label: {
-                    Text(train.destination.rawValue)
+                    Text(train.destination.monogram)
                 }
             }
             .font(.callout)
-            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
     
     var xxLargeTrainRow: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(spacing: 0) {
             Text(train.number.formatted())
                 .rowTitleStyle()
             
-            VStack(alignment: .leading, spacing: 0) {
+            Group {
                 LabeledContent {
                     Text(train.departure.formattedTime)
                         .monospacedStyle()
                 } label: {
-                    Text(train.origin.rawValue)
+                    Text(train.origin.monogram)
                 }
                 
                 LabeledContent {
                     Text(train.arrival.formattedTime)
                         .monospacedStyle()
                 } label: {
-                    Text(train.destination.rawValue)
+                    Text(train.destination.monogram)
                 }
             }
             .font(.callout)
         }
     }
-}
 
-extension TrainRowView {
     @ViewBuilder
     private func createRow(for size: DynamicTypeSize) -> some View {
         if size > .accessibility2 {

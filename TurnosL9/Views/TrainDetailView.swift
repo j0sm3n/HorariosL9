@@ -15,15 +15,15 @@ struct TrainDetailView: View {
         VStack(spacing: 0) {
             headerView
             ScrollView {
-                ForEach(Array(train.stops.enumerated()), id: \.offset) { index, stop in
-                    LabeledContent(dynamicTypeSize > .accessibility2 ? stop.location.monogram : stop.location.rawValue) {
-                        Text(stop.departure.formattedTime)
-                            .monospacedStyle()
-                    }
-                    .padding(.horizontal)
-                    .rowStyle(in: color(for: index))
-                    .overlay(alignment: .leading) {
-                        TimelineView(.animation) { _ in
+                TimelineView(.animation) { _ in
+                    ForEach(Array(train.stops.enumerated()), id: \.offset) { index, stop in
+                        LabeledContent(dynamicTypeSize > .accessibility2 ? stop.location.monogram : stop.location.rawValue) {
+                            Text(stop.departure.formattedTime)
+                                .monospacedStyle()
+                        }
+                        .padding(.horizontal)
+                        .rowStyle(in: color(for: index))
+                        .overlay(alignment: .leading) {
                             Circle()
                                 .frame(width: 8, height: 8)
                                 .offset(x: 12)
