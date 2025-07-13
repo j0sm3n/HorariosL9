@@ -36,6 +36,12 @@ extension Train {
     }
 }
 
+extension [Train] {
+    static var preview: [Train] {
+        Shift.preview.trains
+    }
+}
+
 extension Stop {
     static var previewActualStop: Stop {
         Train.preview.stops[2]

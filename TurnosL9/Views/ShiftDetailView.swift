@@ -17,17 +17,7 @@ struct ShiftDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             headerView
-            
-            ScrollView {
-                ForEach(shift.trains) { train in
-                    NavigationLink {
-                        TrainDetailView(train: train)
-                    } label: {
-                        TrainRowView(train: train, color: train.color, showIndicator: true)
-                    }
-                }
-                .padding(.horizontal)
-            }
+            TrainListView(trains: shift.trains)
         }
         .contentMargins(.top, 30)
         .overlay {

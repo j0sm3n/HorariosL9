@@ -24,33 +24,33 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            Picker("Residencia", selection: $showBenidormShifts) {
-                Text(Location.benidorm.rawValue).tag(true)
-                Text(Location.denia.rawValue).tag(false)
-            }
-            .pickerStyle(.segmented)
-            .padding(.vertical)
-            .padding(.horizontal, 80)
-
-            ScrollView {
-                ForEach(filteredShifts) { shift in
-                    NavigationLink {
-                        ShiftDetailView(shift: Binding<Shift>(
-                            get: { shift },
-                            set: { newShift in
-                                if let index = viewModel.shifts.firstIndex(where: { $0.id == shift.id }) {
-                                    viewModel.shifts[index] = newShift
-                                }
+            locationPicker
+            ShiftListView(shifts: filteredShifts)
+                .navigationTitle("Horarios L9")
+                .navigationDestination(for: Shift.self) { shift in
+                    ShiftDetailView(shift: Binding<Shift>(
+                        get: { shift },
+                        set: { newShift in
+                            if let index = viewModel.shifts.firstIndex(where: { $0.id == shift.id }) {
+                                viewModel.shifts[index] = newShift
                             }
-                        ))
-                    } label: {
-                        ShiftRowView(shift: shift)
-                    }
+                        }
+                    ))
                 }
-                .padding(.horizontal)
-            }
-            .navigationTitle("Horarios L9")
+                .navigationDestination(for: Train.self) { train in
+                    TrainDetailView(train: train)
+                }
         }
+    }
+    
+    private var locationPicker: some View {
+        Picker("Residencia", selection: $showBenidormShifts) {
+            Text(Location.benidorm.rawValue).tag(true)
+            Text(Location.denia.rawValue).tag(false)
+        }
+        .pickerStyle(.segmented)
+        .padding(.vertical)
+        .padding(.horizontal, 80)
     }
 }
 
