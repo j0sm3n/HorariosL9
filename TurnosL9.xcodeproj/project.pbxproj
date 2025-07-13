@@ -6,25 +6,98 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8266AE2E2D9ACFBF00976E73 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8266AE2D2D9ACFBF00976E73 /* WidgetKit.framework */; };
+		8266AE302D9ACFBF00976E73 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8266AE2F2D9ACFBF00976E73 /* SwiftUI.framework */; };
+		8266AE412D9ACFC100976E73 /* LiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8266AE2B2D9ACFBF00976E73 /* LiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8266AE3F2D9ACFC100976E73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8278DED32CC93DA500273B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8266AE2A2D9ACFBF00976E73;
+			remoteInfo = LiveActivityExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8266AE422D9ACFC100976E73 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8266AE412D9ACFC100976E73 /* LiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8266AE2B2D9ACFBF00976E73 /* LiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8266AE2D2D9ACFBF00976E73 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8266AE2F2D9ACFBF00976E73 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8278DEDB2CC93DA500273B0E /* Horarios L9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Horarios L9.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8278DEF92CC9876600273B0E /* Exceptions for "TurnosL9" folder in "Horarios L9" target */ = {
+		8266AE462D9ACFC100976E73 /* Exceptions for "LiveActivity" folder in "LiveActivityExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
+			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
+		};
+		8266AE4A2D9AD7CC00976E73 /* Exceptions for "LiveActivity" folder in "Horarios L9" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				JourneyAttributes.swift,
+			);
 			target = 8278DEDA2CC93DA500273B0E /* Horarios L9 */;
+		};
+		8278DEF92CC9876600273B0E /* Exceptions for "TurnosL9" folder in "Horarios L9" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Styles/LockScreenTextStyle.swift,
+			);
+			target = 8278DEDA2CC93DA500273B0E /* Horarios L9 */;
+		};
+		82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extensions/DateComponents+Extensions.swift",
+				"Extensions/TimeInterval+Extensions.swift",
+				Models/Location.swift,
+				Models/Shift.swift,
+				Models/ShiftStatus.swift,
+				Models/Stop.swift,
+				Models/Time.swift,
+				Models/Train.swift,
+				Styles/LockScreenTextStyle.swift,
+			);
+			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8266AE312D9ACFBF00976E73 /* LiveActivity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8266AE4A2D9AD7CC00976E73 /* Exceptions for "LiveActivity" folder in "Horarios L9" target */,
+				8266AE462D9ACFC100976E73 /* Exceptions for "LiveActivity" folder in "LiveActivityExtension" target */,
+			);
+			path = LiveActivity;
+			sourceTree = "<group>";
+		};
 		8278DEDD2CC93DA500273B0E /* TurnosL9 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				8278DEF92CC9876600273B0E /* Exceptions for "TurnosL9" folder in "Horarios L9" target */,
+				82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */,
 			);
 			path = TurnosL9;
 			sourceTree = "<group>";
@@ -32,6 +105,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8266AE282D9ACFBF00976E73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8266AE302D9ACFBF00976E73 /* SwiftUI.framework in Frameworks */,
+				8266AE2E2D9ACFBF00976E73 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8278DED82CC93DA500273B0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,10 +124,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8266AE2C2D9ACFBF00976E73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8266AE2D2D9ACFBF00976E73 /* WidgetKit.framework */,
+				8266AE2F2D9ACFBF00976E73 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8278DED22CC93DA500273B0E = {
 			isa = PBXGroup;
 			children = (
 				8278DEDD2CC93DA500273B0E /* TurnosL9 */,
+				8266AE312D9ACFBF00976E73 /* LiveActivity */,
+				8266AE2C2D9ACFBF00976E73 /* Frameworks */,
 				8278DEDC2CC93DA500273B0E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				8278DEDB2CC93DA500273B0E /* Horarios L9.app */,
+				8266AE2B2D9ACFBF00976E73 /* LiveActivityExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +155,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8266AE452D9ACFC100976E73 /* Build configuration list for PBXNativeTarget "LiveActivityExtension" */;
+			buildPhases = (
+				8266AE272D9ACFBF00976E73 /* Sources */,
+				8266AE282D9ACFBF00976E73 /* Frameworks */,
+				8266AE292D9ACFBF00976E73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8266AE312D9ACFBF00976E73 /* LiveActivity */,
+			);
+			name = LiveActivityExtension;
+			packageProductDependencies = (
+			);
+			productName = LiveActivityExtension;
+			productReference = 8266AE2B2D9ACFBF00976E73 /* LiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8278DEDA2CC93DA500273B0E /* Horarios L9 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8278DEE92CC93DA600273B0E /* Build configuration list for PBXNativeTarget "Horarios L9" */;
@@ -68,10 +184,12 @@
 				8278DED72CC93DA500273B0E /* Sources */,
 				8278DED82CC93DA500273B0E /* Frameworks */,
 				8278DED92CC93DA500273B0E /* Resources */,
+				8266AE422D9ACFC100976E73 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8266AE402D9ACFC100976E73 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8278DEDD2CC93DA500273B0E /* TurnosL9 */,
@@ -90,9 +208,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					8266AE2A2D9ACFBF00976E73 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					8278DEDA2CC93DA500273B0E = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -113,11 +234,19 @@
 			projectRoot = "";
 			targets = (
 				8278DEDA2CC93DA500273B0E /* Horarios L9 */,
+				8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8266AE292D9ACFBF00976E73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8278DED92CC93DA500273B0E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +257,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8266AE272D9ACFBF00976E73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8278DED72CC93DA500273B0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +273,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8266AE402D9ACFC100976E73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
+			targetProxy = 8266AE3F2D9ACFC100976E73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8266AE432D9ACFC100976E73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.josmen.TurnosL9.LiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8266AE442D9ACFC100976E73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.josmen.TurnosL9.LiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		8278DEE72CC93DA600273B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -173,6 +379,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = F259VZ645X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -196,6 +403,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -236,6 +444,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = F259VZ645X;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -252,6 +461,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -263,15 +473,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"TurnosL9/Preview Content\"";
-				DEVELOPMENT_TEAM = F259VZ645X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TurnosL9/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Turnos L9";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para calcular el tiempo restante hasta la siguiente parada";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para mostrar actualizaciones basadas en tu ubicación.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -300,15 +510,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"TurnosL9/Preview Content\"";
-				DEVELOPMENT_TEAM = F259VZ645X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TurnosL9/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Turnos L9";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para calcular el tiempo restante hasta la siguiente parada";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "La app necesita permiso de localización para mostrar actualizaciones basadas en tu ubicación.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -334,6 +544,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8266AE452D9ACFC100976E73 /* Build configuration list for PBXNativeTarget "LiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8266AE432D9ACFC100976E73 /* Debug */,
+				8266AE442D9ACFC100976E73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8278DED62CC93DA500273B0E /* Build configuration list for PBXProject "TurnosL9" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

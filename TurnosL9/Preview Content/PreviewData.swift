@@ -26,8 +26,28 @@ extension [Shift] {
     }
 }
 
-extension Trip {
-    static var preview: Trip {
-        Shift.preview.trips[0]
+extension Train {
+    static var preview: Train {
+        Shift.preview.trains[0]
+    }
+    
+    static var previewNextTrain: Train {
+        Shift.preview.trains[1]
+    }
+}
+
+extension [Train] {
+    static var preview: [Train] {
+        Shift.preview.trains
+    }
+}
+
+extension Stop {
+    static var previewActualStop: Stop {
+        Train.preview.stops[2]
+    }
+    
+    static var previewNextStop: Stop {
+        Train.preview.stops[3]
     }
 }

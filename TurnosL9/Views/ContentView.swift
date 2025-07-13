@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(ViewModel.self) var viewModel
     @AppStorage("showBenidormShifts") var showBenidormShifts: Bool = true
-    let shifts: [Shift]
+    @State private var path = NavigationPath()
     
     private var toolbarForegroundColor: Color {
         colorScheme == .dark ? Color.white : Color.black
@@ -18,37 +19,60 @@ struct ContentView: View {
     
     private var filteredShifts: [Shift] {
         showBenidormShifts
-        ? shifts.filter { $0.location == Location.benidorm.rawValue }
-        : shifts.filter { $0.location == Location.denia.rawValue }
+        ? viewModel.shifts.filter { $0.location == Location.benidorm.rawValue }
+        : viewModel.shifts.filter { $0.location == Location.denia.rawValue }
     }
     
     var body: some View {
-        NavigationStack {
-            Picker("Residencia", selection: $showBenidormShifts) {
-                Text(Location.benidorm.rawValue).tag(true)
-                Text(Location.denia.rawValue).tag(false)
-            }
-            .pickerStyle(.segmented)
-            .padding(.vertical)
-            .padding(.horizontal, 80)
-
-            ScrollView {
-                ForEach(filteredShifts) { shift in
-                    NavigationLink {
-                        ShiftDetailView(shift: shift)
-                    } label: {
-                        ShiftRowView(shift: shift)
+        NavigationStack(path: $path) {
+            locationPicker
+            ShiftListView(shifts: filteredShifts)
+                .navigationTitle("Horarios L9")
+                .navigationDestination(for: Train.self) { train in
+                    TrainDetailView(train: train)
+                }
+                .onOpenURL { url in
+                    print("onOpenUrl: \(url)")
+                    let trainNumberString = url.lastPathComponent
+                    print("Train \(trainNumberString)")
+                    if let result = getShiftAndTrain(for: trainNumberString) {
+                        path.removeLast(path.count)
+                        path.append(result.train)
                     }
                 }
-                .padding(.horizontal)
-            }
-            .navigationTitle("Horarios L9")
         }
     }
 }
 
 #if DEBUG
 #Preview {
-    ContentView(shifts: .preview)
+    ContentView()
+        .environment(ViewModel())
 }
 #endif
+
+extension ContentView {
+    private var locationPicker: some View {
+        Picker("Residencia", selection: $showBenidormShifts) {
+            Text(Location.benidorm.rawValue).tag(true)
+            Text(Location.denia.rawValue).tag(false)
+        }
+        .pickerStyle(.segmented)
+        .padding(.vertical)
+        .padding(.horizontal, 80)
+    }
+    
+    private func getShiftAndTrain(for trainNumber: String) -> (shift: Shift, train: Train)? {
+        guard let trainNumber = Int(trainNumber) else {
+            return nil
+        }
+        for shift in viewModel.shifts {
+            for train in shift.trains {
+                if train.number == trainNumber {
+                    return (shift, train)
+                }
+            }
+        }
+        return nil
+    }
+}

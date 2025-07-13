@@ -11,6 +11,10 @@ struct ShiftRowView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let shift: Shift
     
+    var font: Font {
+        shift.name.count > 2 ? .title : .largeTitle
+    }
+    
     var body: some View {
         createRow(for: dynamicTypeSize)
     }
@@ -27,9 +31,8 @@ extension ShiftRowView {
     var smallShiftRow: some View {
         HStack {
             Text(shift.name)
-                .font(.largeTitle)
-                .bold()
-                .rowTitleStyle()
+                .font(font)
+                .rowTitleStyle(bold: shift.isWorking ? true : false)
                 .frame(width: 72, height: 48)
             
             Spacer()
@@ -37,11 +40,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.shiftStart.positionalTimeString)
+                        Text(shift.start.formattedTime)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.shiftEnd.positionalTimeString)
+                        Text(shift.end.formattedTime)
                             .monospacedStyle()
                     }
                 }
@@ -52,7 +55,7 @@ extension ShiftRowView {
                 
                 VStack(alignment: .leading) {
                     LabeledContent("Jornada") {
-                        Text(shift.shiftDuration.positionalTimeString)
+                        Text(shift.duration.positionalTimeString)
                             .monospacedStyle()
                     }
                     if let saturation = shift.saturation {
@@ -75,7 +78,7 @@ extension ShiftRowView {
     var mediumShiftRow: some View {
         HStack {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 72, height: 48)
@@ -83,11 +86,11 @@ extension ShiftRowView {
             HStack(spacing: 4) {
                 VStack(alignment: .leading) {
                     LabeledContent("Inicio") {
-                        Text(shift.shiftStart.positionalTimeString)
+                        Text(shift.start.formattedTime)
                             .monospacedStyle()
                     }
                     LabeledContent("Fin") {
-                        Text(shift.shiftEnd.positionalTimeString)
+                        Text(shift.end.formattedTime)
                             .monospacedStyle()
                     }
                 }
@@ -98,7 +101,7 @@ extension ShiftRowView {
                 
                 VStack(alignment: .leading) {
                     LabeledContent("Jorn.") {
-                        Text(shift.shiftDuration.positionalTimeString)
+                        Text(shift.duration.positionalTimeString)
                             .monospacedStyle()
                     }
                     if let saturation = shift.saturation {
@@ -121,7 +124,7 @@ extension ShiftRowView {
     var largeShiftRow: some View {
         HStack(alignment: .top) {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 80, height: 48)
@@ -129,16 +132,16 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.shiftStart.positionalTimeString)
+                    Text(shift.start.formattedTime)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.shiftEnd.positionalTimeString)
+                    Text(shift.end.formattedTime)
                         .monospacedStyle()
                 }
                 
                 LabeledContent("Jornada") {
-                    Text(shift.shiftDuration.positionalTimeString)
+                    Text(shift.duration.positionalTimeString)
                         .monospacedStyle()
                 }
                 if let saturation = shift.saturation {
@@ -159,7 +162,7 @@ extension ShiftRowView {
     var xLargeShiftRow: some View {
         HStack(alignment: .top) {
             Text(shift.name)
-                .font(.largeTitle)
+                .font(font)
                 .bold()
                 .rowTitleStyle()
                 .frame(width: 90, height: 48)
@@ -167,16 +170,16 @@ extension ShiftRowView {
             
             VStack(alignment: .leading, spacing: 2) {
                 LabeledContent("Inicio") {
-                    Text(shift.shiftStart.positionalTimeString)
+                    Text(shift.start.formattedTime)
                         .monospacedStyle()
                 }
                 LabeledContent("Fin") {
-                    Text(shift.shiftEnd.positionalTimeString)
+                    Text(shift.end.formattedTime)
                         .monospacedStyle()
                 }
                 
                 LabeledContent("Jor.") {
-                    Text(shift.shiftDuration.positionalTimeString)
+                    Text(shift.duration.positionalTimeString)
                         .monospacedStyle()
                 }
                 if let saturation = shift.saturation {
@@ -198,7 +201,7 @@ extension ShiftRowView {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
                 Text(shift.name)
-                    .font(.largeTitle)
+                    .font(font)
                     .bold()
                     .rowTitleStyle()
                     .frame(width: 96, height: 48)
@@ -207,16 +210,16 @@ extension ShiftRowView {
             .frame(maxWidth: .infinity, alignment: .center)
             
             LabeledContent("Inicio") {
-                Text(shift.shiftStart.positionalTimeString)
+                Text(shift.start.formattedTime)
                     .monospacedStyle()
             }
             LabeledContent("Fin") {
-                Text(shift.shiftEnd.positionalTimeString)
+                Text(shift.end.formattedTime)
                     .monospacedStyle()
             }
             
             LabeledContent("Jorn.") {
-                Text(shift.shiftDuration.positionalTimeString)
+                Text(shift.duration.positionalTimeString)
                     .monospacedStyle()
             }
             if let saturation = shift.saturation {

@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import MapKit
+import CoreLocation
+//import MapKit
 
 enum Location: String {
     case benidorm = "Benidorm"
@@ -29,12 +30,14 @@ enum Location: String {
     case unknown
 }
 
-extension Location: Decodable {
+extension Location: Hashable, Codable, Identifiable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
         self = .init(rawValue: rawValue) ?? .unknown
     }
+    
+    var id: Self { self }
 }
 
 extension Location {
@@ -63,26 +66,49 @@ extension Location {
 }
 
 extension Location {
-    var identifier: MKMapItem.Identifier? {
+//    var identifier: MKMapItem.Identifier? {
+//        switch self {
+//            case .benidorm: return MKMapItem.Identifier(rawValue: "I48E9EBC50F715CBD")!
+//            case .intermodal: return MKMapItem.Identifier(rawValue: "I11273607EE5E9972")!
+//            case .camiCoves: return MKMapItem.Identifier(rawValue: "IC14C57E03FEB8556")!
+//            case .alfaz: return MKMapItem.Identifier(rawValue: "I3059017F19F3BFCC")!
+//            case .elAlbir: return MKMapItem.Identifier(rawValue: "IB55E8F8F35F8153C")!
+//            case .altea: return MKMapItem.Identifier(rawValue: "I9D533E978CC6031")!
+//            case .garganes: return MKMapItem.Identifier(rawValue: "I39734D083DEF8BC6")!
+//            case .capNegret: return MKMapItem.Identifier(rawValue: "IF5DC62E6C3CBF504")!
+//            case .ollaAltea: return MKMapItem.Identifier(rawValue: "I150F5B0EC0A21315")!
+//            case .calp: return MKMapItem.Identifier(rawValue: "I8378A7861E86DCA9")!
+//            case .benissa: return MKMapItem.Identifier(rawValue: "I8776AA921CE1C651")!
+//            case .teulada: return MKMapItem.Identifier(rawValue: "IA435BE44DC7A92F2")!
+//            case .gata: return MKMapItem.Identifier(rawValue: "I925A31DEC50FBC24")!
+//            case .laXara: return MKMapItem.Identifier(rawValue: "I4DC1D09E7E751663")!
+//            case .pedreraVessanes: return MKMapItem.Identifier(rawValue: "IC7E5710D217B6C59")!
+//            case .boscDeDiana: return MKMapItem.Identifier(rawValue: "I5AFC3934D2A0346C")!
+//            case .denia: return MKMapItem.Identifier(rawValue: "I22A10EA1D04074F3")!
+//            case .unknown: return nil
+//        }
+//    }
+    
+    var location: CLLocationCoordinate2D? {
         switch self {
-            case .benidorm: return MKMapItem.Identifier(rawValue: "I48E9EBC50F715CBD")!
-            case .intermodal: return MKMapItem.Identifier(rawValue: "I11273607EE5E9972")!
-            case .camiCoves: return MKMapItem.Identifier(rawValue: "IC14C57E03FEB8556")!
-            case .alfaz: return MKMapItem.Identifier(rawValue: "I3059017F19F3BFCC")!
-            case .elAlbir: return MKMapItem.Identifier(rawValue: "IB55E8F8F35F8153C")!
-            case .altea: return MKMapItem.Identifier(rawValue: "I9D533E978CC6031")!
-            case .garganes: return MKMapItem.Identifier(rawValue: "I39734D083DEF8BC6")!
-            case .capNegret: return MKMapItem.Identifier(rawValue: "IF5DC62E6C3CBF504")!
-            case .ollaAltea: return MKMapItem.Identifier(rawValue: "I150F5B0EC0A21315")!
-            case .calp: return MKMapItem.Identifier(rawValue: "I8378A7861E86DCA9")!
-            case .benissa: return MKMapItem.Identifier(rawValue: "I8776AA921CE1C651")!
-            case .teulada: return MKMapItem.Identifier(rawValue: "IA435BE44DC7A92F2")!
-            case .gata: return MKMapItem.Identifier(rawValue: "I925A31DEC50FBC24")!
-            case .laXara: return MKMapItem.Identifier(rawValue: "I4DC1D09E7E751663")!
-            case .pedreraVessanes: return MKMapItem.Identifier(rawValue: "IC7E5710D217B6C59")!
-            case .boscDeDiana: return MKMapItem.Identifier(rawValue: "I5AFC3934D2A0346C")!
-            case .denia: return MKMapItem.Identifier(rawValue: "I22A10EA1D04074F3")!
-            case .unknown: return nil
+        case .benidorm: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .intermodal: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .camiCoves: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .alfaz: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .elAlbir: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .altea: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .garganes: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .capNegret: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .ollaAltea: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .calp: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .benissa: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .teulada: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .gata: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .laXara: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .pedreraVessanes: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .boscDeDiana: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .denia: return .init(latitude: 38.54818, longitude: -0.13501)
+        case .unknown: return .init(latitude: 38.54818, longitude: -0.13501)
         }
     }
 }

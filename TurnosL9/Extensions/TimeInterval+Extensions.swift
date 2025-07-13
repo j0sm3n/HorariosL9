@@ -27,4 +27,9 @@ extension TimeInterval {
         formatter.zeroFormattingBehavior = .pad
         return formatter.string(from: self) ?? ""
     }
+    
+    var minutesString: String {
+        let minutes = Int(self) / 60
+        return String(format: "%02d", minutes)
+    }
 }
