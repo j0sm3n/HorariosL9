@@ -20,6 +20,10 @@ final class LiveActivityManager {
     }
     
     func startActivity(with shift: Shift) {
+        guard shift.isWorking else {
+            print("Not working")
+            return
+        }
         if ActivityAuthorizationInfo().areActivitiesEnabled {
             self.activity = nil
             self.selectedShift = shift
@@ -42,7 +46,7 @@ final class LiveActivityManager {
                         pushType: nil
                     )
                     self.activity = activity
-                    print("Live activity started: \(activity.id)")
+                    print("🚂 Live activity started: \(activity.id)")
                 } catch {
                     print("Error starting live activity: \(error)")
                 }
@@ -64,7 +68,7 @@ final class LiveActivityManager {
                         pushType: nil
                     )
                     self.activity = activity
-                    print("Live activity started: \(activity.id)")
+                    print("☕ Live activity started: \(activity.id)")
                 } catch {
                     print("Error starting live activity: \(error)")
                 }
@@ -86,7 +90,7 @@ final class LiveActivityManager {
                         pushType: nil
                     )
                     self.activity = activity
-                    print("Live activity started: \(activity.id)")
+                    print("⌛ Live activity started: \(activity.id)")
                 } catch {
                     print("Error starting live activity: \(error)")
                 }
@@ -148,9 +152,12 @@ final class LiveActivityManager {
             trainNumber: 0
         )
         Task {
-            let oneMinuteLater = Date().addingTimeInterval(60)
-            await activity?.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .after(oneMinuteLater))
-            print("🛑 Live activity ended: \(activity?.id ?? "unknown")")
+            guard let activity else {
+                print(">>> No activity to end.")
+                return
+            }
+            await activity.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
+            print("🛑 Live activity ended: \(activity.id)")
             self.activity = nil
             self.selectedShift = nil
         }

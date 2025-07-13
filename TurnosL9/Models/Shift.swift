@@ -171,28 +171,10 @@ extension Shift {
             if let nextStop = currentTrain.nextStop { // not in last stop
                 components.hour = nextStop.departure.hour
                 components.minute = nextStop.departure.minute
-//            } else { // last stop
-//                components.hour = currentTrain.arrival.hour
-//                components.minute = currentTrain.arrival.minute
-//                components.second = 59
             }
             return Calendar.current.date(from: components)!
         case .finished:
             return endDate
         }
     }
-    
-//    var progress: Double {
-//        switch shiftStatus {
-//        case .waiting:
-//            let startOfRestDate = Calendar.current.date(from: startOfRest)!
-//            return ((Date.now.timeIntervalSince(startOfRestDate)) / (departure.timeIntervalSince(startOfRestDate))) * 100
-//        case .working:
-//            return currentTrain?.progress ?? 0
-//        case .finished:
-//            // Time until end
-//            let startOfRest = Calendar.current.date(from: startOfRest)!
-//            return ((Date.now.timeIntervalSince(startOfRest)) / (departure.timeIntervalSince(startOfRest))) * 100
-//        }
-//    }
 }

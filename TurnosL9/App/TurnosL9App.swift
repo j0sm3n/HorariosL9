@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct TurnosL9App: App {
+    @State private var activityManager = LiveActivityManager()
     @State private var locationManger = LocationManager()
     @State private var viewModel = ViewModel()
     
@@ -16,6 +17,7 @@ struct TurnosL9App: App {
         WindowGroup {
             if locationManger.isAuthorized {
                 ContentView()
+                    .environment(activityManager)
                     .environment(viewModel)
                     .environment(locationManger)
             } else {

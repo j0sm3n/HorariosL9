@@ -11,6 +11,7 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(ViewModel.self) var viewModel
     @AppStorage("showBenidormShifts") var showBenidormShifts: Bool = true
+    @State private var path = NavigationPath()
     
     private var toolbarForegroundColor: Color {
         colorScheme == .dark ? Color.white : Color.black
@@ -23,34 +24,23 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             locationPicker
             ShiftListView(shifts: filteredShifts)
                 .navigationTitle("Horarios L9")
-                .navigationDestination(for: Shift.self) { shift in
-                    ShiftDetailView(shift: Binding<Shift>(
-                        get: { shift },
-                        set: { newShift in
-                            if let index = viewModel.shifts.firstIndex(where: { $0.id == shift.id }) {
-                                viewModel.shifts[index] = newShift
-                            }
-                        }
-                    ))
-                }
                 .navigationDestination(for: Train.self) { train in
                     TrainDetailView(train: train)
                 }
+                .onOpenURL { url in
+                    print("onOpenUrl: \(url)")
+                    let trainNumberString = url.lastPathComponent
+                    print("Train \(trainNumberString)")
+                    if let result = getShiftAndTrain(for: trainNumberString) {
+                        path.removeLast(path.count)
+                        path.append(result.train)
+                    }
+                }
         }
-    }
-    
-    private var locationPicker: some View {
-        Picker("Residencia", selection: $showBenidormShifts) {
-            Text(Location.benidorm.rawValue).tag(true)
-            Text(Location.denia.rawValue).tag(false)
-        }
-        .pickerStyle(.segmented)
-        .padding(.vertical)
-        .padding(.horizontal, 80)
     }
 }
 
@@ -60,3 +50,29 @@ struct ContentView: View {
         .environment(ViewModel())
 }
 #endif
+
+extension ContentView {
+    private var locationPicker: some View {
+        Picker("Residencia", selection: $showBenidormShifts) {
+            Text(Location.benidorm.rawValue).tag(true)
+            Text(Location.denia.rawValue).tag(false)
+        }
+        .pickerStyle(.segmented)
+        .padding(.vertical)
+        .padding(.horizontal, 80)
+    }
+    
+    private func getShiftAndTrain(for trainNumber: String) -> (shift: Shift, train: Train)? {
+        guard let trainNumber = Int(trainNumber) else {
+            return nil
+        }
+        for shift in viewModel.shifts {
+            for train in shift.trains {
+                if train.number == trainNumber {
+                    return (shift, train)
+                }
+            }
+        }
+        return nil
+    }
+}

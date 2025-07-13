@@ -18,8 +18,10 @@ struct JourneyActivityWidget: Widget {
                 .preferredColorScheme(activityFamily == .small ? .dark : colorScheme)
                 .activityBackgroundTint(.row)
                 .activitySystemActionForegroundColor(.black)
+                .widgetURL(URL(string: "horarios-l9:///\(context.state.trainNumber)"))
         } dynamicIsland: { context in
             createDynamicIsland(context: context)
+                .widgetURL(URL(string: "horarios-l9:///\(context.state.trainNumber)"))
         }
         .supplementalActivityFamilies([.medium, .small])
     }
@@ -72,8 +74,8 @@ extension JourneyActivityWidget {
     }
 }
 
-extension String {
+fileprivate extension String {
     var minuteString: String {
-        ":" + String(self.split(separator: ":")[1])
+        String(self.split(separator: ":")[1]) + "'"
     }
 }
