@@ -22,6 +22,8 @@ struct TrainListView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     TrainListView(trains: .preview)
 }
+#endif

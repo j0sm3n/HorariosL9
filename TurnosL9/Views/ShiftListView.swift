@@ -36,6 +36,8 @@ struct ShiftListView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     ShiftListView(shifts: .preview)
 }
+#endif
