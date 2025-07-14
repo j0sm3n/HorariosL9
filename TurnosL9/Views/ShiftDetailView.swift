@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ShiftDetailView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-    @Environment(LocationManager.self) var locationManager
     @Environment(LiveActivityManager.self) var activityManager
     @State private var timer: Timer? = nil
     @Binding var shift: Shift
@@ -46,7 +45,7 @@ struct ShiftDetailView: View {
     
     NavigationStack {
         ShiftDetailView(shift: $shift)
-            .environment(LocationManager())
+            .environment(LiveActivityManager())
     }
 }
 #endif

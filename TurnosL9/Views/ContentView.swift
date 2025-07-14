@@ -24,6 +24,7 @@ struct ContentView: View {
     }
     
     var body: some View {
+        @Bindable var viewModel = self.viewModel
         NavigationStack(path: $path) {
             locationPicker
             ShiftListView(shifts: filteredShifts)
@@ -31,12 +32,18 @@ struct ContentView: View {
                 .navigationDestination(for: Train.self) { train in
                     TrainDetailView(train: train)
                 }
+                .navigationDestination(for: UUID.self) { shiftID in
+                    if let index = viewModel.shifts.firstIndex(where: { $0.id == shiftID }) {
+                        ShiftDetailView(shift: $viewModel.shifts[index])
+                    }
+                }
                 .onOpenURL { url in
                     print("onOpenUrl: \(url)")
                     let trainNumberString = url.lastPathComponent
                     print("Train \(trainNumberString)")
                     if let result = getShiftAndTrain(for: trainNumberString) {
                         path.removeLast(path.count)
+                        path.append(result.shift.id)
                         path.append(result.train)
                     }
                 }
