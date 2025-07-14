@@ -13,12 +13,13 @@ final class LiveActivityManager {
     private var selectedShift: Shift? = nil
     private var activity: Activity<JourneyAttributes>?
     var nextUpdate: Date?
-    
+    private var updateTimer: Timer?
+
     var timeToShow: String {
         guard let nextUpdate else { return "00:00" }
         return nextUpdate.formatted(date: .omitted, time: .shortened)
     }
-    
+
     func startActivity(with shift: Shift) {
         guard shift.isWorking else {
             print("Not working")
@@ -38,7 +39,7 @@ final class LiveActivityManager {
                     shiftStatus: shift.shiftStatus,
                     trainNumber: currentTrain.number
                 )
-                
+
                 do {
                     let activity = try Activity<JourneyAttributes>.request(
                         attributes: journeyAttributes,
@@ -60,7 +61,7 @@ final class LiveActivityManager {
                     shiftStatus: shift.shiftStatus,
                     trainNumber: nextTrain.number
                 )
-                
+
                 do {
                     let activity = try Activity<JourneyAttributes>.request(
                         attributes: journeyAttributes,
@@ -82,7 +83,7 @@ final class LiveActivityManager {
                     shiftStatus: shift.shiftStatus,
                     trainNumber: 0
                 )
-                
+
                 do {
                     let activity = try Activity<JourneyAttributes>.request(
                         attributes: journeyAttributes,
@@ -95,12 +96,20 @@ final class LiveActivityManager {
                     print("Error starting live activity: \(error)")
                 }
             }
+
+            updateTimer?.invalidate()
+            updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+                guard let self = self, let nextUpdate = self.nextUpdate else { return }
+                if Date() >= nextUpdate {
+                    self.updateActivity()
+                }
+            }
         }
     }
-    
+
     func updateActivity() {
         guard let activity, let selectedShift else { return }
-        
+
         var journeyContentState: JourneyAttributes.ContentState? = nil
 
         // driving the train
@@ -134,7 +143,7 @@ final class LiveActivityManager {
                 trainNumber: 0
             )
         }
-            
+
         if let journeyContentState {
             Task {
                 let alertConfiguration = AlertConfiguration(title: "Turno actualizado", body: "Se ha actualizado el estadu del turno", sound: .default)
@@ -160,6 +169,8 @@ final class LiveActivityManager {
             print("🛑 Live activity ended: \(activity.id)")
             self.activity = nil
             self.selectedShift = nil
+            self.updateTimer?.invalidate()
+            self.updateTimer = nil
         }
     }
 }
