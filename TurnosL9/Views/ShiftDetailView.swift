@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ShiftDetailView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-    @Environment(LocationManager.self) var locationManager
     @Environment(LiveActivityManager.self) var activityManager
-    @State private var timer: Timer? = nil
     @Binding var shift: Shift
     
     var body: some View {
@@ -46,7 +44,7 @@ struct ShiftDetailView: View {
     
     NavigationStack {
         ShiftDetailView(shift: $shift)
-            .environment(LocationManager())
+            .environment(LiveActivityManager())
     }
 }
 #endif
@@ -128,25 +126,10 @@ extension ShiftDetailView {
     private func startActivity() {
         shift.isLiveActivityRegistered = true
         activityManager.startActivity(with: shift)
-        var components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
-        components.hour = shift.end.hour
-        components.minute = shift.end.minute
-        if let endOfShift = Calendar.current.date(from: components) {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                if Date.now > endOfShift {
-                    stopActivity()
-                } else {
-                    if let nextUpdate = activityManager.nextUpdate, Date.now >= nextUpdate {
-                        activityManager.updateActivity()
-                    }
-                }
-            }
-        }
     }
     
     private func stopActivity() {
         activityManager.stopActivity()
         shift.isLiveActivityRegistered = false
-        timer?.invalidate()
     }
 }

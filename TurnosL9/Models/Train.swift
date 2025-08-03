@@ -30,7 +30,7 @@ extension Train {
     private var isEven: Bool { number.isMultiple(of: 2) }
     
     var color: Color {
-        Color.gray.opacity(self.isEven ? 0.5 : 0.2)
+        isRunning ? Color.row : Color.gray.opacity(self.isEven ? 0.5 : 0.2)
     }
     
     var currentTime: DateComponents {

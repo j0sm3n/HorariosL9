@@ -16,14 +16,14 @@ struct TrainDetailView: View {
             headerView
             ScrollView {
                 TimelineView(.animation) { _ in
-                    ForEach(Array(train.stops.enumerated()), id: \.offset) { index, stop in
+                    ForEach(train.stops) { stop in
                         LabeledContent(stopString(for: stop.location)) {
                             Text(stop.departure.formattedTime)
                                 .monospaced()
                         }
                         .padding(.horizontal)
-                        .fontWeight(isHighlighted(for: stop, with: index) ? .heavy : .light)
-                        .rowStyle(in: color(for: index))
+                        .fontWeight(fontWeight(for: stop))
+                        .rowStyle(in: color(for: stop))
                     }
                 }
                 .padding(.horizontal)
@@ -75,8 +75,8 @@ extension TrainDetailView {
     }
 
     // MARK: - Private functions
-    private func isHighlighted(for stop: Stop, with index: Int) -> Bool {
-        guard train.isRunning else { return false }
+    private func isHighlighted(stop: Stop) -> Bool {
+        guard let index = indexOf(stop: stop) else { return false }
         
         if index == 0 {
             return train.currentTime == stop.departure
@@ -85,11 +85,24 @@ extension TrainDetailView {
         }
     }
     
-    private func color(for index: Int) -> Color {
-        .gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2)
+    private func color(for stop: Stop) -> Color {
+        if isHighlighted(stop: stop) {
+            return Color.row
+        } else {
+            guard let index = indexOf(stop: stop) else { return Color.white }
+            return Color.gray.opacity(index.isMultiple(of: 2) ? 0.5 : 0.2)
+        }
+    }
+    
+    private func fontWeight(for stop: Stop) -> Font.Weight {
+        isHighlighted(stop: stop) ? .heavy : .light
     }
     
     private func stopString(for location: Location) -> String {
         dynamicTypeSize > .accessibility2 ? location.monogram : location.rawValue
+    }
+    
+    private func indexOf(stop: Stop) -> Int? {
+        train.stops.firstIndex(of: stop)
     }
 }

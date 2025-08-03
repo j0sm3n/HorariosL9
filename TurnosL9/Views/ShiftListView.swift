@@ -14,28 +14,17 @@ struct ShiftListView: View {
     var body: some View {
         ScrollView {
             ForEach(shifts) { shift in
-                NavigationLink {
-                    ShiftDetailView(shift: Binding<Shift>(
-                        get: { shift },
-                        set: { newShift in
-                            if let index = viewModel.shifts.firstIndex(where: { $0.id == shift.id }) {
-                                viewModel.shifts[index] = newShift
-                            }
-                        }
-                    ))
-                } label: {
+                NavigationLink(value: shift.id) {
                     ShiftRowView(shift: shift)
                 }
-
-//                NavigationLink(value: shift) {
-//                    ShiftRowView(shift: shift)
-//                }
             }
             .padding(.horizontal)
         }
     }
 }
 
+#if DEBUG
 #Preview {
     ShiftListView(shifts: .preview)
 }
+#endif

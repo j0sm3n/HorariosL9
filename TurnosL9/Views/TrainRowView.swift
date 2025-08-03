@@ -11,7 +11,6 @@ struct TrainRowView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let train: Train
     let color: Color
-    let showIndicator: Bool
     
     var body: some View {
         TimelineView(.animation) { _ in
@@ -23,7 +22,7 @@ struct TrainRowView: View {
 
 #if DEBUG
 #Preview {
-    TrainRowView(train: .preview, color: .row, showIndicator: true)
+    TrainRowView(train: .preview, color: .row)
         .padding(.horizontal)
 }
 #endif
