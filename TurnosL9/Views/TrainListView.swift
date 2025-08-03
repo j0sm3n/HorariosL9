@@ -14,7 +14,7 @@ struct TrainListView: View {
         ScrollView {
             ForEach(trains) { train in
                 NavigationLink(value: train) {
-                    TrainRowView(train: train, color: train.color, showIndicator: true)
+                    TrainRowView(train: train, color: train.color)
                 }
             }
             .padding(.horizontal)
