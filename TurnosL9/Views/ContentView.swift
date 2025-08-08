@@ -10,24 +10,17 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(ViewModel.self) var viewModel
-    @AppStorage("showBenidormShifts") var showBenidormShifts: Bool = true
     @State private var path = NavigationPath()
     
     private var toolbarForegroundColor: Color {
         colorScheme == .dark ? Color.white : Color.black
     }
     
-    private var filteredShifts: [Shift] {
-        showBenidormShifts
-        ? viewModel.shifts.filter { $0.location == Location.benidorm.rawValue }
-        : viewModel.shifts.filter { $0.location == Location.denia.rawValue }
-    }
-    
     var body: some View {
         @Bindable var viewModel = self.viewModel
         NavigationStack(path: $path) {
             locationPicker
-            ShiftListView(shifts: filteredShifts)
+            ShiftListView()
                 .navigationTitle("Horarios L9")
                 .navigationDestination(for: Train.self) { train in
                     TrainDetailView(train: train)
@@ -59,10 +52,12 @@ struct ContentView: View {
 #endif
 
 extension ContentView {
+    @ViewBuilder
     private var locationPicker: some View {
-        Picker("Residencia", selection: $showBenidormShifts) {
-            Text(Location.benidorm.rawValue).tag(true)
-            Text(Location.denia.rawValue).tag(false)
+        @Bindable var viewModel = viewModel
+        Picker("Residencia", selection: $viewModel.selectedShiftsLocation) {
+            Text(Location.benidorm.rawValue).tag(Location.benidorm)
+            Text(Location.denia.rawValue).tag(Location.denia)
         }
         .pickerStyle(.segmented)
         .padding(.vertical)

@@ -11,6 +11,30 @@ import Foundation
 final class ViewModel {
     var shifts: [Shift] = []
     
+    private let defaults = UserDefaults.standard
+    private let selectedShiftsLocationKey = "selectedShiftsLocationKey"
+    
+    var selectedShiftsLocation: Location {
+        get {
+            access(keyPath: \.selectedShiftsLocation)
+            guard let locationString = defaults.string(forKey: selectedShiftsLocationKey),
+                  let location = Location(rawValue: locationString) else {
+                return .benidorm
+            }
+            return location
+        }
+        
+        set {
+            withMutation(keyPath: \.selectedShiftsLocation) {
+                defaults.set(newValue.rawValue, forKey: selectedShiftsLocationKey)
+            }
+        }
+    }
+    
+    var selectedShifts: [Shift] {
+        shifts.filter { $0.location == selectedShiftsLocation }
+    }
+    
     init() {
         self.fetchShifts()
     }

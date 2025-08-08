@@ -79,8 +79,7 @@ extension ShiftRowView {
         HStack {
             Text(shift.name)
                 .font(font)
-                .bold()
-                .rowTitleStyle()
+                .rowTitleStyle(bold: shift.isWorking ? true : false)
                 .frame(width: 72, height: 48)
             
             HStack(spacing: 4) {
@@ -125,8 +124,7 @@ extension ShiftRowView {
         HStack(alignment: .top) {
             Text(shift.name)
                 .font(font)
-                .bold()
-                .rowTitleStyle()
+                .rowTitleStyle(bold: shift.isWorking ? true : false)
                 .frame(width: 80, height: 48)
                 .padding(.top, 16)
             
@@ -163,8 +161,7 @@ extension ShiftRowView {
         HStack(alignment: .top) {
             Text(shift.name)
                 .font(font)
-                .bold()
-                .rowTitleStyle()
+                .rowTitleStyle(bold: shift.isWorking ? true : false)
                 .frame(width: 90, height: 48)
                 .padding(.top, 18)
             
@@ -202,8 +199,7 @@ extension ShiftRowView {
             HStack {
                 Text(shift.name)
                     .font(font)
-                    .bold()
-                    .rowTitleStyle()
+                    .rowTitleStyle(bold: shift.isWorking ? true : false)
                     .frame(width: 96, height: 48)
             }
             .padding(.vertical,24)

@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ShiftListView: View {
     @Environment(ViewModel.self) var viewModel
-    let shifts: [Shift]
 
     var body: some View {
         ScrollView {
-            ForEach(shifts) { shift in
+            ForEach(viewModel.selectedShifts) { shift in
                 NavigationLink(value: shift.id) {
                     ShiftRowView(shift: shift)
                 }
@@ -25,6 +24,7 @@ struct ShiftListView: View {
 
 #if DEBUG
 #Preview {
-    ShiftListView(shifts: .preview)
+    ShiftListView()
+        .environment(ViewModel())
 }
 #endif

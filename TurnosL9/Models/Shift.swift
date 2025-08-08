@@ -13,7 +13,7 @@ struct Shift: Hashable, Identifiable {
     var start: DateComponents
     var duration: TimeInterval
     var saturation: Double?
-    var location: String
+    var location: Location
     var trains: [Train]
     
     var isLiveActivityRegistered: Bool = false
@@ -36,7 +36,7 @@ extension Shift: Codable {
 
         self.name = try container.decode(String.self, forKey: .name)
         self.saturation = try container.decodeIfPresent(Double.self, forKey: .saturation)
-        self.location = try container.decode(String.self, forKey: .location)
+        self.location = try container.decode(Location.self, forKey: .location)
         self.trains = try container.decode([Train].self, forKey: .trains)
 
         let startTime = try container.decode(Time.self, forKey: .start)
