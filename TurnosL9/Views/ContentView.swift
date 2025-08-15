@@ -31,9 +31,7 @@ struct ContentView: View {
                     }
                 }
                 .onOpenURL { url in
-                    print("onOpenUrl: \(url)")
                     let trainNumberString = url.lastPathComponent
-                    print("Train \(trainNumberString)")
                     if let result = getShiftAndTrain(for: trainNumberString) {
                         path.removeLast(path.count)
                         path.append(result.shift.id)
