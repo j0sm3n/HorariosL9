@@ -99,8 +99,10 @@ final class LiveActivityManager {
 
             updateTimer?.invalidate()
             updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-                guard let self = self, let nextUpdate = self.nextUpdate else { return }
-                if Date() >= nextUpdate {
+                guard let self = self, let nextUpdate = self.nextUpdate, let selectedShift else { return }
+                if Date.now >= selectedShift.endDate {
+                    stopActivity()
+                } else if Date.now >= nextUpdate {
                     self.updateActivity()
                 }
             }
