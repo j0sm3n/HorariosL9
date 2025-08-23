@@ -33,7 +33,6 @@ struct ShiftDetailView: View {
                         .symbolEffect(.rotate, value: shift.isLiveActivityRegistered)
                         .sensoryFeedback(.success, trigger: shift.isLiveActivityRegistered)
                 }
-                .disabled(!shift.isWorking)
             }
         }
     }
