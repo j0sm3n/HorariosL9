@@ -89,26 +89,26 @@ extension Location {
 //        }
 //    }
     
-    var location: CLLocationCoordinate2D? {
+    var coordinate: CLLocationCoordinate2D? {
         switch self {
-        case .benidorm: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .intermodal: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .camiCoves: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .alfaz: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .elAlbir: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .altea: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .garganes: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .capNegret: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .ollaAltea: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .calp: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .benissa: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .teulada: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .gata: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .laXara: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .pedreraVessanes: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .boscDeDiana: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .denia: return .init(latitude: 38.54818, longitude: -0.13501)
-        case .unknown: return .init(latitude: 38.54818, longitude: -0.13501)
+            case .benidorm: return CLLocationCoordinate2D(latitude: 38.54817, longitude: -0.13501)
+            case .intermodal: return CLLocationCoordinate2D(latitude: 38.54844, longitude: -0.12277)
+            case .camiCoves: return CLLocationCoordinate2D(latitude: 38.55941, longitude: -0.10419)
+            case .alfaz: return CLLocationCoordinate2D(latitude: 38.5677, longitude: -0.09278)
+            case .elAlbir: return CLLocationCoordinate2D(latitude: 38.5764, longitude: -0.07965)
+            case .altea: return CLLocationCoordinate2D(latitude: 38.59606, longitude: -0.05207)
+            case .garganes: return CLLocationCoordinate2D(latitude: 38.60237, longitude: -0.04785)
+            case .capNegret: return CLLocationCoordinate2D(latitude: 38.61054, longitude: -0.04104)
+            case .ollaAltea: return CLLocationCoordinate2D(latitude: 38.62137, longitude: -0.03276)
+            case .calp: return CLLocationCoordinate2D(latitude: 38.64998, longitude: 0.03296)
+            case .benissa: return CLLocationCoordinate2D(latitude: 38.71514, longitude: 0.07663)
+            case .teulada: return CLLocationCoordinate2D(latitude: 38.7293, longitude: 0.09803)
+            case .gata: return CLLocationCoordinate2D(latitude: 38.77517, longitude: 0.08742)
+            case .laXara: return CLLocationCoordinate2D(latitude: 38.823, longitude: 0.06386)
+            case .pedreraVessanes: return CLLocationCoordinate2D(latitude: 38.83184, longitude: 0.10082)
+            case .boscDeDiana: return CLLocationCoordinate2D(latitude: 38.83469, longitude: 0.10723)
+            case .denia: return CLLocationCoordinate2D(latitude: 38.83958, longitude: 0.11263)
+            case .unknown: return CLLocationCoordinate2D(latitude: 0, longitude: 0)
         }
     }
 }
