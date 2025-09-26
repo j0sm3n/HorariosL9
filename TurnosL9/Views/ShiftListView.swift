@@ -18,6 +18,7 @@ struct ShiftListView: View {
                 }
             }
             .padding(.horizontal)
+            .animation(.easeInOut, value: viewModel.selectedShiftsLocation)
         }
     }
 }
