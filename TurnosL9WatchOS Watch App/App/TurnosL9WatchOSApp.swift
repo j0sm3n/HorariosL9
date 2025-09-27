@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct TurnosL9WatchOS_Watch_AppApp: App {
+    @State private var store = ShiftStore()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(store)
         }
     }
 }

@@ -11,14 +11,14 @@ import SwiftUI
 struct TurnosL9App: App {
     @State private var activityManager = LiveActivityManager()
     @State private var locationManger = LocationManager()
-    @State private var viewModel = ViewModel()
+    @State private var store = ShiftStore()
     
     var body: some Scene {
         WindowGroup {
             if locationManger.isAuthorized {
                 ContentView()
                     .environment(activityManager)
-                    .environment(viewModel)
+                    .environment(store)
                     .environment(locationManger)
             } else {
                 UnauthorizedView()

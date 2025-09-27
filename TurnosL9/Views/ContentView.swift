@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
-    @Environment(ViewModel.self) var viewModel
+    @Environment(ShiftStore.self) var store
     @State private var path = NavigationPath()
     
     private var toolbarForegroundColor: Color {
@@ -17,7 +17,6 @@ struct ContentView: View {
     }
     
     var body: some View {
-        @Bindable var viewModel = self.viewModel
         NavigationStack(path: $path) {
             locationPicker
             ShiftListView()
@@ -26,8 +25,8 @@ struct ContentView: View {
                     TrainDetailView(train: train)
                 }
                 .navigationDestination(for: UUID.self) { shiftID in
-                    if let index = viewModel.shifts.firstIndex(where: { $0.id == shiftID }) {
-                        ShiftDetailView(shift: $viewModel.shifts[index])
+                    if let index = store.shifts.firstIndex(where: { $0.id == shiftID }) {
+                        ShiftDetailView(shift: Bindable(store).shifts[index])
                     }
                 }
                 .onOpenURL { url in
@@ -45,15 +44,14 @@ struct ContentView: View {
 #if DEBUG
 #Preview {
     ContentView()
-        .environment(ViewModel())
+        .environment(ShiftStore())
 }
 #endif
 
 extension ContentView {
     @ViewBuilder
     private var locationPicker: some View {
-        @Bindable var viewModel = viewModel
-        Picker("Residencia", selection: $viewModel.selectedShiftsLocation) {
+        Picker("Residencia", selection: Bindable(store).selectedShiftsLocation) {
             Text(Location.benidorm.rawValue).tag(Location.benidorm)
             Text(Location.denia.rawValue).tag(Location.denia)
         }
@@ -66,7 +64,7 @@ extension ContentView {
         guard let trainNumber = Int(trainNumber) else {
             return nil
         }
-        for shift in viewModel.shifts {
+        for shift in store.shifts {
             for train in shift.trains {
                 if train.number == trainNumber {
                     return (shift, train)

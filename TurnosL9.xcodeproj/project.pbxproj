@@ -86,7 +86,23 @@
 			);
 			target = 8278DEDA2CC93DA500273B0E /* Horarios L9 */;
 		};
-		82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */ = {
+		8280EB432E86EB81003CF94F /* Exceptions for "Shared" folder in "TurnosL9WatchOS Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Data/shifts.json,
+				"Extensions/DateComponents+Extensions.swift",
+				"Extensions/TimeInterval+Extensions.swift",
+				Models/Location.swift,
+				Models/Shift.swift,
+				Models/ShiftStatus.swift,
+				Models/Stop.swift,
+				Models/Time.swift,
+				Models/Train.swift,
+				Stores/ShiftStore.swift,
+			);
+			target = 825B87D32E865C3200840F74 /* TurnosL9WatchOS Watch App */;
+		};
+		8280EB452E86EC57003CF94F /* Exceptions for "Shared" folder in "LiveActivityExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Extensions/DateComponents+Extensions.swift",
@@ -97,6 +113,19 @@
 				Models/Stop.swift,
 				Models/Time.swift,
 				Models/Train.swift,
+			);
+			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
+		};
+		8280EB522E87AC8C003CF94F /* Exceptions for "TurnosL9" folder in "TurnosL9WatchOS Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/PreviewData.swift",
+			);
+			target = 825B87D32E865C3200840F74 /* TurnosL9WatchOS Watch App */;
+		};
+		82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
 				Styles/LockScreenTextStyle.swift,
 			);
 			target = 8266AE2A2D9ACFBF00976E73 /* LiveActivityExtension */;
@@ -107,6 +136,15 @@
 		825B87D52E865C3200840F74 /* TurnosL9WatchOS Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TurnosL9WatchOS Watch App";
+			sourceTree = "<group>";
+		};
+		825B87E52E86E99D00840F74 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8280EB452E86EC57003CF94F /* Exceptions for "Shared" folder in "LiveActivityExtension" target */,
+				8280EB432E86EB81003CF94F /* Exceptions for "Shared" folder in "TurnosL9WatchOS Watch App" target */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		8266AE312D9ACFBF00976E73 /* LiveActivity */ = {
@@ -123,6 +161,7 @@
 			exceptions = (
 				8278DEF92CC9876600273B0E /* Exceptions for "TurnosL9" folder in "Horarios L9" target */,
 				82A225AA2D9BE2B3006E68C0 /* Exceptions for "TurnosL9" folder in "LiveActivityExtension" target */,
+				8280EB522E87AC8C003CF94F /* Exceptions for "TurnosL9" folder in "TurnosL9WatchOS Watch App" target */,
 			);
 			path = TurnosL9;
 			sourceTree = "<group>";
@@ -168,6 +207,7 @@
 		8278DED22CC93DA500273B0E = {
 			isa = PBXGroup;
 			children = (
+				825B87E52E86E99D00840F74 /* Shared */,
 				8278DEDD2CC93DA500273B0E /* TurnosL9 */,
 				8266AE312D9ACFBF00976E73 /* LiveActivity */,
 				825B87D52E865C3200840F74 /* TurnosL9WatchOS Watch App */,
@@ -250,6 +290,7 @@
 				825B87DD2E865C3300840F74 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				825B87E52E86E99D00840F74 /* Shared */,
 				8278DEDD2CC93DA500273B0E /* TurnosL9 */,
 			);
 			name = "Horarios L9";
