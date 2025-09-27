@@ -416,6 +416,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Horarios L9";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.josmen.TurnosL9;
+				INFOPLIST_KEY_WKSupportsLiveActivityLaunchAttributeTypes = JourneyAttributes;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,6 +449,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Horarios L9";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.josmen.TurnosL9;
+				INFOPLIST_KEY_WKSupportsLiveActivityLaunchAttributeTypes = JourneyAttributes;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
