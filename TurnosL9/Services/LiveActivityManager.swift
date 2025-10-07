@@ -10,8 +10,8 @@ import ActivityKit
 
 @Observable
 final class LiveActivityManager {
-    private var selectedShift: Shift? = nil
     private var activity: Activity<JourneyAttributes>?
+    var selectedShift: Shift? = nil
     var nextUpdate: Date?
     private var updateTimer: Timer?
 
@@ -163,13 +163,10 @@ final class LiveActivityManager {
             trainNumber: 0
         )
         Task {
-            guard let activity else {
-                print(">>> No activity to end.")
-                return
-            }
-            await activity.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
-            print("🛑 Live activity ended: \(activity.id)")
+            await activity?.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
+            print("🛑 Live activity ended: \(activity?.id ?? "unknown")")
             self.activity = nil
+            self.selectedShift?.isLiveActivityRegistered = false
             self.selectedShift = nil
             self.updateTimer?.invalidate()
             self.updateTimer = nil

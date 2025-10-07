@@ -28,7 +28,7 @@ struct ShiftDetailView: View {
                 Button {
                     changeActivityStatus()
                 } label: {
-                    Image(systemName: shift.isLiveActivityRegistered ? "stop.circle" : "play.circle")
+                    Image(systemName: activityManager.selectedShift != nil ? "stop.circle" : "play.circle")
                         .font(.title2)
                         .symbolEffect(.rotate, value: shift.isLiveActivityRegistered)
                         .sensoryFeedback(.success, trigger: shift.isLiveActivityRegistered)
@@ -125,11 +125,13 @@ extension ShiftDetailView {
     
     private func startActivity() {
         shift.isLiveActivityRegistered = true
+        activityManager.selectedShift = shift
         activityManager.startActivity(with: shift)
     }
     
     private func stopActivity() {
         activityManager.stopActivity()
         shift.isLiveActivityRegistered = false
+        activityManager.selectedShift = nil
     }
 }
