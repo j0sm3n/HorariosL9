@@ -10,7 +10,10 @@ import SwiftUI
 struct ShiftDetailView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @Environment(LiveActivityManager.self) var activityManager
+    @Environment(NotificationManager.self) var notificationManager
     @Binding var shift: Shift
+    @State private var errorMessage: String?
+    @State private var shouldPresentError: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,6 +38,7 @@ struct ShiftDetailView: View {
                 }
             }
         }
+        .alert(errorMessage ?? "Error", isPresented: $shouldPresentError, actions: {})
     }
 }
 
@@ -45,6 +49,7 @@ struct ShiftDetailView: View {
     NavigationStack {
         ShiftDetailView(shift: $shift)
             .environment(LiveActivityManager())
+            .environment(NotificationManager())
     }
 }
 #endif
@@ -124,14 +129,29 @@ extension ShiftDetailView {
     }
     
     private func startActivity() {
-        shift.isLiveActivityRegistered = true
-        activityManager.selectedShift = shift
-        activityManager.startActivity(with: shift)
+        do {
+            shift.isLiveActivityRegistered = true
+            activityManager.selectedShift = shift
+            try activityManager.startActivity(with: shift)
+        } catch {
+            stopActivity()
+            errorMessage = error.localizedDescription
+            shouldPresentError = true
+        }
     }
     
     private func stopActivity() {
         activityManager.stopActivity()
         shift.isLiveActivityRegistered = false
         activityManager.selectedShift = nil
+        notificationManager.clearRequests()
+    }
+    
+    private func scheduleNotifications() {
+        Task {
+            try? await notificationManager.requestAuthorization()
+            notificationManager.clearRequests()
+            notificationManager.scheduleNotification(for: shift.getRestDates())
+        }
     }
 }

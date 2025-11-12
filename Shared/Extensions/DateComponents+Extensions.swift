@@ -35,4 +35,13 @@ extension DateComponents {
         let components = Calendar.current.dateComponents([.minute], from: date1, to: date2)
         return components.minute ?? 0
     }
+    
+    func minus(_ quantity: Int, component: Calendar.Component) -> DateComponents {
+        let calendar = Calendar.current
+        guard let baseDate = calendar.date(from: self) else { return self }
+        guard let newDate = calendar.date(byAdding: component, value: -quantity, to: baseDate) else { return self }
+        print("Fecha original: \(baseDate)")
+        print("5 minutos antes: \(newDate)")
+        return calendar.dateComponents([.year, .month, .day, .hour, .minute], from: newDate)
+    }
 }
