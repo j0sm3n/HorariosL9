@@ -5,15 +5,19 @@
 //  Created by Jose Antonio Mendoza on 31/10/24.
 //
 
+import ActivityKit
 import SwiftUI
 
 struct ShiftDetailView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-    @Environment(LiveActivityManager.self) var activityManager
     @Environment(NotificationManager.self) var notificationManager
     @Binding var shift: Shift
     @State private var errorMessage: String?
     @State private var shouldPresentError: Bool = false
+    
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var activity: Activity<JourneyAttributes>?
+    @State private var nextUpdate: Date?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -31,7 +35,7 @@ struct ShiftDetailView: View {
                 Button {
                     changeActivityStatus()
                 } label: {
-                    Image(systemName: activityManager.selectedShift != nil ? "stop.circle" : "play.circle")
+                    Image(systemName: shift.isLiveActivityRegistered ? "stop.circle" : "play.circle")
                         .font(.title2)
                         .symbolEffect(.rotate, value: shift.isLiveActivityRegistered)
                         .sensoryFeedback(.success, trigger: shift.isLiveActivityRegistered)
@@ -39,6 +43,20 @@ struct ShiftDetailView: View {
             }
         }
         .alert(errorMessage ?? "Error", isPresented: $shouldPresentError, actions: {})
+        .onReceive(timer) { time in
+            if shift.isLiveActivityRegistered {
+                print("Time: \(time)")
+                if time >= shift.endDate {
+                    print("El turno ha terminado el ultimo tren")
+                    stopActivity()
+                } else if let nextUpdate, time >= nextUpdate {
+                    print("La hora actual (\(time.formatted(date: .omitted, time: .shortened))) es mayor o igual que la hora de actualización (\(nextUpdate.formatted(date: .omitted, time: .shortened))), por lo que se va a actualizar la actividad.")
+                    updateActivity()
+                } else {
+                    print(time.formatted(date: .omitted, time: .shortened))
+                }
+            }
+        }
     }
 }
 
@@ -48,7 +66,6 @@ struct ShiftDetailView: View {
     
     NavigationStack {
         ShiftDetailView(shift: $shift)
-            .environment(LiveActivityManager())
             .environment(NotificationManager())
     }
 }
@@ -130,9 +147,22 @@ extension ShiftDetailView {
     
     private func startActivity() {
         do {
+            print("-- Starting activity --")
+            print("End date: \(shift.endDate)")
+            print("Next update: \(shift.nextUpdateTimeString)")
             shift.isLiveActivityRegistered = true
-            activityManager.selectedShift = shift
-            try activityManager.startActivity(with: shift)
+            nextUpdate = shift.nextUpdate
+            print("Next update: \(shift.nextUpdateTimeString)")
+            let journeyAttributes = JourneyAttributes(journeyId: shift.id.uuidString)
+            let journeyState = JourneyAttributes.ContentState(
+                nextStop: shift.nextStop,
+                timeString: shift.nextUpdateTimeString,
+                shiftStatus: shift.shiftStatus,
+                trainNumber: shift.trainNumber
+            )
+            self.activity = try LiveActivityManager().startActivity(attributes: journeyAttributes, state: journeyState)
+            self.timer = Timer.publish(every: 10.0, on: .main, in: .common).autoconnect()
+            scheduleNotifications()
         } catch {
             stopActivity()
             errorMessage = error.localizedDescription
@@ -140,10 +170,24 @@ extension ShiftDetailView {
         }
     }
     
+    private func updateActivity() {
+        guard let activity else { return }
+        nextUpdate = shift.nextUpdate
+        print("Next update: \(nextUpdate, default: "N/A")")
+        let journeyState = JourneyAttributes.ContentState(
+            nextStop: shift.nextStop,
+            timeString: shift.nextUpdateTimeString,
+            shiftStatus: shift.shiftStatus,
+            trainNumber: shift.trainNumber
+        )
+        LiveActivityManager().updateActivity(activityID: activity.id, state: journeyState)
+    }
+    
     private func stopActivity() {
-        activityManager.stopActivity()
+        LiveActivityManager().stopActivity()
         shift.isLiveActivityRegistered = false
-        activityManager.selectedShift = nil
+        self.activity = nil
+        self.nextUpdate = nil
         notificationManager.clearRequests()
     }
     

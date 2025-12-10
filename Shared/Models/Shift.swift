@@ -178,6 +178,29 @@ extension Shift {
         }
     }
     
+    var nextUpdate: Date {
+        switch shiftStatus {
+            case .waiting:
+                return departure
+            case .working:
+                return arrival
+            case .finished:
+                return endDate
+        }
+    }
+    
+    var nextUpdateTimeString: String {
+        nextUpdate.formatted(date: .omitted, time: .shortened)
+    }
+    
+    var nextStop: String {
+        if let currentTrain, let _ = currentTrain.nextStop {
+            return currentTrain.nextStopString
+        } else {
+            return ""
+        }
+    }
+    
     func getRestDates() -> [DateComponents] {
         guard let firstTrain = trains.first else { return [] }
         

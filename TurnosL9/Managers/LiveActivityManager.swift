@@ -23,8 +23,6 @@ extension LiveActivityError: LocalizedError {
 
 @Observable
 final class LiveActivityManager {
-    private var activity: Activity<JourneyAttributes>?
-    var selectedShift: Shift? = nil
     var nextUpdate: Date?
     private var updateTimer: Timer?
 
@@ -33,143 +31,33 @@ final class LiveActivityManager {
         return nextUpdate.formatted(date: .omitted, time: .shortened)
     }
 
-    func startActivity(with shift: Shift) throws {
-        guard shift.isWorking else {
-            activity = nil
-            selectedShift = nil
-            nextUpdate = nil
-            updateTimer?.invalidate()
-            throw LiveActivityError.notWorking
-        }
-
+    func startActivity(attributes: JourneyAttributes, state: JourneyAttributes.ContentState) throws -> Activity<JourneyAttributes>? {
+        var activity: Activity<JourneyAttributes>?
+        
         if ActivityAuthorizationInfo().areActivitiesEnabled {
-            self.activity = nil
-            self.selectedShift = shift
-
-            // driving the train
-            if let currentTrain = shift.currentTrain {
-                nextUpdate = shift.arrival
-                let journeyAttributes = JourneyAttributes(journeyId: currentTrain.id.uuidString)
-                let journeyContentState = JourneyAttributes.ContentState(
-                    nextStop: currentTrain.nextStop != nil ? currentTrain.nextStopString : "",
-                    timeString: timeToShow,
-                    shiftStatus: shift.shiftStatus,
-                    trainNumber: currentTrain.number
+            do {
+                activity = try Activity<JourneyAttributes>.request(
+                    attributes: attributes,
+                    content: .init(state: state, staleDate: nil),
+                    pushType: nil
                 )
-
-                do {
-                    let activity = try Activity<JourneyAttributes>.request(
-                        attributes: journeyAttributes,
-                        content: .init(state: journeyContentState, staleDate: nil),
-                        pushType: nil
-                    )
-                    self.activity = activity
-                    print("🚂 Live activity started: \(activity.id)")
-                } catch {
-                    print("Error starting live activity: \(error)")
-                }
-
-            // waiting until next train
-            } else if let nextTrain = shift.nextTrain {
-                nextUpdate = shift.departure
-                let journeyAttributes = JourneyAttributes(journeyId: nextTrain.id.uuidString)
-                let journeyContentState = JourneyAttributes.ContentState(
-                    nextStop: "",
-                    timeString: timeToShow,
-                    shiftStatus: shift.shiftStatus,
-                    trainNumber: nextTrain.number
-                )
-
-                do {
-                    let activity = try Activity<JourneyAttributes>.request(
-                        attributes: journeyAttributes,
-                        content: .init(state: journeyContentState, staleDate: nil),
-                        pushType: nil
-                    )
-                    self.activity = activity
-                    print("☕ Live activity started: \(activity.id)")
-                } catch {
-                    print("Error starting live activity: \(error)")
-                }
-
-            // waiting to finish
-            } else {
-                nextUpdate = shift.endDate
-                let journeyAttributes = JourneyAttributes(journeyId: shift.id.uuidString)
-                let journeyContentState = JourneyAttributes.ContentState(
-                    nextStop: "",
-                    timeString: timeToShow,
-                    shiftStatus: shift.shiftStatus,
-                    trainNumber: 0
-                )
-
-                do {
-                    let activity = try Activity<JourneyAttributes>.request(
-                        attributes: journeyAttributes,
-                        content: .init(state: journeyContentState, staleDate: nil),
-                        pushType: nil
-                    )
-                    self.activity = activity
-                    print("⌛ Live activity started: \(activity.id)")
-                } catch {
-                    print("Error starting live activity: \(error)")
-                }
-            }
-
-            updateTimer?.invalidate()
-            updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-                guard let self = self, let nextUpdate = self.nextUpdate, let selectedShift else { return }
-                if Date.now >= selectedShift.endDate {
-                    stopActivity()
-                } else if Date.now >= nextUpdate {
-                    self.updateActivity()
-                }
+                print("🚂 Live activity started: \(activity?.id, default: "No Activity ID")")
+            } catch {
+                print("Error starting live activity: \(error)")
             }
         }
+        
+        return activity
     }
 
-    func updateActivity() {
-        guard let activity, let selectedShift else { return }
-
-        var journeyContentState: JourneyAttributes.ContentState? = nil
-
-        // driving the train
-        if let currentTrain = selectedShift.currentTrain {
-            nextUpdate = selectedShift.arrival
-            // not in last stop
-            if currentTrain.nextStop != nil {
-                journeyContentState = JourneyAttributes.ContentState(
-                    nextStop: currentTrain.nextStopString,
-                    timeString: timeToShow,
-                    shiftStatus: selectedShift.shiftStatus,
-                    trainNumber: currentTrain.number
-                )
-            }
-        // waiting until next train
-        } else if let nextTrain = selectedShift.nextTrain {
-            nextUpdate = selectedShift.departure
-            journeyContentState = JourneyAttributes.ContentState(
-                nextStop: nextTrain.currentStopString,
-                timeString: timeToShow,
-                shiftStatus: selectedShift.shiftStatus,
-                trainNumber: nextTrain.number
-            )
-        // waiting to finish work
-        } else {
-            nextUpdate = selectedShift.endDate
-            journeyContentState = JourneyAttributes.ContentState(
-                nextStop: "",
-                timeString: timeToShow,
-                shiftStatus: selectedShift.shiftStatus,
-                trainNumber: 0
-            )
-        }
-
-        if let journeyContentState {
-            Task {
-                let alertConfiguration = AlertConfiguration(title: "Turno actualizado", body: "Se ha actualizado el estado del turno", sound: .default)
-                await activity.update(.init(state: journeyContentState, staleDate: nil), alertConfiguration: alertConfiguration)
+    func updateActivity(activityID: String, state: JourneyAttributes.ContentState) {
+        Task {
+            let alertConfiguration = AlertConfiguration(title: "Turno actualizado", body: "Se ha actualizado el estado del turno", sound: .default)
+            if let activity = Activity<JourneyAttributes>.activities.first(where: { $0.id == activityID }) {
+                await activity.update(.init(state: state, staleDate: nil), alertConfiguration: alertConfiguration)
                 print("Live activity updated: \(activity.id)")
+            } else {
+                print("No activity found with ID: \(activityID)")
             }
         }
     }
@@ -177,18 +65,15 @@ final class LiveActivityManager {
     func stopActivity() {
         let journeyContentState = JourneyAttributes.ContentState(
             nextStop: "",
-            timeString: selectedShift != nil ? "Finalizado turno \(selectedShift!.name)" : "Turno finalizado",
+            timeString: "Turno finalizado",
             shiftStatus: .finished,
             trainNumber: 0
         )
         Task {
-            await activity?.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
-            print("🛑 Live activity ended: \(activity?.id ?? "unknown")")
-            self.activity = nil
-            self.selectedShift?.isLiveActivityRegistered = false
-            self.selectedShift = nil
-            self.updateTimer?.invalidate()
-            self.updateTimer = nil
+            for activity in Activity<JourneyAttributes>.activities {
+                await activity.end(.init(state: journeyContentState, staleDate: nil), dismissalPolicy: .immediate)
+                print("🛑 Live activity ended: \(activity.id)")
+            }
         }
     }
 }
