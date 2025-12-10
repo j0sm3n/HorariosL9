@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TrainDetailView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    @State private var showMonogram: Bool = false
     let train: Train
     
     var body: some View {
@@ -24,6 +25,9 @@ struct TrainDetailView: View {
                         .padding(.horizontal)
                         .fontWeight(fontWeight(for: stop))
                         .rowStyle(in: color(for: stop))
+                        .onTapGesture {
+                            showMonogram.toggle()
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -99,7 +103,7 @@ extension TrainDetailView {
     }
     
     private func stopString(for location: Location) -> String {
-        dynamicTypeSize > .accessibility2 ? location.monogram : location.rawValue
+        (dynamicTypeSize > .accessibility2 || showMonogram) ? location.monogram : location.rawValue
     }
     
     private func indexOf(stop: Stop) -> Int? {

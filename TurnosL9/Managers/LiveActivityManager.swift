@@ -8,6 +8,19 @@
 import Foundation
 import ActivityKit
 
+enum LiveActivityError: Error {
+    case notWorking
+}
+
+extension LiveActivityError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+            case .notWorking:
+                return NSLocalizedString("El turno seleccionado está fuera de horario de trabajo.", comment: "Selected shift is not working")
+        }
+    }
+}
+
 @Observable
 final class LiveActivityManager {
     private var activity: Activity<JourneyAttributes>?
@@ -20,11 +33,15 @@ final class LiveActivityManager {
         return nextUpdate.formatted(date: .omitted, time: .shortened)
     }
 
-    func startActivity(with shift: Shift) {
+    func startActivity(with shift: Shift) throws {
         guard shift.isWorking else {
-            print("Not working")
-            return
+            activity = nil
+            selectedShift = nil
+            nextUpdate = nil
+            updateTimer?.invalidate()
+            throw LiveActivityError.notWorking
         }
+
         if ActivityAuthorizationInfo().areActivitiesEnabled {
             self.activity = nil
             self.selectedShift = shift
@@ -51,6 +68,7 @@ final class LiveActivityManager {
                 } catch {
                     print("Error starting live activity: \(error)")
                 }
+
             // waiting until next train
             } else if let nextTrain = shift.nextTrain {
                 nextUpdate = shift.departure
@@ -73,6 +91,7 @@ final class LiveActivityManager {
                 } catch {
                     print("Error starting live activity: \(error)")
                 }
+
             // waiting to finish
             } else {
                 nextUpdate = shift.endDate
@@ -148,7 +167,7 @@ final class LiveActivityManager {
 
         if let journeyContentState {
             Task {
-                let alertConfiguration = AlertConfiguration(title: "Turno actualizado", body: "Se ha actualizado el estadu del turno", sound: .default)
+                let alertConfiguration = AlertConfiguration(title: "Turno actualizado", body: "Se ha actualizado el estado del turno", sound: .default)
                 await activity.update(.init(state: journeyContentState, staleDate: nil), alertConfiguration: alertConfiguration)
                 print("Live activity updated: \(activity.id)")
             }

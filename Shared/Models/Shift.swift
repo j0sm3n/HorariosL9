@@ -177,4 +177,29 @@ extension Shift {
             return endDate
         }
     }
+    
+    func getRestDates() -> [DateComponents] {
+        guard let firstTrain = trains.first else { return [] }
+        
+        var dates: [DateComponents] = []
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: .now)
+        
+        let firstTrainDeparture = DateComponents(year: today.year, month: today.month, day: today.day, hour: firstTrain.departure.hour, minute: firstTrain.departure.minute)
+        dates.append(firstTrainDeparture)
+        
+        for train in trains {
+            let trainIndex = trains.firstIndex(of: train)!
+            if trainIndex < trains.count - 1 {
+                let nextTrain = trains[trainIndex + 1]
+                
+                let restMinutes = train.arrival.minutesBetween(to: nextTrain.departure)
+                if restMinutes > 15 {
+                    dates.append(DateComponents(year: today.year, month: today.month, day: today.day, hour: nextTrain.departure.hour, minute: nextTrain.departure.minute))
+                }
+            }
+        }
+        
+        return dates
+    }
+
 }
