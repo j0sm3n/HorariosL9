@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.colorScheme) var colorScheme
     @Environment(ShiftStore.self) var store
     @State private var path = NavigationPath()
-    
-    private var toolbarForegroundColor: Color {
-        colorScheme == .dark ? Color.white : Color.black
-    }
     
     var body: some View {
         NavigationStack(path: $path) {
